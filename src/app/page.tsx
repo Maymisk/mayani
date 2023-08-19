@@ -1,11 +1,14 @@
 import { Banner } from '@/components/Banner';
+import { UserCard } from '@/components/UserCard';
 
 export default function Home() {
 	return (
 		<>
 			<Banner />
 
-			<main></main>
+			<main>
+				<UserCard />
+			</main>
 		</>
 	);
 }

@@ -9,6 +9,7 @@ export function Banner() {
 				height={400}
 				src={'/logo.png'}
 				alt="Job Connect Logo"
+				priority
 			/>
 		</div>
 	);
