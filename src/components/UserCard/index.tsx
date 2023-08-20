@@ -12,7 +12,7 @@ export function UserCard() {
 				width={148}
 				height={148}
 				priority
-				className="object-cover"
+				className="object-cover rounded-xl"
 			/>
 
 			<div className="flex flex-col gap-2">

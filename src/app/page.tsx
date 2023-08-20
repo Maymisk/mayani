@@ -1,4 +1,5 @@
 import { Banner } from '@/components/Banner';
+import { JobSearch } from '@/components/JobSearch';
 import { UserCard } from '@/components/UserCard';
 
 export default function Home() {
@@ -8,6 +9,8 @@ export default function Home() {
 
 			<main>
 				<UserCard />
+
+				<JobSearch />
 			</main>
 		</>
 	);
