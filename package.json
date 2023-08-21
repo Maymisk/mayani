@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"server": "json-server ./server.json -p 5555"
+		"server": "json-server --watch server.json -p 5555"
 	},
 	"dependencies": {
 		"@heroicons/react": "^2.0.18",

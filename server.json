@@ -1,0 +1,268 @@
+{
+	"users": [
+		{
+			"id": "012",
+			"name": "Mateus",
+			"bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+			"avatar_url": "https://github.com/lukechilds.png",
+			"occupation": "Eletricista",
+			"rating": 1.6,
+
+			"works": [
+				{
+					"id": "j34kR9",
+					"title": "consertar chuveiro da dona de casa",
+					"tag": "Elétrica",
+					"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+					"banner_url": "/electricity1.png"
+				},
+				{
+					"id": "p7HsA2",
+					"title": "Consertar microondas",
+					"tag": "Elétrica",
+					"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+					"banner_url": "/electricity2.jpg"
+				}
+			],
+
+			"ratings": [
+				{
+					"id": "126",
+					"title": "horrivel odiei",
+					"description": "causou um incendio eletrico na minha casa tentando consertar o chuveiro e agora está devendo milhões em indenização",
+					"rating": 0.6
+				},
+				{
+					"id": "321",
+					"title": "Esse cara eh bom",
+					"description": "Fez tudo que eu pedi 😏",
+					"rating": 5
+				}
+			]
+		},
+
+		{
+			"id": "031",
+			"name": "Arthur",
+			"bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+			"avatar_url": "https://github.com/nmfretz.png",
+			"occupation": "Eletromecânico",
+			"rating": 3.3,
+
+			"works": [
+				{
+					"id": "qP9tF8",
+					"title": "10 anos de experiência na automazoom",
+					"tag": "Automação",
+					"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+					"banner_url": "/machines1.png"
+				}
+			],
+
+			"ratings": [
+				{
+					"id": "001",
+					"title": "muito bom",
+					"description": "Faz boas máquinas",
+					"rating": 4.5
+				}
+			]
+		},
+
+		{
+			"id": "042",
+			"name": "Luiz",
+			"bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+			"avatar_url": "https://github.com/todaywasawesome.png",
+			"occupation": "Eletricista",
+			"rating": 4.3,
+
+			"works": [
+				{
+					"id": "m2GnE5",
+					"title": "Consertei a fiação da casa do bora bill",
+					"tag": "Elétrica",
+					"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+					"banner_url": "/electricity1.png"
+				}
+			],
+
+			"ratings": [
+				{
+					"id": "002",
+					"title": "Quebrou meu forro tentando consertar a fiação",
+					"description": "Ele subiu no forro da casa para verificar a fiação e caiu lá de cima, quebrou tudo. Detestei.",
+					"rating": 1.4
+				}
+			]
+		},
+
+		{
+			"id": "058",
+			"name": "Maisa",
+			"bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+			"avatar_url": "https://github.com/EzioBy.png",
+			"occupation": "Biomédica",
+			"rating": 3.4,
+
+			"works": [
+				{
+					"id": "r6WdC3",
+					"title": "Já trabalhei na Acripel Farma",
+					"tag": "biohackeria",
+					"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+					"banner_url": "/biodoc1.png"
+				}
+			],
+
+			"ratings": [
+				{
+					"id": "003",
+					"title": "Adoooroo!! 💯",
+					"description": "Uma ótima biomédica",
+					"rating": 4.9
+				}
+			]
+		},
+
+		{
+			"id": "072",
+			"name": "Otávio",
+			"bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+			"avatar_url": "https://github.com/qiuyu96.png",
+			"occupation": "Diarista",
+			"rating": 2.4,
+
+			"works": [
+				{
+					"id": "h5ZbV1",
+					"title": "10 anos de experiência como diarista",
+					"tag": "faxina",
+					"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+					"banner_url": "/charwoman1.png"
+				}
+			],
+
+			"ratings": [
+				{
+					"id": "004",
+					"title": "Lindo 💘💘",
+					"description": "homem muito forte, foi aspirar debaixo do meu sofá e levantou ele com um braço só!!",
+					"rating": 5
+				}
+			]
+		},
+
+		{
+			"id": "081",
+			"name": "Clara",
+			"bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+			"avatar_url": "https://github.com/ken-ouyang.png",
+			"occupation": "Pedreira",
+			"rating": 4.7,
+
+			"works": [
+				{
+					"id": "t8YfU4",
+					"title": "Construí o Burj Khalifa",
+					"tag": "mestre de obras",
+					"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+					"banner_url": "/bricklayer1.png"
+				}
+			],
+
+			"ratings": [
+				{
+					"id": "005",
+					"title": "Ruim",
+					"description": "moça muito desastrada, obra é serviço de homem!!",
+					"rating": 0.6
+				}
+			]
+		},
+
+		{
+			"id": "093",
+			"name": "Gustavo",
+			"bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+			"avatar_url": "https://github.com/henry123-boy.png",
+			"occupation": "Jardineiro",
+			"rating": 3.8,
+
+			"works": [
+				{
+					"id": "d1XcQ7",
+					"title": "Já cuidei do jardim do João Rodrigues",
+					"tag": "jardinagem",
+					"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+					"banner_url": "/gardener.png"
+				}
+			],
+
+			"ratings": [
+				{
+					"id": "006",
+					"title": "Muito bom",
+					"description": "homem muito delicado, cuidou muito bem das minhas plantinhas... a grama está muito verde",
+					"rating": 5
+				}
+			]
+		},
+
+		{
+			"id": "104",
+			"name": "Mauricio",
+			"bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+			"avatar_url": "https://github.com/zkcys001.png",
+			"occupation": "Diarista",
+			"rating": 3.1,
+
+			"works": [
+				{
+					"id": "k9JmA6",
+					"title": "Jogador da NBA aposentado, sei limpar uma casa muito bem",
+					"tag": "faxina",
+					"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+					"banner_url": "/charwoman2.png"
+				}
+			],
+
+			"ratings": [
+				{
+					"id": "007",
+					"title": "Lindo 😋",
+					"description": "desde a primeira vez que vi o mauricio jogando nos teloes da NBA, quis conhecer ele.",
+					"rating": 5
+				}
+			]
+		},
+
+		{
+			"id": "120",
+			"name": "Davi",
+			"bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+			"avatar_url": "https://github.com/leejet.png",
+			"occupation": "Jardineiro",
+			"rating": 3.2,
+
+			"works": [
+				{
+					"id": "w3LpO0",
+					"title": "15 anos de experiência em jardinagem - delicado e meticuloso!",
+					"tag": "jardinagem",
+					"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, officia.",
+					"banner_url": "/gardener2.png"
+				}
+			],
+
+			"ratings": [
+				{
+					"id": "008",
+					"title": "serviço ruim",
+					"description": "a jardinagem é boa, mas ele trouxe consigo uma caixa de som enorme e começou a tocar músicas do 'Radiohead'.. atrapalhou todos da vizinhança",
+					"rating": 3.4
+				}
+			]
+		}
+	]
+}

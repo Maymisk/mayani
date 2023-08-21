@@ -1,8 +1,11 @@
 import { Banner } from '@/components/Banner';
-import { JobSearch } from '@/components/JobSearch';
-import { UserCard } from '@/components/UserCard';
+import { JobSearch } from '@/components/home/JobSearch';
+import { UserCard } from '@/components/home/UserCard';
+import { api } from '@/services/api';
 
-export default function Home() {
+export default async function Home() {
+	const jobs = await api.get('/users', { next: { revalidate: 0 } });
+
 	return (
 		<>
 			<Banner />
@@ -10,7 +13,7 @@ export default function Home() {
 			<main>
 				<UserCard />
 
-				<JobSearch />
+				<JobSearch initialData={jobs} />
 			</main>
 		</>
 	);

@@ -3,11 +3,19 @@ import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import { ReactNode } from 'react';
 
-const nunito = Nunito({ subsets: ['latin'], weight: ['400', '700', '900'] });
+const nunito = Nunito({
+	subsets: ['latin'],
+	weight: ['200', '400', '700', '900'],
+});
 
 export const metadata: Metadata = {
 	title: 'Job Connect',
-	icons: ['favicon.png'],
+	icons: [
+		{
+			url: '/favicon.png',
+			rel: 'icon',
+		},
+	],
 };
 
 interface IRootLayoutProps {

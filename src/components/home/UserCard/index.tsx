@@ -5,7 +5,7 @@ import { Info } from './Info';
 
 export function UserCard() {
 	return (
-		<div className="mt-[-5rem] flex gap-8 bg-gray400 py-8 px-10 rounded-lg">
+		<div className="mt-[-5rem] flex flex-col sm:flex-row items-center text-center sm:text-left gap-8 bg-gray400 py-8 px-10 rounded-lg">
 			<Image
 				src={'/favicon.png'}
 				alt="User profile picture"
