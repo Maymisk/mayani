@@ -1,4 +1,4 @@
-import { Banner } from '@/components/Banner';
+import { Banner } from '@/components/banner';
 import { Ratings } from '@/components/user/Ratings';
 import { UserInfo } from '@/components/user/UserInfo';
 import { Works } from '@/components/user/Works';
