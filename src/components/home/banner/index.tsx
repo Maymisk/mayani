@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export function Banner() {
+export function HomeBanner() {
 	return (
 		<header className="w-full h-[24rem] bg-white flex flex-col justify-center items-center">
 			<Link href={'/'}>

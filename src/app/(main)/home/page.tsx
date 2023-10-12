@@ -1,4 +1,4 @@
-import { Banner } from '@/components/banner';
+import { HomeBanner } from '@/components/home/banner';
 import { JobSearch } from '@/components/home/JobSearch';
 import { UserCard } from '@/components/home/UserCard';
 import { api } from '@/services/api';
@@ -8,7 +8,7 @@ export async function Home() {
 
 	return (
 		<>
-			<Banner />
+			<HomeBanner />
 
 			<main>
 				<UserCard />

@@ -1,4 +1,4 @@
-import { Banner } from '@/components/banner';
+import { HomeBanner } from '@/components/home/banner';
 import { Ratings } from '@/components/user/Ratings';
 import { UserInfo } from '@/components/user/UserInfo';
 import { Works } from '@/components/user/Works';
@@ -18,7 +18,7 @@ export default async function User({ params }: IUserProps) {
 
 	return (
 		<>
-			<Banner />
+			<HomeBanner />
 
 			<main>
 				<UserInfo
