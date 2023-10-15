@@ -6,11 +6,11 @@ export function Navbar() {
 
 	return (
 		<nav className="flex items-center justify-between font-bold text-xl bg-white px-12 py-6">
-			<span className="text-2xl hover:scale-105 transition-all">
+			<span className="text-3xl hover:scale-105 transition-all">
 				JobConnect
 			</span>
 
-			<ul className="w-[30%] flex items-center justify-around">
+			<ul className="w-[30%] text-2xl flex items-center justify-around">
 				<li className="hover:text-blue700 hover:scale-105 transition-all">
 					<Link href="/home">Home</Link>
 				</li>

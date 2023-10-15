@@ -14,7 +14,7 @@ interface IJobCardProps {
 	rating: number;
 }
 
-export function JobCard({
+export function WorkerCard({
 	id,
 	name,
 	bio,
@@ -23,7 +23,7 @@ export function JobCard({
 	rating,
 }: IJobCardProps) {
 	return (
-		<div className="flex flex-col items-center justify-center p-4 rounded-lg bg-gray400 border-2 border-transparent hover:border-blue700 transition-all">
+		<div className="flex flex-col items-center justify-center p-4 rounded-lg bg-gray400 border-2 border-transparent hover:border-blue700 transition-all shadow-md shadow-gray-900">
 			<header className="text-center">
 				<Image
 					src={avatar_url}
@@ -34,7 +34,7 @@ export function JobCard({
 				/>
 
 				<Link
-					href={`/user/${id}`}
+					href={`/worker/${id}`}
 					className="mt-2 text-blue100 text-xl font-bold block hover:text-blue500 transition-all"
 				>
 					{name}

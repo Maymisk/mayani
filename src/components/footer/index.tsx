@@ -2,7 +2,10 @@ import Link from 'next/link';
 
 export function Footer() {
 	return (
-		<footer className="flex items-start justify-between w-full text-white border-y-2 border-y-gray400 px-4 py-8 mb-8">
+		<footer
+			id="mainFooter"
+			className="flex items-start justify-between w-full text-white border-y-2 border-y-gray400 px-4 py-8 mt-20 mb-8"
+		>
 			<Link
 				href="https://storyset.com/"
 				className="uppercase font-bold hover:text-blue700 transition-all text-sm"

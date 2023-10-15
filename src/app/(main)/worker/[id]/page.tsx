@@ -1,7 +1,7 @@
 import { HomeBanner } from '@/components/home/banner';
-import { Ratings } from '@/components/user/Ratings';
-import { UserInfo } from '@/components/user/UserInfo';
-import { Works } from '@/components/user/Works';
+import { Ratings } from '@/components/worker/Ratings';
+import { WorkerInfo } from '@/components/worker/WorkerInfo';
+import { Works } from '@/components/worker/Works';
 import { api } from '@/services/api';
 
 interface IUserProps {
@@ -10,7 +10,7 @@ interface IUserProps {
 	};
 }
 
-export default async function User({ params }: IUserProps) {
+export default async function Worker({ params }: IUserProps) {
 	const { name, bio, avatar_url, occupation, works, ratings } = await api.get(
 		'/users/' + params.id,
 		{ next: { revalidate: 0 } }
@@ -21,7 +21,7 @@ export default async function User({ params }: IUserProps) {
 			<HomeBanner />
 
 			<main>
-				<UserInfo
+				<WorkerInfo
 					name={name}
 					bio={bio}
 					occupation={occupation}

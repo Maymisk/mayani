@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 
 const nunito = Nunito({
 	subsets: ['latin'],
-	weight: ['200', '400', '700', '900'],
+	weight: ['200', '300', '400', '700', '900'],
 });
 
 export const metadata: Metadata = {

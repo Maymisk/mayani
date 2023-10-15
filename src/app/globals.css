@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-body main, body footer {
+body main, #mainFooter {
   width: 100%;
 
   max-width: 1368px;
@@ -16,4 +16,3 @@ body main, body footer {
 
   padding-bottom: 4rem;
 }
-

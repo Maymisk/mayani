@@ -9,8 +9,8 @@ export function ProfileIcon({ profile_picture }: IProfileIconProps) {
 		<Image
 			src={profile_picture}
 			alt="Logged in user's profile picture"
-			height={50}
-			width={50}
+			height={60}
+			width={60}
 			className="rounded-full"
 		/>
 	);

@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { JobCard } from '../JobCard';
+import { WorkerCard } from '../WorkerCard';
 import { api } from '@/services/api';
 
-interface IJob {
+interface IWorker {
 	id: string;
 	name: string;
 	bio: string;
@@ -13,13 +13,13 @@ interface IJob {
 	rating: number;
 }
 
-type IData = IJob[];
+type IData = IWorker[];
 
 interface IJobSearchProps {
 	initialData: IData;
 }
 
-export function JobSearch({ initialData }: IJobSearchProps) {
+export function WorkerSearch({ initialData }: IJobSearchProps) {
 	const [query, setQuery] = useState('');
 	const [data, setData] = useState<IData>(initialData);
 
@@ -27,8 +27,8 @@ export function JobSearch({ initialData }: IJobSearchProps) {
 		const timeout = setTimeout(async () => {
 			if (query === '') return setData(initialData);
 
-			const jobs = await api.get(`/users/?q=${query}`);
-			setData(jobs);
+			const workers = await api.get(`/users/?q=${query}`);
+			setData(workers);
 		}, 1200);
 
 		return () => clearTimeout(timeout);
@@ -49,8 +49,8 @@ export function JobSearch({ initialData }: IJobSearchProps) {
 			/>
 
 			<div className="grid gap-8 mt-12 grid-cols-1 sm:grid-cols-2">
-				{data?.map(job => (
-					<JobCard key={job.id} {...job} />
+				{data?.map(worker => (
+					<WorkerCard key={worker.id} {...worker} />
 				))}
 			</div>
 		</section>

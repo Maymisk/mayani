@@ -7,6 +7,7 @@ export function Testimonials() {
 			<h1 className="text-4xl font-bold hover:scale-105 transition-all">
 				O que nossos usuários dizem
 			</h1>
+
 			<span className="block font-light">
 				Ouça de nossos clientes satisfeitos
 			</span>

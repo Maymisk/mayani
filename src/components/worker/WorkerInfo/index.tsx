@@ -8,7 +8,7 @@ interface IUserInfoProps {
 	avatar_url: string;
 }
 
-export function UserInfo({
+export function WorkerInfo({
 	name,
 	bio,
 	occupation,
