@@ -8,24 +8,4 @@ const validation = yup.object({
 	password: yup.string().required('A senha é necessária.'),
 });
 
-interface IValidation {
-	email: string;
-	password: string;
-}
-
-interface IError {
-	path: string | undefined;
-	message: string;
-}
-
-async function validate(props: IValidation): Promise<undefined | IError> {
-	try {
-		await validation.validate(props);
-	} catch (error) {
-		if (error instanceof yup.ValidationError)
-			return { path: error.path, message: error.message };
-		else throw error;
-	}
-}
-
-export { validate };
+export { validation };

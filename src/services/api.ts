@@ -1,3 +1,5 @@
+// api to use the Fake database (json server)
+
 interface IWork {
 	id: string;
 	title: string;

@@ -1,66 +1,101 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
-import { validate } from './validation';
+import { validation } from './validation';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { Database } from '@root/supabase/databaseTypes';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
+
+interface IOnSubmitData {
+	email: string;
+	password: string;
+}
 
 export function LoginForm() {
-	const [user, setUser] = useState<string>('');
-	const [userError, setUserError] = useState<string>('');
+	const { signIn } = useAuth();
 
-	const [password, setPassword] = useState<string>('');
-	const [passwordError, setPasswordError] = useState<string>('');
+	const {
+		register,
+		handleSubmit,
+		clearErrors,
+		formState: { isSubmitting, errors },
+	} = useForm({ resolver: yupResolver(validation) });
 
-	async function handleOnSubmit(event: FormEvent) {
-		event.preventDefault();
+	const [loginError, setLoginError] = useState<string>('');
 
-		const error = await validate({ email: user, password });
+	async function onSubmit({ email, password }: IOnSubmitData) {
+		const error = await signIn({ email, password });
 
-		if (error) {
-			if (error.path === 'email') setUserError(error.message);
-			else setPasswordError(error.message);
-
-			return;
-		}
-
-		console.log(user, password);
+		if (error) setLoginError('Credenciais Inválidas');
 	}
 
 	return (
 		<form
-			onSubmit={handleOnSubmit}
-			className="w-full h-full flex flex-col gap-2"
+			onSubmit={handleSubmit(onSubmit)}
+			className="w-full h-full flex flex-col gap-4 mt-1"
 		>
-			<label className="text-danger font-bold">{userError}</label>
-			<input
-				type="email"
-				required
-				value={user}
-				onChange={e => {
-					if (userError.length > 0) setUserError('');
-					setUser(e.target.value);
-				}}
-				className="h-12 rounded-sm py-1 px-4 bg-gray focus:outline-none bg-blue100 hover:bg-gray300 transition-all placeholder:text-black font-bold"
-				placeholder="Digite seu email"
-			/>
+			<div>
+				<input
+					type="email"
+					required
+					autoComplete="off"
+					{...register('email')}
+					onChange={() => clearErrors()}
+					className="w-full p-3 bg-transparent text-gray-400 outline-none focus:outline-none border-2 border-gray500 rounded-md transition-all placeholder:text-gray-400 placeholder:font-extralight hover:border-blue500 focus:border-blue500"
+					placeholder="Digite seu email"
+				/>
 
-			<label className="text-danger font-bold">{passwordError}</label>
-			<input
-				type="password"
-				required
-				value={password}
-				onChange={e => {
-					if (passwordError.length > 0) setPasswordError('');
-					setPassword(e.target.value);
-				}}
-				className="h-12 rounded-sm py-1 px-4 bg-blue100 focus:outline-none hover:bg-gray300 transition-all text-black placeholder:text-black font-bold"
-				placeholder="Digite sua senha"
-			/>
+				<p
+					className={`text-danger font-bold mt-1 ${
+						errors.email ? 'block' : 'hidden'
+					}`}
+				>
+					{errors.email?.message}
+				</p>
+			</div>
+
+			<div>
+				<input
+					type="password"
+					required
+					{...register('password')}
+					onChange={() => clearErrors()}
+					className="w-full p-3 bg-transparent text-gray-400 outline-none focus:outline-none border-2 border-gray500 rounded-md transition-all placeholder:text-gray-400 placeholder:font-extralight hover:border-blue500 focus:border-blue500"
+					placeholder="Digite sua senha"
+				/>
+
+				<p
+					className={`text-danger font-bold mt-1 ${
+						errors.password ? 'block' : 'hidden'
+					}`}
+				>
+					{errors.password?.message}
+				</p>
+			</div>
 
 			<button
 				type="submit"
-				className="w-full h-12 bg-blue500 hover:bg-blue700 transition-all mt-auto rounded-sm font-bold"
+				className="w-full h-12 bg-blue500 hover:bg-blue700 hover:text-white transition-all mt-auto rounded-sm font-bold flex items-center justify-center disabled:bg-blue-400 disabled:cursor-not-allowed"
+				onClick={() => setLoginError('')}
+				disabled={isSubmitting}
 			>
-				Logar
+				{isSubmitting ? (
+					<WrenchScrewdriverIcon
+						width={25}
+						height={25}
+						className="text-gray400 animate-spin"
+					/>
+				) : loginError ? (
+					<span className="font-bold uppercase text-sm">
+						{loginError}
+					</span>
+				) : (
+					'Logar'
+				)}
 			</button>
 		</form>
 	);

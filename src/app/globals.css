@@ -8,11 +8,21 @@
   box-sizing: border-box;
 }
 
-body main, #mainFooter {
+body main {
   width: 100%;
 
   max-width: 1368px;
   margin: 0 auto;
 
   padding-bottom: 4rem;
+  margin-top: 10rem;
+}
+
+body #mainFooter {
+  width: 100%;
+  
+  margin: 0 auto;
+
+  padding-bottom: 4rem;
+  margin-top: 10rem;
 }

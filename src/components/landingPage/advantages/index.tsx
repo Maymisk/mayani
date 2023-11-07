@@ -2,7 +2,7 @@ import { AdvantageCard } from './AdvantageCard';
 
 export function Advantages() {
 	return (
-		<section className="mt-36 bg-gray400 p-8 flex flex-col items-center justify-center rounded-sm gap-4">
+		<section className="mt-36 border-2 border-gray400 p-8 flex flex-col items-center justify-center rounded-xl gap-4">
 			<h1 className="text-4xl font-bold hover:scale-105 transition-all">
 				Por que escolher o JobConnect?
 			</h1>

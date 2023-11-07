@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function AuthLayout({ children }: IAuthLayout) {
 	return (
-		<main className="flex flex-col justify-evenly items-center h-screen">
+		<main className="flex flex-col justify-evenly items-center h-screen mt-0">
 			<Image
 				src={'/favicon.png'}
 				alt="Job Connect Logo"

@@ -4,7 +4,7 @@ export function Footer() {
 	return (
 		<footer
 			id="mainFooter"
-			className="flex items-start justify-between w-full text-white border-y-2 border-y-gray400 px-4 py-8 mt-20 mb-8"
+			className="w-full flex items-start justify-evenly text-white bg-gray500 border-y-2 border-y-gray400 px-8 py-8 mt-20 mb-8"
 		>
 			<Link
 				href="https://storyset.com/"
@@ -42,7 +42,7 @@ export function Footer() {
 					</li>
 
 					<li className="hover:text-blue700 transition-all font-extralight">
-						<Link href={'#'}>Preços</Link>
+						<Link href={'/pricing'}>Preços</Link>
 					</li>
 
 					<li className="hover:text-blue700 transition-all font-extralight">

@@ -1,16 +1,14 @@
 import Link from 'next/link';
-import { ProfileIcon } from './ProfileIcon';
+import { ProfileButton } from './ProfileButton';
 
 export function Navbar() {
-	const user = 'user';
-
 	return (
-		<nav className="flex items-center justify-between font-bold text-xl bg-white px-12 py-6">
-			<span className="text-3xl hover:scale-105 transition-all">
+		<nav className="w-full fixed top-0 right-0 flex items-center justify-between font-bold text-xl bg-gray500 text-white px-12 py-6 border-b-4 border-gray400">
+			<h1 className="text-3xl hover:scale-105 transition-all">
 				JobConnect
-			</span>
+			</h1>
 
-			<ul className="w-[30%] text-2xl flex items-center justify-around">
+			<ul className="w-[40%] text-xl flex items-center justify-around">
 				<li className="hover:text-blue700 hover:scale-105 transition-all">
 					<Link href="/home">Home</Link>
 				</li>
@@ -23,25 +21,7 @@ export function Navbar() {
 					<Link href="">Contate-nos</Link>
 				</li>
 
-				<li className="hover:text-blue700 hover:scale-105 transition-all">
-					{user ? (
-						<Link href="">
-							<ProfileIcon
-								profile_picture={
-									'https://github.com/maymisk.png'
-								}
-							/>
-						</Link>
-					) : (
-						// profile icon will be a client component later on
-						<Link
-							href="/auth/login"
-							className="border-2 border-blue500 p-3 rounded-sm hover:text-blue700 hover:border-blue700 transition-all"
-						>
-							Fazer Login
-						</Link>
-					)}
-				</li>
+				<ProfileButton />
 			</ul>
 		</nav>
 	);

@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 export default function SignUp() {
 	return (
-		<div className="w-full max-w-xs text-center scale-95 hover:scale-100 transition-all">
-			<div className="bg-gray400 h-96 p-4 rounded-md flex flex-col gap-2">
+		<div className="w-full max-w-xs text-center">
+			<div className="bg-gray400 h-96 p-4 rounded-md flex flex-col gap-2 shadow-md shadow-gray-600">
 				<h1 className="text-blue100 font-bold text-2xl">Sign Up</h1>
 
 				<SignUpForm />

@@ -2,7 +2,7 @@ import { PricingCard } from '@/components/pricing/PricingCard';
 
 export default function Pricing() {
 	return (
-		<main className="flex flex-col justify-center items-center gap-4 mt-20 text-white">
+		<main className="flex flex-col justify-center items-center gap-4 text-white">
 			<h1 className="text-4xl hover:scale-105 transition-all">
 				Preço acessível para todos
 			</h1>

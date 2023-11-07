@@ -1,92 +1,125 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
-import { validate } from './validation';
+import { useAuth } from '@/contexts/AuthContext';
+import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Input } from './Input';
+import { validation } from './validation';
+
+interface IOnSubmitData {
+	email: string;
+	password: string;
+	passwordConfirmation: string;
+}
 
 export function SignUpForm() {
-	const [email, setEmail] = useState<string>('');
-	const [emailError, setEmailError] = useState<string>('');
+	const { signUp } = useAuth();
 
-	const [password, setPassword] = useState<string>('');
-	const [passwordError, setPasswordError] = useState<string>('');
+	const {
+		register,
+		handleSubmit,
+		clearErrors,
+		formState: { errors, isSubmitting },
+	} = useForm({ resolver: yupResolver(validation) });
 
-	const [passwordMatch, setPasswordMatch] = useState<string>('');
-	const [passwordMatchError, setPasswordMatchError] = useState<string>('');
+	const [signUpError, setSignUpError] = useState('');
 
-	async function handleOnSubmit(event: FormEvent) {
-		event.preventDefault();
+	async function onSubmit({
+		email,
+		password,
+		passwordConfirmation,
+	}: IOnSubmitData) {
+		if (password != passwordConfirmation) return;
 
-		const error = await validate({
+		const error = await signUp({
 			email,
 			password,
-			passwordConfirmation: passwordMatch,
+			name: 'Khalil Bohner',
+			username: 'a',
+			type: 'workers',
 		});
 
-		if (error) {
-			const message = error.message;
-
-			if (error.path === 'email') setEmailError(message);
-			else if (error.path === 'password') setPasswordError(message);
-			else setPasswordMatchError(message);
-
-			return;
-		}
-
-		console.log(email, password);
+		if (error) setSignUpError('Erro');
 	}
 
 	return (
 		<form
-			onSubmit={handleOnSubmit}
-			className="w-full flex flex-col flex-1 gap-2"
+			onSubmit={handleSubmit(onSubmit)}
+			className="w-full flex flex-col flex-1 gap-4 mt-2"
 		>
-			<label className="text-danger font-bold">{emailError}</label>
-			<input
-				type="text"
-				required
-				value={email}
-				onChange={e => {
-					if (emailError.length > 0) setEmailError('');
-					setEmail(e.target.value);
-				}}
-				className="h-12 rounded-sm py-1 px-4 bg-gray focus:outline-none bg-blue100 hover:bg-gray300 transition-all placeholder:text-black font-bold"
-				placeholder="Digite seu email"
-			/>
+			<div>
+				<Input
+					type="text"
+					required
+					autoComplete="off"
+					{...register('email')}
+					onChange={() => clearErrors()}
+					placeholder="Digite seu email"
+				/>
+				<p
+					className={`text-danger font-bold text-sm text-left mt-1 ${
+						errors.email ? 'block' : 'hidden'
+					}`}
+				>
+					{errors.email?.message}
+				</p>
+			</div>
 
-			<label className="text-danger font-bold">{passwordError}</label>
-			<input
-				type="password"
-				required
-				value={password}
-				onChange={e => {
-					if (passwordError.length > 0) setPasswordError('');
-					setPassword(e.target.value);
-				}}
-				className="h-12 rounded-sm py-1 px-4 bg-blue100 focus:outline-none hover:bg-gray300 transition-all text-black placeholder:text-black font-bold"
-				placeholder="Digite sua senha"
-			/>
+			<div>
+				<Input
+					type="password"
+					required
+					{...register('password')}
+					onChange={() => clearErrors()}
+					placeholder="Digite sua senha"
+				/>
+				<p
+					className={`text-danger font-bold text-sm ${
+						errors.password?.message ? 'block' : 'hidden'
+					} text-left mt-1`}
+				>
+					{errors.password?.message}
+				</p>
+			</div>
 
-			<label className="text-danger font-bold">
-				{passwordMatchError}
-			</label>
-			<input
-				type="password"
-				required
-				value={passwordMatch}
-				onChange={e => {
-					if (passwordMatchError.length > 0)
-						setPasswordMatchError('');
-					setPasswordMatch(e.target.value);
-				}}
-				className="h-12 rounded-sm py-1 px-4 bg-blue100 focus:outline-none hover:bg-gray300 transition-all text-black placeholder:text-black font-bold"
-				placeholder="Confirme sua senha"
-			/>
+			<div>
+				<Input
+					type="password"
+					required
+					{...register('passwordConfirmation')}
+					onChange={() => clearErrors()}
+					placeholder="Confirme sua senha"
+				/>
+				<p
+					className={`text-danger font-bold text-sm ${
+						errors.passwordConfirmation?.message
+							? 'block'
+							: 'hidden'
+					} text-left mt-1`}
+				>
+					{errors.passwordConfirmation?.message}
+				</p>
+			</div>
 
 			<button
 				type="submit"
-				className="w-full h-12 bg-blue500 hover:bg-blue700 transition-all mt-auto rounded-sm font-bold"
+				className="w-full h-12 bg-blue500 hover:bg-blue700 hover:text-white transition-all mt-auto rounded-sm font-bold flex items-center justify-center disabled:bg-blue-400 disabled:cursor-not-allowed"
+				disabled={isSubmitting}
+				onClick={() => setSignUpError('')}
 			>
-				Criar conta
+				{isSubmitting ? (
+					<WrenchScrewdriverIcon
+						width={25}
+						height={25}
+						className="text-gray400 animate-spin"
+					/>
+				) : signUpError ? (
+					signUpError
+				) : (
+					'Criar Conta'
+				)}
 			</button>
 		</form>
 	);

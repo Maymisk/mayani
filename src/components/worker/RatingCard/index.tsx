@@ -1,30 +1,44 @@
+import { FallbackAvatar } from '@/components/fallbackAvatar';
 import { StarIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 
 interface IRating {
+	author: {
+		name: string;
+		avatar: string | null;
+	};
 	title: string;
-	description: string;
-	rating: number;
+	description: string | null;
+	stars: number;
 }
 
-export function RatingCard({ title, description, rating }: IRating) {
+export function RatingCard({ author, title, description, stars }: IRating) {
 	return (
-		<article className="text-blue100 p-4 rounded-lg bg-gray400 hover:scale-105 transition-all">
+		<article className="text-blue100 p-4 rounded-lg bg-gray400 hover:scale-[1.01] transition-all">
 			<header className="flex items-center justify-between font-bold text-blue500">
-				<div>
-					<Image
-						src={'https://github.com/Maymisk.png'}
-						alt="Rating author profile picture"
-						width={40}
-						height={40}
-						className="w-auto h-auto rounded-full inline-block mr-4"
-					/>
-					por Khalil Bohner
+				<div className="flex items-center gap-4">
+					{author.avatar ? (
+						<Image
+							src={author.avatar}
+							alt="Rating author profile picture"
+							width={40}
+							height={40}
+							className="w-auto h-auto rounded-full"
+						/>
+					) : (
+						<FallbackAvatar
+							name={author.name}
+							text="text-xl"
+							width="w-[40px]"
+							height="h-[40px]"
+						/>
+					)}
+					por {author.name}
 				</div>
 
 				<div className="flex gap-1 text-yellow-300">
 					<StarIcon width={20} height={20} />
-					{rating}
+					{stars}
 				</div>
 			</header>
 

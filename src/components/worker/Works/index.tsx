@@ -3,9 +3,9 @@ import { WorkCard } from '../WorkCard';
 interface IWork {
 	id: string;
 	title: string;
-	tag: string;
-	description: string;
-	banner_url: string;
+	tag?: string;
+	description: string | null;
+	banner_url?: string;
 }
 
 interface IWorksProps {

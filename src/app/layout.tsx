@@ -1,3 +1,4 @@
+import { AuthContextProvider } from '@/contexts/AuthContext';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
@@ -25,7 +26,11 @@ interface IRootLayoutProps {
 export default function RootLayout({ children }: IRootLayoutProps) {
 	return (
 		<html lang="en">
-			<body className={`bg-gray500 ${nunito.className}`}>{children}</body>
+			<AuthContextProvider>
+				<body className={`bg-gray500 ${nunito.className}`}>
+					{children}
+				</body>
+			</AuthContextProvider>
 		</html>
 	);
 }

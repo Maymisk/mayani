@@ -1,16 +1,15 @@
 'use client';
 
+import { FallbackAvatar } from '@/components/fallbackAvatar';
 import { BriefcaseIcon, StarIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 interface IJobCardProps {
 	id: string;
 	name: string;
-	bio: string;
-	occupation: string;
-	avatar_url: string;
+	bio: string | null;
+	avatar_url: string | null;
 	rating: number;
 }
 
@@ -18,20 +17,28 @@ export function WorkerCard({
 	id,
 	name,
 	bio,
-	occupation,
 	avatar_url,
 	rating,
 }: IJobCardProps) {
 	return (
 		<div className="flex flex-col items-center justify-center p-4 rounded-lg bg-gray400 border-2 border-transparent hover:border-blue700 transition-all shadow-md shadow-gray-900">
-			<header className="text-center">
-				<Image
-					src={avatar_url}
-					alt="User's profile picture"
-					width={150}
-					height={150}
-					className="rounded-full"
-				/>
+			<header className="flex flex-col gap-2 items-center justify-center">
+				{avatar_url ? (
+					<Image
+						src={avatar_url}
+						alt="User's profile picture"
+						width={150}
+						height={150}
+						className="rounded-full"
+					/>
+				) : (
+					<FallbackAvatar
+						name={name}
+						width="w-[150px]"
+						height="h-[150px]"
+						text="text-6xl"
+					/>
+				)}
 
 				<Link
 					href={`/worker/${id}`}
@@ -48,12 +55,14 @@ export function WorkerCard({
 			<footer className="text-blue700 font-bold flex gap-6 mt-4 transition-all">
 				<div className="flex gap-1 items-center hover:text-blue-500">
 					<StarIcon width={16} height={16} />
-					{rating} em avaliações
+					{rating === 0
+						? 'Sem avaliações'
+						: `${rating.toFixed(1)} em avaliações`}
 				</div>
 
 				<div className="flex gap-1 items-center hover:text-blue-500">
 					<BriefcaseIcon width={16} height={16} />
-					{occupation}
+					Trabalhador JobConnect
 				</div>
 			</footer>
 		</div>

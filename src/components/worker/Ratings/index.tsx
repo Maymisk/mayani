@@ -4,22 +4,27 @@ import { RatingCard } from '../RatingCard';
 interface IRating {
 	id: string;
 	title: string;
-	description: string;
-	rating: number;
+	description: string | null;
+	stars: number;
+	author: {
+		name: string;
+		avatar: string | null;
+	};
 }
 
 interface IRatingProp {
+	id: string;
 	ratings: IRating[];
 }
 
-export function Ratings({ ratings }: IRatingProp) {
+export function Ratings({ id, ratings }: IRatingProp) {
 	return (
 		<section className="text-blue100 mt-20">
 			<div className="flex items-center justify-between mb-4">
 				<h2 className="text-2xl">Avaliações</h2>
 
 				<Link
-					href=""
+					href={`/ratings/user/${id}`}
 					className="text-blue500 hover:text-blue700 hover:underline transition-all"
 				>
 					Ver todas

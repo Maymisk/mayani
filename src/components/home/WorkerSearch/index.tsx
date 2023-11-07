@@ -1,34 +1,34 @@
 'use client';
 
+import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
 import { useEffect, useState } from 'react';
 import { WorkerCard } from '../WorkerCard';
-import { api } from '@/services/api';
+import { NoWorkers } from './NoWorkers';
 
 interface IWorker {
 	id: string;
 	name: string;
-	bio: string;
-	occupation: string;
-	avatar_url: string;
+	bio: string | null;
+	avatar_url: string | null;
 	rating: number;
 }
 
 type IData = IWorker[];
 
 interface IJobSearchProps {
-	initialData: IData;
+	initialData: IData | null;
 }
 
 export function WorkerSearch({ initialData }: IJobSearchProps) {
 	const [query, setQuery] = useState('');
-	const [data, setData] = useState<IData>(initialData);
+	const [isLoading, setIsLoading] = useState(false);
+	const [data, setData] = useState<IData | null>(initialData);
 
 	useEffect(() => {
 		const timeout = setTimeout(async () => {
 			if (query === '') return setData(initialData);
 
-			const workers = await api.get(`/users/?q=${query}`);
-			setData(workers);
+			setData(null);
 		}, 1200);
 
 		return () => clearTimeout(timeout);
@@ -48,11 +48,23 @@ export function WorkerSearch({ initialData }: IJobSearchProps) {
 				value={query}
 			/>
 
-			<div className="grid gap-8 mt-12 grid-cols-1 sm:grid-cols-2">
-				{data?.map(worker => (
-					<WorkerCard key={worker.id} {...worker} />
-				))}
-			</div>
+			{isLoading ? (
+				<div className="w-full flex justify-center mt-12 text-white">
+					<WrenchScrewdriverIcon
+						width={30}
+						height={30}
+						className="animate-spin"
+					/>
+				</div>
+			) : data ? (
+				<div className="grid gap-8 mt-12 grid-cols-1 sm:grid-cols-2">
+					{data?.map(worker => (
+						<WorkerCard key={worker.id} {...worker} />
+					))}
+				</div>
+			) : (
+				<NoWorkers />
+			)}
 		</section>
 	);
 }

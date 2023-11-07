@@ -1,17 +1,18 @@
 import { StarIcon } from '@heroicons/react/24/solid';
 
 interface IStarsProps {
-	rating: number;
+	stars: number;
 }
 
-export function Stars({ rating }: IStarsProps) {
-	const rounded = Math.round(rating);
+export function Stars({ stars }: IStarsProps) {
+	const rounded = Math.round(stars);
 
 	return (
 		<div className="flex justify-center gap-1 ">
 			{new Array(5).fill(0).map((_, index) => {
 				return (
 					<StarIcon
+						key={index}
 						width={20}
 						height={20}
 						className={`${
@@ -24,7 +25,7 @@ export function Stars({ rating }: IStarsProps) {
 			})}
 
 			<span className="block mt-[-1px] ml-1 text-white font-bold">
-				{rounded}
+				{stars.toFixed(1)}
 			</span>
 		</div>
 	);
