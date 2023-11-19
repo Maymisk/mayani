@@ -11,6 +11,7 @@ export interface Database {
 		Tables: {
 			clients: {
 				Row: {
+					avatar: string | null;
 					created_at: string;
 					id: string;
 					location: string | null;
@@ -18,6 +19,7 @@ export interface Database {
 					username: string;
 				};
 				Insert: {
+					avatar?: string | null;
 					created_at?: string;
 					id?: string;
 					location?: string | null;
@@ -25,6 +27,7 @@ export interface Database {
 					username: string;
 				};
 				Update: {
+					avatar?: string | null;
 					created_at?: string;
 					id?: string;
 					location?: string | null;
@@ -96,7 +99,7 @@ export interface Database {
 				};
 				Insert: {
 					clientId?: string | null;
-					id?: string;
+					id: string;
 					workerId?: string | null;
 				};
 				Update: {
@@ -134,6 +137,9 @@ export interface Database {
 					bio: string | null;
 					id: string;
 					location: string | null;
+					occupation:
+						| Database['public']['Enums']['occupationType']
+						| null;
 					resume: string | null;
 					workerId: string;
 				};
@@ -142,6 +148,9 @@ export interface Database {
 					bio?: string | null;
 					id?: string;
 					location?: string | null;
+					occupation?:
+						| Database['public']['Enums']['occupationType']
+						| null;
 					resume?: string | null;
 					workerId: string;
 				};
@@ -150,6 +159,9 @@ export interface Database {
 					bio?: string | null;
 					id?: string;
 					location?: string | null;
+					occupation?:
+						| Database['public']['Enums']['occupationType']
+						| null;
 					resume?: string | null;
 					workerId?: string;
 				};
@@ -167,7 +179,9 @@ export interface Database {
 				Row: {
 					created_at: string;
 					id: string;
-					isSubscribed: boolean;
+					isSubscribed:
+						| Database['public']['Enums']['subscriptionType']
+						| null;
 					isVerified: boolean;
 					name: string;
 					username: string;
@@ -175,7 +189,9 @@ export interface Database {
 				Insert: {
 					created_at?: string;
 					id?: string;
-					isSubscribed?: boolean;
+					isSubscribed?:
+						| Database['public']['Enums']['subscriptionType']
+						| null;
 					isVerified?: boolean;
 					name: string;
 					username: string;
@@ -183,7 +199,9 @@ export interface Database {
 				Update: {
 					created_at?: string;
 					id?: string;
-					isSubscribed?: boolean;
+					isSubscribed?:
+						| Database['public']['Enums']['subscriptionType']
+						| null;
 					isVerified?: boolean;
 					name?: string;
 					username?: string;
@@ -229,7 +247,7 @@ export interface Database {
 						foreignKeyName: 'works_clientId_fkey';
 						columns: ['clientId'];
 						isOneToOne: false;
-						referencedRelation: 'clients';
+						referencedRelation: 'users';
 						referencedColumns: ['id'];
 					},
 					{
@@ -249,7 +267,19 @@ export interface Database {
 			[_ in never]: never;
 		};
 		Enums: {
-			[_ in never]: never;
+			occupationType:
+				| 'Plumber'
+				| 'Electrician'
+				| 'Carpenter'
+				| 'Painter'
+				| 'Mechanic'
+				| 'Bricklayer'
+				| 'Drywaller'
+				| 'Welder'
+				| 'Gardener'
+				| 'Locksmith'
+				| 'Housekeeper';
+			subscriptionType: 'VERIFIED' | 'PREMIUM';
 		};
 		CompositeTypes: {
 			[_ in never]: never;

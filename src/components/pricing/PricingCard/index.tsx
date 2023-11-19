@@ -20,9 +20,9 @@ export function PricingCard({
 			<Image
 				src={image}
 				alt="Image describing the paid plan"
-				height={200}
+				height={300}
 				width={300}
-				className="w-full max-h-[200px] rounded-t-lg bg-white"
+				className="w-auto h-auto max-h-[200px] rounded-t-lg bg-white"
 			/>
 
 			<div className="flex flex-col justify-center items-center gap-8 flex-1 p-8">

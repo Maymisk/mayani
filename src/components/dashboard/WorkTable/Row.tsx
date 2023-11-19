@@ -1,16 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { StatusColors, Status } from './status';
+import { StatusColors, WorkStatus } from '../../../utils/WorkStatus';
 import { currencyFormatter } from '@/utils/currencyFormatter';
+import { FallbackAvatar } from '@/components/fallbackAvatar';
 
 interface IWorkTableRowProps {
 	client: {
 		name: string;
-		avatar: string;
+		avatar: string | null;
 	};
 	price: number;
-	status: keyof typeof Status;
-	date: string;
+	status: keyof typeof WorkStatus;
+	created_at: string;
 	url: string;
 }
 
@@ -18,19 +19,27 @@ export function WorkTableRow({
 	client,
 	status,
 	price,
-	date,
+	created_at,
 	url,
 }: IWorkTableRowProps) {
 	return (
 		<tr className="text-white">
 			<td className="p-2 flex items-center justify-center rounded-l-xl border-l-2 border-y-2 border-gray400">
-				<Image
-					src={client.avatar}
-					alt="Client profile picutre"
-					width={50}
-					height={50}
-					className="rounded-full"
-				/>
+				{client.avatar ? (
+					<Image
+						src={client.avatar}
+						alt="Client profile picutre"
+						width={50}
+						height={50}
+						className="rounded-full"
+					/>
+				) : (
+					<FallbackAvatar
+						width="w-[50px]"
+						height="h-[50px]"
+						name={client.name}
+					/>
+				)}
 			</td>
 			<td className="p-2 text-center border-y-2 border-gray400">
 				{client.name}
@@ -44,7 +53,7 @@ export function WorkTableRow({
 				{status}
 			</td>
 			<td className="p-2 text-center border-y-2 border-gray400">
-				{date}
+				{created_at}
 			</td>
 			<td className="p-2 text-center rounded-r-xl border-y-2 border-r-2 border-gray400">
 				<Link

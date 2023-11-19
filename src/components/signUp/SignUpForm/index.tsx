@@ -1,14 +1,19 @@
 'use client';
 
-import { useAuth } from '@/contexts/AuthContext';
-import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
+import { LoadingIcon } from '@/components/loadingIcon';
+import { useAuth } from '@/contexts/auth/AuthContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Input } from './Input';
+import { useForm, Controller } from 'react-hook-form';
+import { SignUpFormInput } from './SignUpFormInput';
 import { validation } from './validation';
+import { SignUpFormRadioInput } from './SignUpFormRadioInput';
+import { UserType } from '@/contexts/auth/types';
 
 interface IOnSubmitData {
+	name: string;
+	username: string;
+	type: UserType;
 	email: string;
 	password: string;
 	passwordConfirmation: string;
@@ -20,13 +25,17 @@ export function SignUpForm() {
 	const {
 		register,
 		handleSubmit,
-		clearErrors,
 		formState: { errors, isSubmitting },
+		control,
+		reset,
 	} = useForm({ resolver: yupResolver(validation) });
 
 	const [signUpError, setSignUpError] = useState('');
 
 	async function onSubmit({
+		name,
+		username,
+		type,
 		email,
 		password,
 		passwordConfirmation,
@@ -34,14 +43,15 @@ export function SignUpForm() {
 		if (password != passwordConfirmation) return;
 
 		const error = await signUp({
+			name,
+			username,
+			type,
 			email,
 			password,
-			name: 'Khalil Bohner',
-			username: 'a',
-			type: 'workers',
 		});
 
 		if (error) setSignUpError('Erro');
+		else reset();
 	}
 
 	return (
@@ -49,58 +59,64 @@ export function SignUpForm() {
 			onSubmit={handleSubmit(onSubmit)}
 			className="w-full flex flex-col flex-1 gap-4 mt-2"
 		>
-			<div>
-				<Input
-					type="text"
-					required
-					autoComplete="off"
-					{...register('email')}
-					onChange={() => clearErrors()}
-					placeholder="Digite seu email"
-				/>
-				<p
-					className={`text-danger font-bold text-sm text-left mt-1 ${
-						errors.email ? 'block' : 'hidden'
-					}`}
-				>
-					{errors.email?.message}
-				</p>
-			</div>
+			<SignUpFormInput
+				type="text"
+				required
+				autoComplete="off"
+				{...register('name')}
+				placeholder="Digite seu nome"
+				error={errors.name?.message}
+			/>
 
-			<div>
-				<Input
+			<SignUpFormInput
+				type="text"
+				required
+				autoComplete="off"
+				{...register('username')}
+				placeholder="Digite seu nome de usuário"
+				error={errors.username?.message}
+			/>
+
+			<Controller
+				name="type"
+				render={({
+					field: { onChange, value },
+					formState: { errors },
+				}) =>
+					SignUpFormRadioInput({
+						value,
+						onChange,
+						error: errors.type?.message,
+					})
+				}
+				control={control}
+			/>
+
+			<SignUpFormInput
+				type="email"
+				required
+				autoComplete="off"
+				{...register('email')}
+				placeholder="Digite seu email"
+				error={errors.email?.message}
+			/>
+
+			<div className="flex gap-2">
+				<SignUpFormInput
 					type="password"
 					required
 					{...register('password')}
-					onChange={() => clearErrors()}
 					placeholder="Digite sua senha"
+					error={errors.password?.message}
 				/>
-				<p
-					className={`text-danger font-bold text-sm ${
-						errors.password?.message ? 'block' : 'hidden'
-					} text-left mt-1`}
-				>
-					{errors.password?.message}
-				</p>
-			</div>
 
-			<div>
-				<Input
+				<SignUpFormInput
 					type="password"
 					required
 					{...register('passwordConfirmation')}
-					onChange={() => clearErrors()}
 					placeholder="Confirme sua senha"
+					error={errors.passwordConfirmation?.message}
 				/>
-				<p
-					className={`text-danger font-bold text-sm ${
-						errors.passwordConfirmation?.message
-							? 'block'
-							: 'hidden'
-					} text-left mt-1`}
-				>
-					{errors.passwordConfirmation?.message}
-				</p>
 			</div>
 
 			<button
@@ -110,13 +126,9 @@ export function SignUpForm() {
 				onClick={() => setSignUpError('')}
 			>
 				{isSubmitting ? (
-					<WrenchScrewdriverIcon
-						width={25}
-						height={25}
-						className="text-gray400 animate-spin"
-					/>
+					<LoadingIcon />
 				) : signUpError ? (
-					signUpError
+					<span className="uppercase">{signUpError}</span>
 				) : (
 					'Criar Conta'
 				)}

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, userAgent } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
 
@@ -12,19 +12,23 @@ export default async function middleware(req: NextRequest) {
 
 	const path = req.nextUrl.pathname;
 
+	if (session && (path === '/' || path === '/login' || path === '/signUp'))
+		return NextResponse.redirect(new URL('/home', req.url));
+
+	if (!session && path !== '/' && path !== '/login' && path !== '/signUp')
+		return NextResponse.redirect(new URL('/login', req.url));
+
+	const splitPath = path.split('/');
+
 	if (
 		session &&
-		(path === '/' || path === '/auth/login' || path === '/auth/signUp')
+		splitPath[1] === 'dashboard' &&
+		splitPath[3] != session.user.user_metadata.id
 	)
 		return NextResponse.redirect(new URL('/home', req.url));
 
-	if (
-		!session &&
-		path !== '/' &&
-		path !== '/auth/login' &&
-		path !== '/auth/signUp'
-	)
-		return NextResponse.redirect(new URL('/auth/login', req.url));
+	if (session && !session.user.user_metadata.isWorker && path === '/pricing')
+		return NextResponse.redirect(new URL('/home', req.url));
 
 	return res;
 }

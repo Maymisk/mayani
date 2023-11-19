@@ -1,14 +1,12 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
-import { validation } from './validation';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from '@root/supabase/databaseTypes';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { LoadingIcon } from '@/components/loadingIcon';
+import { useAuth } from '@/contexts/auth/AuthContext';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
+import { validation } from './validation';
+import { LoginFormInput } from './LoginFormInput';
 
 interface IOnSubmitData {
 	email: string;
@@ -21,7 +19,6 @@ export function LoginForm() {
 	const {
 		register,
 		handleSubmit,
-		clearErrors,
 		formState: { isSubmitting, errors },
 	} = useForm({ resolver: yupResolver(validation) });
 
@@ -36,46 +33,24 @@ export function LoginForm() {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className="w-full h-full flex flex-col gap-4 mt-1"
+			className="w-full h-full flex flex-col flex-1 gap-4 mt-1"
 		>
-			<div>
-				<input
-					type="email"
-					required
-					autoComplete="off"
-					{...register('email')}
-					onChange={() => clearErrors()}
-					className="w-full p-3 bg-transparent text-gray-400 outline-none focus:outline-none border-2 border-gray500 rounded-md transition-all placeholder:text-gray-400 placeholder:font-extralight hover:border-blue500 focus:border-blue500"
-					placeholder="Digite seu email"
-				/>
+			<LoginFormInput
+				type="email"
+				required
+				autoComplete="off"
+				{...register('email')}
+				placeholder="Digite seu email"
+				error={errors.email?.message}
+			/>
 
-				<p
-					className={`text-danger font-bold mt-1 ${
-						errors.email ? 'block' : 'hidden'
-					}`}
-				>
-					{errors.email?.message}
-				</p>
-			</div>
-
-			<div>
-				<input
-					type="password"
-					required
-					{...register('password')}
-					onChange={() => clearErrors()}
-					className="w-full p-3 bg-transparent text-gray-400 outline-none focus:outline-none border-2 border-gray500 rounded-md transition-all placeholder:text-gray-400 placeholder:font-extralight hover:border-blue500 focus:border-blue500"
-					placeholder="Digite sua senha"
-				/>
-
-				<p
-					className={`text-danger font-bold mt-1 ${
-						errors.password ? 'block' : 'hidden'
-					}`}
-				>
-					{errors.password?.message}
-				</p>
-			</div>
+			<LoginFormInput
+				type="password"
+				required
+				{...register('password')}
+				placeholder="Digite sua senha"
+				error={errors.password?.message}
+			/>
 
 			<button
 				type="submit"
@@ -84,11 +59,7 @@ export function LoginForm() {
 				disabled={isSubmitting}
 			>
 				{isSubmitting ? (
-					<WrenchScrewdriverIcon
-						width={25}
-						height={25}
-						className="text-gray400 animate-spin"
-					/>
+					<LoadingIcon />
 				) : loginError ? (
 					<span className="font-bold uppercase text-sm">
 						{loginError}

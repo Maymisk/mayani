@@ -36,7 +36,7 @@ export function RatingCard({ author, title, description, stars }: IRating) {
 					por {author.name}
 				</div>
 
-				<div className="flex gap-1 text-yellow-300">
+				<div className="flex gap-1 text-blue700">
 					<StarIcon width={20} height={20} />
 					{stars}
 				</div>

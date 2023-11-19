@@ -5,8 +5,19 @@ import {
 	WrenchScrewdriverIcon,
 } from '@heroicons/react/24/solid';
 import { ListItem } from './ListItem';
+import { isSubscribedType } from '@root/supabase/isSubscribed';
 
-export function SummarizedData() {
+interface ISummarizedDataProps {
+	amountOfWorks: number;
+	amountOfRatings: number;
+	subscriptionType: isSubscribedType;
+}
+
+export function SummarizedData({
+	amountOfWorks,
+	amountOfRatings,
+	subscriptionType,
+}: ISummarizedDataProps) {
 	return (
 		<div className="border-2 border-gray400 p-4 rounded-md">
 			<ul className="flex items-center justify-around">
@@ -21,7 +32,7 @@ export function SummarizedData() {
 
 				<ListItem
 					title="Serviços feitos"
-					data={1000}
+					data={amountOfWorks}
 					Icon={<WrenchScrewdriverIcon width={25} height={25} />}
 					iconColor="danger"
 				/>
@@ -30,7 +41,7 @@ export function SummarizedData() {
 
 				<ListItem
 					title="Avaliações recebidas"
-					data={1000}
+					data={amountOfRatings}
 					Icon={<StarIcon width={25} height={25} />}
 					iconColor="yellow-400"
 				/>
@@ -39,7 +50,7 @@ export function SummarizedData() {
 
 				<ListItem
 					title="Inscrição"
-					data="Premium"
+					data={subscriptionType || 'Sem inscrição'}
 					Icon={<ExclamationCircleIcon width={25} height={25} />}
 					iconColor="blue700"
 				/>

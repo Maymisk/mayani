@@ -1,5 +1,6 @@
 'use client';
 
+import { useAuth } from '@/contexts/auth/AuthContext';
 import {
 	ArrowRightOnRectangleIcon,
 	InformationCircleIcon,
@@ -8,21 +9,19 @@ import {
 } from '@heroicons/react/24/solid';
 import { Content, Item, Separator } from '@radix-ui/react-dropdown-menu';
 import Link from 'next/link';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from '@root/supabase/databaseTypes';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { Ref, forwardRef } from 'react';
 
-export function ProfileMenu() {
-	const { signOut } = useAuth();
+function ProfileMenuComponent(_: any, ref: Ref<HTMLDivElement>) {
+	const { user, signOut } = useAuth();
 
 	return (
 		<Content
-			className="w-[200px] bg-gray400 text-gray300 py-2 rounded-md  px-1 flex flex-col gap-1 shadow-md shadow-black"
+			ref={ref}
+			className="w-[15.625rem] relative z-50 bg-gray400 text-gray300 py-2 rounded-md px-1 flex flex-col gap-1 shadow-md shadow-black"
 			align="end"
 		>
 			<Link
-				href={''}
+				href={`/profile/user/${user?.user_id}`}
 				className="focus:bg-blue700 focus:text-gray300 outline-none rounded-sm"
 			>
 				<Item className="flex items-center justify-between hover:bg-blue700 hover:text-gray300 outline-none px-4 py-1 rounded-sm">
@@ -30,25 +29,29 @@ export function ProfileMenu() {
 				</Item>
 			</Link>
 
-			<Link
-				href={'/dashboard/user/123'}
-				className="focus:bg-blue700 focus:text-gray300 outline-none rounded-sm"
-			>
-				<Item className="flex items-center justify-between hover:bg-blue700 hover:text-gray300 outline-none px-4 py-1 rounded-sm">
-					Painel <InformationCircleIcon width={20} height={20} />
-				</Item>
-			</Link>
+			{user?.isWorker && (
+				<Link
+					href={'/dashboard/user/' + user?.id}
+					className="focus:bg-blue700 focus:text-gray300 outline-none rounded-sm"
+				>
+					<Item className="flex items-center justify-between hover:bg-blue700 hover:text-gray300 outline-none px-4 py-1 rounded-sm">
+						Painel <InformationCircleIcon width={20} height={20} />
+					</Item>
+				</Link>
+			)}
 
 			<Separator className="bg-gray500 h-[1px] mb-2" />
 
-			<Link
-				href={'/pricing'}
-				className="focus:bg-yellow-400 focus:text-black outline-none rounded-sm text-yellow-400"
-			>
-				<Item className="flex items-center justify-between hover:bg-yellow-400 hover:text-black outline-none px-4 py-1 rounded-sm">
-					Premium <StarIcon width={20} height={20} />
-				</Item>
-			</Link>
+			{user?.isWorker && !user.isWorker.isSubscribed && (
+				<Link
+					href={'/pricing'}
+					className="focus:bg-yellow-400 focus:text-black outline-none rounded-sm text-yellow-400"
+				>
+					<Item className="flex items-center justify-between hover:bg-yellow-400 hover:text-black outline-none px-4 py-1 rounded-sm">
+						Premium <StarIcon width={20} height={20} />
+					</Item>
+				</Link>
+			)}
 
 			<button
 				onClick={signOut}
@@ -61,3 +64,5 @@ export function ProfileMenu() {
 		</Content>
 	);
 }
+
+export const ProfileMenu = forwardRef(ProfileMenuComponent);

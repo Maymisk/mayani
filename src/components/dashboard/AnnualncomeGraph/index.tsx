@@ -3,14 +3,23 @@
 import { Line } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import { Chart } from 'chart.js/auto';
+import { currencyFormatter } from '@/utils/currencyFormatter';
 
 Chart.register(CategoryScale);
 
-export function AnnualIncomeGraph() {
+interface IAnnualIncomeGraphProps {
+	income: number[];
+	totalIncome: number;
+}
+
+export function AnnualIncomeGraph({
+	income,
+	totalIncome,
+}: IAnnualIncomeGraphProps) {
 	return (
 		<div className="w-full mt-8 p-8 rounded-2xl border-2 border-gray400">
 			<h2 className="text-2xl font-bold mb-4 text-center text-white">
-				Renda Anual
+				Renda Anual de {currencyFormatter.format(totalIncome)}
 			</h2>
 
 			<Line
@@ -33,7 +42,7 @@ export function AnnualIncomeGraph() {
 					datasets: [
 						{
 							label: '',
-							data: [1, 4, 3, 4, 2],
+							data: income,
 							borderColor: '#4EA8DE',
 							borderWidth: 2,
 							pointBackgroundColor: 'black',

@@ -1,15 +1,18 @@
 'use client';
 
 import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
+import { Database } from '@root/supabase/databaseTypes';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';
+import { NoWorkers } from '../../empty/NoWorkers';
 import { WorkerCard } from '../WorkerCard';
-import { NoWorkers } from './NoWorkers';
+import { searchWorkers } from './fetch';
 
 interface IWorker {
 	id: string;
 	name: string;
 	bio: string | null;
-	avatar_url: string | null;
+	avatar: string | null;
 	rating: number;
 }
 
@@ -20,6 +23,8 @@ interface IJobSearchProps {
 }
 
 export function WorkerSearch({ initialData }: IJobSearchProps) {
+	const supabase = createClientComponentClient<Database>();
+
 	const [query, setQuery] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [data, setData] = useState<IData | null>(initialData);
@@ -28,8 +33,12 @@ export function WorkerSearch({ initialData }: IJobSearchProps) {
 		const timeout = setTimeout(async () => {
 			if (query === '') return setData(initialData);
 
-			setData(null);
-		}, 1200);
+			setIsLoading(true);
+
+			setData(await searchWorkers(query, supabase));
+
+			setIsLoading(false);
+		}, 1000);
 
 		return () => clearTimeout(timeout);
 	}, [query, initialData]);

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { Trigger } from '@radix-ui/react-dropdown-menu';
 import { FallbackAvatar } from '@/components/fallbackAvatar';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/auth/AuthContext';
 
 interface IProfileIconProps {
 	avatar: string | null;

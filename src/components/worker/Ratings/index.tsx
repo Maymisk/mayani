@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { RatingCard } from '../RatingCard';
+import { NoRatings } from '@/components/empty/NoRatings';
 
 interface IRating {
 	id: string;
@@ -32,9 +33,13 @@ export function Ratings({ id, ratings }: IRatingProp) {
 			</div>
 
 			<div className="grid grid-cols-2 gap-4">
-				{ratings?.map(rating => (
-					<RatingCard key={rating.id} {...rating} />
-				))}
+				{ratings.length > 0 ? (
+					ratings.map(rating => (
+						<RatingCard key={rating.id} {...rating} />
+					))
+				) : (
+					<NoRatings />
+				)}
 			</div>
 		</section>
 	);

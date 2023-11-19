@@ -9,23 +9,17 @@ interface IJobCardProps {
 	id: string;
 	name: string;
 	bio: string | null;
-	avatar_url: string | null;
-	rating: number;
+	avatar: string | null;
+	rating: number | null;
 }
 
-export function WorkerCard({
-	id,
-	name,
-	bio,
-	avatar_url,
-	rating,
-}: IJobCardProps) {
+export function WorkerCard({ id, name, bio, avatar, rating }: IJobCardProps) {
 	return (
 		<div className="flex flex-col items-center justify-center p-4 rounded-lg bg-gray400 border-2 border-transparent hover:border-blue700 transition-all shadow-md shadow-gray-900">
 			<header className="flex flex-col gap-2 items-center justify-center">
-				{avatar_url ? (
+				{avatar ? (
 					<Image
-						src={avatar_url}
+						src={avatar}
 						alt="User's profile picture"
 						width={150}
 						height={150}
@@ -55,7 +49,7 @@ export function WorkerCard({
 			<footer className="text-blue700 font-bold flex gap-6 mt-4 transition-all">
 				<div className="flex gap-1 items-center hover:text-blue-500">
 					<StarIcon width={16} height={16} />
-					{rating === 0
+					{!rating
 						? 'Sem avaliações'
 						: `${rating.toFixed(1)} em avaliações`}
 				</div>

@@ -1,6 +1,12 @@
 import * as yup from 'yup';
 
 const validation = yup.object({
+	name: yup.string().required('Digite seu nome.'),
+	username: yup.string().required('Digite seu nome de usuário.'),
+	type: yup
+		.string()
+		.required('Diga que tipo de usuário você é.')
+		.oneOf(['workers', 'clients'] as const),
 	email: yup
 		.string()
 		.email('Insira um email válido')

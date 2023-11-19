@@ -3,12 +3,23 @@
 import { Chart } from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 Chart.register(CategoryScale);
 
-export function MonthlyWorksGraph() {
-	// calcular as porcentagens de cada dado e modificar as labels
-	const data = [10, 20, 30];
+interface IMonthlyWorksGraphProps {
+	finished: number;
+	pending: number;
+	canceled: number;
+}
+
+export function MonthlyWorksGraph({
+	finished,
+	pending,
+	canceled,
+}: IMonthlyWorksGraphProps) {
+	const data = [finished, pending, canceled];
+	const total = finished + pending + canceled;
 
 	return (
 		<div className="w-full p-6 rounded-3xl flex flex-col items-center gap-4 border-2 border-gray400">
@@ -16,23 +27,39 @@ export function MonthlyWorksGraph() {
 				Trabalhos do mês atual
 			</h2>
 
-			<div>
-				<Pie
-					data={{
-						labels: ['36% - CONCLUÍDOS', 'PENDENTES', 'CANCELADOS'],
-						datasets: [
-							{
-								data,
-								backgroundColor: [
-									'#1E6F9F',
-									'#FACC15',
-									'#E25858',
-								],
-							},
-						],
-					}}
-				/>
-			</div>
+			{total > 0 ? (
+				<div>
+					<Pie
+						data={{
+							labels: [
+								`${
+									Math.round(finished / total) * 100
+								}% - CONCLUÍDOS`,
+								`${
+									Math.round(pending / total) * 100
+								}% PENDENTES`,
+								`${
+									Math.round(canceled / total) * 100
+								}% CANCELADOS`,
+							],
+							datasets: [
+								{
+									data,
+									backgroundColor: [
+										'#1E6F9F',
+										'#FACC15',
+										'#E25858',
+									],
+								},
+							],
+						}}
+					/>
+				</div>
+			) : (
+				<div className="flex items-center justify-center text-gray-600 text-xl font-bold uppercase">
+					Sem trabalhos no mês atual
+				</div>
+			)}
 		</div>
 	);
 }

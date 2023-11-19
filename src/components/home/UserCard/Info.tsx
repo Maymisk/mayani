@@ -1,5 +1,3 @@
-'use client';
-
 import {
 	StarIcon,
 	BuildingOfficeIcon,
@@ -24,7 +22,7 @@ export function Info({ rating, company, followers }: IInfo) {
 			<div className="flex flex-col sm:flex-row items-center gap-2 text-blue100">
 				<BuildingOfficeIcon width={18} height={18} />
 
-				<span>{company} </span>
+				<span>{company}</span>
 			</div>
 
 			<div className="flex flex-col sm:flex-row items-center gap-2 text-blue100">

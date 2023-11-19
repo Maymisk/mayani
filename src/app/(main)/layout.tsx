@@ -1,3 +1,4 @@
+import { MainBanner } from '@/components/banner';
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
 import { ReactNode } from 'react';
@@ -12,6 +13,8 @@ export default function MainLayout({ children }: INavbarLayoutProps) {
 			<header>
 				<Navbar />
 			</header>
+
+			<MainBanner />
 
 			{children}
 

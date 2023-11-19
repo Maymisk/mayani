@@ -3,7 +3,7 @@
 import { Root, Portal } from '@radix-ui/react-dropdown-menu';
 import { ProfileIcon } from './ProfileIcon';
 import { ProfileMenu } from './ProfileMenu';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/auth/AuthContext';
 import Link from 'next/link';
 import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
 

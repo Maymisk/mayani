@@ -1,15 +1,16 @@
 'use client';
 
-import { CategoryScale } from 'chart.js/auto';
 import { Chart } from 'chart.js';
+import { CategoryScale } from 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
-import { StarIcon } from '@heroicons/react/24/solid';
 
 Chart.register(CategoryScale);
 
-export function OverallRatingGraph() {
-	const data = [3, 4, 2, 8, 12];
+interface IOverallRatingGraph {
+	ratingsByStars: number[];
+}
 
+export function OverallRatingGraph({ ratingsByStars }: IOverallRatingGraph) {
 	return (
 		<div className="max-w-[200px]">
 			<Doughnut
@@ -17,7 +18,7 @@ export function OverallRatingGraph() {
 					datasets: [
 						{
 							label: 'AVALIAÇÕES',
-							data,
+							data: ratingsByStars,
 							backgroundColor: [
 								'#E25858',
 								'#ffa739',
