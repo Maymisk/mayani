@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 import { formatRatings } from './formatRatings';
 import { formatWorks } from './formatWorks';
 
-interface IWorkerProfile {
+interface IProfile {
 	avatar: string | null;
 }
 
@@ -15,18 +15,9 @@ interface IRating {
 	description: string | null;
 	stars: number;
 	users: {
-		workers: {
-			name: string;
-			worker_profiles: IWorkerProfile;
-		};
-	};
-}
-
-interface IFetchWorkerResponse {
-	name: string;
-	isSubscribed: isSubscribedType;
-	users: {
-		id: string;
+		name: string;
+		worker_profiles: IProfile | null;
+		client_profiles: IProfile | null;
 	};
 }
 
@@ -36,58 +27,60 @@ interface IWork {
 	end_date: string | null;
 	created_at: string;
 	users: {
-		workers: {
-			name: string;
-			worker_profiles: IWorkerProfile;
-		};
+		name: string;
+		worker_profiles: IProfile | null;
+		client_profiles: IProfile | null;
 	};
 }
 
-export async function getDashboardData(id: string) {
+interface IFetchWorkerResponse {
+	name: string;
+	worker_profiles: {
+		isSubscribed: isSubscribedType;
+	};
+	works: IWork[];
+	ratings: IRating[];
+}
+
+export async function getDashboardData(auth_id: string) {
 	const supabase = createServerComponentClient<Database>({ cookies });
 
-	const { data: worker } = await supabase
-		.from('workers')
-		.select(`name, isSubscribed, users(id)`)
-		.eq('id', id)
+	const { data } = await supabase
+		.from('users')
+		.select(
+			`
+				name, 
+				worker_profiles(isSubscribed),
+				works!works_worker_id_fkey(
+					id,
+					price,
+					end_date,
+					created_at,
+					users!works_client_id_fkey(name, worker_profiles(avatar), client_profiles(avatar))
+				),
+				ratings!ratings_rated_id_fkey(
+					id, 
+					description, 
+					stars,  
+					users!ratings_author_id_fkey(
+						name,
+						worker_profiles(avatar),
+						client_profiles(avatar)
+					)
+				)
+			`
+		)
+		.eq('auth_id', auth_id)
 		.returns<IFetchWorkerResponse[]>();
 
-	if (!worker || worker.length === 0) notFound();
+	if (!data || data.length === 0) notFound();
 
-	const { data: worksData } = await supabase
-		.from('works')
-		.select(
-			'id, price, end_date, created_at, users(workers(name, worker_profiles(avatar)))'
-		)
-		.eq('workerId', id)
-		.returns<IWork[]>();
-
-	if (!worksData) notFound();
-
-	const { data: ratingsArray } = await supabase
-		.from('ratings')
-		.select(
-			`id, 
-            description, 
-            stars,
-            users!ratings_authorId_fkey(workers(name, worker_profiles(avatar)))`
-		)
-		.eq('ratedId', worker[0].users.id)
-		.returns<IRating[]>();
-
-	if (!ratingsArray) notFound();
-
-	const {
-		name,
-		isSubscribed,
-		users: { id: user_id },
-	} = worker[0];
+	const { name, ratings, works, worker_profiles } = data[0];
 
 	return {
 		name,
-		isSubscribed,
-		user_id,
-		...formatWorks(worksData),
-		...formatRatings(ratingsArray),
+		isSubscribed: worker_profiles.isSubscribed,
+		...formatWorks(works),
+		...formatRatings(ratings),
 	};
 }

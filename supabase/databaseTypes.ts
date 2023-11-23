@@ -9,82 +9,87 @@ export type Json =
 export interface Database {
 	public: {
 		Tables: {
-			clients: {
+			client_profiles: {
 				Row: {
 					avatar: string | null;
+					client_id: string | null;
 					created_at: string;
 					id: string;
 					location: string | null;
-					name: string;
-					username: string;
 				};
 				Insert: {
 					avatar?: string | null;
+					client_id?: string | null;
 					created_at?: string;
 					id?: string;
 					location?: string | null;
-					name: string;
-					username: string;
 				};
 				Update: {
 					avatar?: string | null;
+					client_id?: string | null;
 					created_at?: string;
 					id?: string;
 					location?: string | null;
-					name?: string;
-					username?: string;
-				};
-				Relationships: [];
-			};
-			ratings: {
-				Row: {
-					authorId: string;
-					created_at: string;
-					description: string | null;
-					id: string;
-					ratedId: string;
-					stars: number;
-					title: string;
-					workId: string;
-				};
-				Insert: {
-					authorId: string;
-					created_at?: string;
-					description?: string | null;
-					id?: string;
-					ratedId: string;
-					stars: number;
-					title: string;
-					workId: string;
-				};
-				Update: {
-					authorId?: string;
-					created_at?: string;
-					description?: string | null;
-					id?: string;
-					ratedId?: string;
-					stars?: number;
-					title?: string;
-					workId?: string;
 				};
 				Relationships: [
 					{
-						foreignKeyName: 'ratings_authorId_fkey';
-						columns: ['authorId'];
+						foreignKeyName: 'client_profiles_client_id_fkey';
+						columns: ['client_id'];
 						isOneToOne: false;
 						referencedRelation: 'users';
-						referencedColumns: ['id'];
-					},
+						referencedColumns: ['auth_id'];
+					}
+				];
+			};
+			ratings: {
+				Row: {
+					author_id: string;
+					created_at: string;
+					description: string | null;
+					id: string;
+					rated_id: string;
+					stars: number;
+					title: string;
+					work_id: string;
+				};
+				Insert: {
+					author_id: string;
+					created_at?: string;
+					description?: string | null;
+					id?: string;
+					rated_id: string;
+					stars: number;
+					title: string;
+					work_id: string;
+				};
+				Update: {
+					author_id?: string;
+					created_at?: string;
+					description?: string | null;
+					id?: string;
+					rated_id?: string;
+					stars?: number;
+					title?: string;
+					work_id?: string;
+				};
+				Relationships: [
 					{
-						foreignKeyName: 'ratings_ratedId_fkey';
-						columns: ['ratedId'];
+						foreignKeyName: 'ratings_author_id_fkey';
+						columns: ['author_id'];
 						isOneToOne: false;
 						referencedRelation: 'users';
-						referencedColumns: ['id'];
+						referencedColumns: ['auth_id'];
 					},
 					{
-						foreignKeyName: 'ratings_workId_fkey';
-						columns: ['workId'];
+						foreignKeyName: 'ratings_rated_id_fkey';
+						columns: ['rated_id'];
+						isOneToOne: false;
+						referencedRelation: 'users';
+						referencedColumns: ['auth_id'];
+					},
+					{
+						foreignKeyName: 'ratings_work_id_fkey';
+						columns: ['work_id'];
 						isOneToOne: false;
 						referencedRelation: 'works';
 						referencedColumns: ['id'];
@@ -93,40 +98,35 @@ export interface Database {
 			};
 			users: {
 				Row: {
-					clientId: string | null;
+					auth_id: string;
+					created_at: string;
 					id: string;
-					workerId: string | null;
+					isWorker: boolean;
+					name: string;
+					username: string;
 				};
 				Insert: {
-					clientId?: string | null;
-					id: string;
-					workerId?: string | null;
+					auth_id: string;
+					created_at?: string;
+					id?: string;
+					isWorker: boolean;
+					name: string;
+					username: string;
 				};
 				Update: {
-					clientId?: string | null;
+					auth_id?: string;
+					created_at?: string;
 					id?: string;
-					workerId?: string | null;
+					isWorker?: boolean;
+					name?: string;
+					username?: string;
 				};
 				Relationships: [
 					{
-						foreignKeyName: 'users_clientId_fkey';
-						columns: ['clientId'];
-						isOneToOne: true;
-						referencedRelation: 'clients';
-						referencedColumns: ['id'];
-					},
-					{
-						foreignKeyName: 'users_id_fkey';
-						columns: ['id'];
+						foreignKeyName: 'users_auth_id_fkey';
+						columns: ['auth_id'];
 						isOneToOne: true;
 						referencedRelation: 'users';
-						referencedColumns: ['id'];
-					},
-					{
-						foreignKeyName: 'users_workerId_fkey';
-						columns: ['workerId'];
-						isOneToOne: true;
-						referencedRelation: 'workers';
 						referencedColumns: ['id'];
 					}
 				];
@@ -136,81 +136,60 @@ export interface Database {
 					avatar: string | null;
 					bio: string | null;
 					id: string;
+					isSubscribed:
+						| Database['public']['Enums']['subscriptionType']
+						| null;
+					isVerified: boolean;
 					location: string | null;
 					occupation:
 						| Database['public']['Enums']['occupationType']
 						| null;
 					resume: string | null;
-					workerId: string;
+					worker_id: string;
 				};
 				Insert: {
 					avatar?: string | null;
 					bio?: string | null;
 					id?: string;
+					isSubscribed?:
+						| Database['public']['Enums']['subscriptionType']
+						| null;
+					isVerified?: boolean;
 					location?: string | null;
 					occupation?:
 						| Database['public']['Enums']['occupationType']
 						| null;
 					resume?: string | null;
-					workerId: string;
+					worker_id: string;
 				};
 				Update: {
 					avatar?: string | null;
 					bio?: string | null;
 					id?: string;
+					isSubscribed?:
+						| Database['public']['Enums']['subscriptionType']
+						| null;
+					isVerified?: boolean;
 					location?: string | null;
 					occupation?:
 						| Database['public']['Enums']['occupationType']
 						| null;
 					resume?: string | null;
-					workerId?: string;
+					worker_id?: string;
 				};
 				Relationships: [
 					{
-						foreignKeyName: 'worker_profiles_workerId_fkey';
-						columns: ['workerId'];
+						foreignKeyName: 'worker_profiles_worker_id_fkey';
+						columns: ['worker_id'];
 						isOneToOne: true;
-						referencedRelation: 'workers';
-						referencedColumns: ['id'];
+						referencedRelation: 'users';
+						referencedColumns: ['auth_id'];
 					}
 				];
 			};
-			workers: {
-				Row: {
-					created_at: string;
-					id: string;
-					isSubscribed:
-						| Database['public']['Enums']['subscriptionType']
-						| null;
-					isVerified: boolean;
-					name: string;
-					username: string;
-				};
-				Insert: {
-					created_at?: string;
-					id?: string;
-					isSubscribed?:
-						| Database['public']['Enums']['subscriptionType']
-						| null;
-					isVerified?: boolean;
-					name: string;
-					username: string;
-				};
-				Update: {
-					created_at?: string;
-					id?: string;
-					isSubscribed?:
-						| Database['public']['Enums']['subscriptionType']
-						| null;
-					isVerified?: boolean;
-					name?: string;
-					username?: string;
-				};
-				Relationships: [];
-			};
 			works: {
 				Row: {
-					clientId: string;
+					client_id: string;
 					created_at: string;
 					description: string | null;
 					end_date: string | null;
@@ -218,10 +197,10 @@ export interface Database {
 					price: number;
 					start_date: string;
 					title: string;
-					workerId: string;
+					worker_id: string;
 				};
 				Insert: {
-					clientId: string;
+					client_id: string;
 					created_at?: string;
 					description?: string | null;
 					end_date?: string | null;
@@ -229,10 +208,10 @@ export interface Database {
 					price: number;
 					start_date: string;
 					title: string;
-					workerId: string;
+					worker_id: string;
 				};
 				Update: {
-					clientId?: string;
+					client_id?: string;
 					created_at?: string;
 					description?: string | null;
 					end_date?: string | null;
@@ -240,22 +219,22 @@ export interface Database {
 					price?: number;
 					start_date?: string;
 					title?: string;
-					workerId?: string;
+					worker_id?: string;
 				};
 				Relationships: [
 					{
-						foreignKeyName: 'works_clientId_fkey';
-						columns: ['clientId'];
+						foreignKeyName: 'works_client_id_fkey';
+						columns: ['client_id'];
 						isOneToOne: false;
 						referencedRelation: 'users';
-						referencedColumns: ['id'];
+						referencedColumns: ['auth_id'];
 					},
 					{
-						foreignKeyName: 'works_workerId_fkey';
-						columns: ['workerId'];
+						foreignKeyName: 'works_worker_id_fkey';
+						columns: ['worker_id'];
 						isOneToOne: false;
-						referencedRelation: 'workers';
-						referencedColumns: ['id'];
+						referencedRelation: 'users';
+						referencedColumns: ['auth_id'];
 					}
 				];
 			};

@@ -1,42 +1,35 @@
-// api to use the Fake database (json server)
-
-interface IWork {
-	id: string;
-	title: string;
-	tag: string;
-	description: string;
-	banner_url: string;
-}
-
-interface IRating {
-	id: string;
-	title: string;
-	description: string;
-	rating: number;
-}
-
-interface IUser {
-	name: string;
-	bio: string;
-	occupation: string;
-	avatar_url: string;
-	works: IWork[];
-	ratings: IRating[];
-}
-
 export const api = new (class {
 	private baseUrl: string;
 
 	constructor() {
-		this.baseUrl = 'http://localhost:5555';
+		this.baseUrl = 'http://localhost:3000/api';
 	}
 
-	async get(path: string, init?: RequestInit | undefined): Promise<any> {
-		const response = await fetch(this.baseUrl + path, init);
-		const data = await response.json();
+	async get(path: string, options?: Omit<RequestInit, 'method'>) {
+		const response = await fetch(this.baseUrl + path, options);
 
-		return data;
+		return await response.json();
 	}
 
-	async post(path: string, payload: any) {}
+	async post(
+		path: string,
+		data: any,
+		options?: Omit<RequestInit, 'method' | 'body'>
+	) {
+		const response = await fetch(this.baseUrl + path, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+			...options,
+		});
+
+		const body = await response.json();
+
+		return {
+			...body,
+			status: response.status,
+		};
+	}
 })();

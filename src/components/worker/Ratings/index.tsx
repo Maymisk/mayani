@@ -14,18 +14,18 @@ interface IRating {
 }
 
 interface IRatingProp {
-	id: string;
+	auth_id: string;
 	ratings: IRating[];
 }
 
-export function Ratings({ id, ratings }: IRatingProp) {
+export function Ratings({ auth_id, ratings }: IRatingProp) {
 	return (
 		<section className="text-blue100 mt-20">
 			<div className="flex items-center justify-between mb-4">
 				<h2 className="text-2xl">Avaliações</h2>
 
 				<Link
-					href={`/ratings/user/${id}`}
+					href={`/ratings/user/${auth_id}`}
 					className="text-blue500 hover:text-blue700 hover:underline transition-all"
 				>
 					Ver todas

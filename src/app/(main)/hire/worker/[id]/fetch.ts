@@ -3,13 +3,13 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-export async function getWorker(id: string) {
+export async function getWorker(auth_id: string) {
 	const supabase = createServerComponentClient<Database>({ cookies });
 
 	const { data } = await supabase
-		.from('workers')
+		.from('users')
 		.select('name')
-		.eq('id', id)
+		.eq('auth_id', auth_id)
 		.single();
 
 	if (!data) notFound();

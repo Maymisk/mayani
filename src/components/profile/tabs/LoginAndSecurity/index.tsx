@@ -3,8 +3,11 @@
 import { Content } from '@radix-ui/react-tabs';
 import { TabsInput } from '../TabsInput';
 import Link from 'next/link';
+import { useAuth } from '@/contexts/auth/AuthContext';
 
 export function LoginAndSecurity() {
+	const { user } = useAuth();
+
 	return (
 		<Content
 			className="max-w-3xl mx-auto mt-8 bg-gray400 p-8 rounded-md shadow-black shadow-md"
@@ -16,7 +19,7 @@ export function LoginAndSecurity() {
 					type="text"
 					disabled={true}
 					readOnly={true}
-					value={'khalilbohner@gmail.com'}
+					value={user?.email || ''}
 				/>
 
 				<Link
@@ -50,7 +53,7 @@ export function LoginAndSecurity() {
 					type="text"
 					disabled={true}
 					readOnly={true}
-					value={'21312372193'}
+					value={user?.phone || '2132132131231'}
 				/>
 
 				<Link

@@ -1,18 +1,16 @@
-export type UserType = 'workers' | 'clients';
-
-type IsWorker = {
-	isVerified: boolean;
-	isSubscribed: boolean;
-	avatar: string | null;
-} | null;
+import { isSubscribedType } from '@root/supabase/isSubscribed';
 
 export type User = {
 	id: string;
+	name: string;
 	username: string;
 	email: string;
 	phone?: string;
-	user_id: string;
-	isWorker: IsWorker;
+	auth_id: string;
+	isWorker: boolean;
+	isVerified: boolean | undefined;
+	isSubscribed: isSubscribedType;
+	avatar: string | null;
 } | null;
 
 export interface ISignInProps {
@@ -25,28 +23,20 @@ export interface ISignUpProps {
 	username: string;
 	email: string;
 	password: string;
-	type: UserType;
-}
-
-export interface ICreateUserData {
-	name: string;
-	username: string;
-	type: UserType;
+	isWorker: boolean;
 }
 
 export type IFetchUserResponse = {
-	workers: {
-		id: string;
-		username: string;
+	id: string;
+	name: string;
+	username: string;
+	worker_profiles: {
 		isVerified: boolean;
-		isSubscribed: boolean;
-		worker_profiles: {
-			avatar: string | null;
-		};
+		isSubscribed: isSubscribedType;
+		avatar: string | null;
 	} | null;
 
-	clients: {
-		id: string;
-		username: string;
+	client_profiles: {
+		avatar: string | null;
 	} | null;
 };

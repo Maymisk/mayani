@@ -21,7 +21,7 @@ function ProfileMenuComponent(_: any, ref: Ref<HTMLDivElement>) {
 			align="end"
 		>
 			<Link
-				href={`/profile/user/${user?.user_id}`}
+				href={`/profile/user/${user?.auth_id}`}
 				className="focus:bg-blue700 focus:text-gray300 outline-none rounded-sm"
 			>
 				<Item className="flex items-center justify-between hover:bg-blue700 hover:text-gray300 outline-none px-4 py-1 rounded-sm">
@@ -31,7 +31,7 @@ function ProfileMenuComponent(_: any, ref: Ref<HTMLDivElement>) {
 
 			{user?.isWorker && (
 				<Link
-					href={'/dashboard/user/' + user?.id}
+					href={'/dashboard/worker/' + user?.auth_id}
 					className="focus:bg-blue700 focus:text-gray300 outline-none rounded-sm"
 				>
 					<Item className="flex items-center justify-between hover:bg-blue700 hover:text-gray300 outline-none px-4 py-1 rounded-sm">
@@ -42,7 +42,7 @@ function ProfileMenuComponent(_: any, ref: Ref<HTMLDivElement>) {
 
 			<Separator className="bg-gray500 h-[1px] mb-2" />
 
-			{user?.isWorker && !user.isWorker.isSubscribed && (
+			{user?.isWorker && !user.isSubscribed && (
 				<Link
 					href={'/pricing'}
 					className="focus:bg-yellow-400 focus:text-black outline-none rounded-sm text-yellow-400"

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { StatusColors, WorkStatus } from '../../../utils/WorkStatus';
 import { currencyFormatter } from '@/utils/currencyFormatter';
+import { format } from 'date-fns';
 import { FallbackAvatar } from '@/components/fallbackAvatar';
 
 interface IWorkTableRowProps {
@@ -53,7 +54,7 @@ export function WorkTableRow({
 				{status}
 			</td>
 			<td className="p-2 text-center border-y-2 border-gray400">
-				{created_at}
+				{format(new Date(created_at), 'dd/MM/yyyy')}
 			</td>
 			<td className="p-2 text-center rounded-r-xl border-y-2 border-r-2 border-gray400">
 				<Link

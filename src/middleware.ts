@@ -23,7 +23,7 @@ export default async function middleware(req: NextRequest) {
 	if (
 		session &&
 		splitPath[1] === 'dashboard' &&
-		splitPath[3] != session.user.user_metadata.id
+		splitPath[3] != session.user.id
 	)
 		return NextResponse.redirect(new URL('/home', req.url));
 

@@ -3,24 +3,29 @@ import { StarIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface IUserCardProps {
-	id: string;
+interface IWorkUserCardProps {
+	auth_id: string;
 	name: string;
 	rating: number | null;
 	avatar: string | null;
 }
 
-export function WorkUserCard({ id, name, rating, avatar }: IUserCardProps) {
+export function WorkUserCard({
+	auth_id,
+	name,
+	rating,
+	avatar,
+}: IWorkUserCardProps) {
 	return (
 		<div className="flex items-center gap-4 border-2 border-gray400 rounded-md p-4">
-			<Link href={id ? `/worker/${id}` : ''}>
+			<Link href={`/worker/${auth_id}`}>
 				{avatar ? (
 					<Image
 						src={avatar}
 						alt="User profile picture"
 						width={50}
 						height={50}
-						className="rounded-full"
+						className="w-[50px] h-[50px] object-cover rounded-full"
 					/>
 				) : (
 					<FallbackAvatar

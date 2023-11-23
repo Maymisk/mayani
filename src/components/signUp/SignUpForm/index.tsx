@@ -8,12 +8,11 @@ import { useForm, Controller } from 'react-hook-form';
 import { SignUpFormInput } from './SignUpFormInput';
 import { validation } from './validation';
 import { SignUpFormRadioInput } from './SignUpFormRadioInput';
-import { UserType } from '@/contexts/auth/types';
 
 interface IOnSubmitData {
 	name: string;
 	username: string;
-	type: UserType;
+	type: 'workers' | 'clients';
 	email: string;
 	password: string;
 	passwordConfirmation: string;
@@ -42,15 +41,17 @@ export function SignUpForm() {
 	}: IOnSubmitData) {
 		if (password != passwordConfirmation) return;
 
-		const error = await signUp({
+		const isWorker = type === 'workers';
+
+		const response = await signUp({
 			name,
 			username,
-			type,
+			isWorker,
 			email,
 			password,
 		});
 
-		if (error) setSignUpError('Erro');
+		if (response.status != 201) setSignUpError('Erro');
 		else reset();
 	}
 

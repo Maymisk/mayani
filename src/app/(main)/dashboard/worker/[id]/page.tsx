@@ -16,7 +16,6 @@ export default async function Dashboard({ params: { id } }: IDashboardProps) {
 	const {
 		name,
 		isSubscribed,
-		user_id,
 		ratings,
 		ratingsByStars,
 		works,
@@ -57,7 +56,7 @@ export default async function Dashboard({ params: { id } }: IDashboardProps) {
 					</div>
 				</div>
 
-				<UserRatings id={user_id} ratings={ratings.sample} />
+				<UserRatings id={id} ratings={ratings.sample} />
 			</section>
 
 			<section className="w-full mt-16">

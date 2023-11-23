@@ -1,18 +1,19 @@
 import { WorkStatus } from '@/utils/WorkStatus';
 import { getMonth, isSameMonth, isSameYear } from 'date-fns';
 
+interface IProfile {
+	avatar: string | null;
+}
+
 interface IWork {
 	id: string;
 	price: number;
 	end_date: string | null;
 	created_at: string;
 	users: {
-		workers: {
-			name: string;
-			worker_profiles: {
-				avatar: string | null;
-			};
-		};
+		name: string;
+		worker_profiles: IProfile | null;
+		client_profiles: IProfile | null;
 	};
 }
 
@@ -34,17 +35,14 @@ export function formatWorks(works: IWork[]) {
 			created_at,
 			price,
 			end_date,
-			users: {
-				workers: {
-					name,
-					worker_profiles: { avatar },
-				},
-			},
+			users: { name, worker_profiles, client_profiles },
 		} = work;
 
 		const client = {
 			name,
-			avatar,
+			avatar: worker_profiles
+				? worker_profiles.avatar
+				: client_profiles!.avatar,
 		};
 
 		if (end_date && isSameYear(new Date(end_date), now)) {
@@ -64,7 +62,7 @@ export function formatWorks(works: IWork[]) {
 
 		return {
 			id,
-			price,
+			price: price / 100,
 			status,
 			client,
 			created_at,

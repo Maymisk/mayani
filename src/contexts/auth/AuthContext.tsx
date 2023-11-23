@@ -15,18 +15,16 @@ import {
 	useEffect,
 	useState,
 } from 'react';
-import { createUser } from './createUser';
 import { fetchUser } from './fetchUser';
 import { ISignInProps, ISignUpProps, User } from './types';
+import { api } from '@/services/api';
 
 type AuthContextData = {
 	user: User;
 	isLoading: boolean;
 	signIn(props: ISignInProps): Promise<void | AuthError>;
 	signOut(): Promise<void>;
-	signUp(
-		props: ISignUpProps
-	): Promise<void | AuthError | PostgrestError | Error>;
+	signUp(props: ISignUpProps): Promise<any>;
 };
 
 interface IAuthContextProviderProps {
@@ -63,47 +61,10 @@ export function AuthContextProvider({ children }: IAuthContextProviderProps) {
 		router.push('/login');
 	}
 
-	async function signUp({
-		name,
-		username,
-		email,
-		password,
-		type,
-	}: ISignUpProps) {
-		const data = await createUser(
-			{
-				name,
-				username,
-				type,
-			},
-			supabase
-		);
+	async function signUp(data: ISignUpProps) {
+		const response = await api.post('/user', data);
 
-		if (!data) return new Error('Error creating the user');
-
-		const isWorker = type === 'workers';
-		const {
-			data: { user },
-			error: authError,
-		} = await supabase.auth.signUp({
-			email,
-			password,
-			options: {
-				emailRedirectTo: 'http://localhost:3000/home',
-				data: { id: data.id, isWorker },
-			},
-		});
-
-		if (authError) return authError;
-
-		// this can be done with database triggers
-		const { error: userError } = await supabase.from('users').insert({
-			id: user!.id,
-			clientId: isWorker ? null : data.id,
-			workerId: isWorker ? data.id : null,
-		});
-
-		if (userError) return userError;
+		return response;
 	}
 
 	async function getUser(user: SupaUser | null) {

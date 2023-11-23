@@ -10,23 +10,21 @@ interface IWorkerProfile {
 	location: string | null;
 }
 
-interface IUsers {
+interface IRating {
 	id: string;
+	title: string;
+	description: string | null;
+	stars: number;
+	users: {
+		name: string;
 
-	ratings: {
-		id: string;
-		title: string;
-		description: string | null;
-		stars: number;
-		users: {
-			workers: {
-				name: string;
-				worker_profiles: {
-					avatar: string | null;
-				};
-			};
-		};
-	}[];
+		worker_profiles: {
+			avatar: string | null;
+		} | null;
+		client_profiles: {
+			avatar: string | null;
+		} | null;
+	};
 }
 
 interface IWork {
@@ -39,54 +37,48 @@ interface IFetchWorkerResponse {
 	name: string;
 	username: string;
 	worker_profiles: IWorkerProfile;
-	users: IUsers;
+	ratings: IRating[];
 	works: IWork[];
 }
 
-export async function getWorkerData(id: string) {
+export async function getWorkerData(auth_id: string) {
 	const supabase = createServerComponentClient<Database>({ cookies });
 
 	const { data } = await supabase
-		.from('workers')
+		.from('users')
 		.select(
 			`name, username, 
 			worker_profiles(bio, avatar, resume, location), 
-			works(id, title, description),
-			users(
+			works!works_worker_id_fkey(id, title, description),
+			ratings!ratings_rated_id_fkey(
 				id, 
-				ratings!ratings_ratedId_fkey(
-					id, 
-					title, 
-					description, 
-					stars, 
-					users!ratings_authorId_fkey(workers(name, worker_profiles(avatar)))
-				)
+				title, 
+				description, 
+				stars, 
+				users!ratings_author_id_fkey(name, worker_profiles(avatar), client_profiles(avatar))
 			)
 			`
 		)
-		.eq('id', id)
-		.limit(2, { foreignTable: 'users.ratings' })
+		.limit(2, { foreignTable: 'ratings' })
 		.limit(4, { foreignTable: 'works' })
+		.eq('auth_id', auth_id)
+		.eq('isWorker', true)
 		.returns<IFetchWorkerResponse[]>();
 
 	if (!data) notFound();
 
-	const { name, username, worker_profiles, users, works } = data[0];
+	const { name, username, worker_profiles, ratings, works } = data[0];
 	const { avatar, bio, location, resume } = worker_profiles;
-	const { id: user_id, ratings } = users;
 
 	const formattedRatings = ratings.map(rating => {
 		const { id, title, description, stars, users } = rating;
-		const {
-			workers: {
-				name,
-				worker_profiles: { avatar },
-			},
-		} = users;
+		const { name, worker_profiles, client_profiles } = users;
 
 		const author = {
 			name,
-			avatar,
+			avatar: worker_profiles
+				? worker_profiles.avatar
+				: client_profiles!.avatar,
 		};
 
 		return {
@@ -105,7 +97,7 @@ export async function getWorkerData(id: string) {
 		location,
 		resume,
 		avatar,
-		user_id,
+		auth_id,
 		ratings: formattedRatings,
 		works,
 	};

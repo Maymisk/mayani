@@ -1,14 +1,15 @@
+interface IProfile {
+	avatar: string | null;
+}
+
 interface IRating {
 	id: string;
 	description: string | null;
 	stars: number;
 	users: {
-		workers: {
-			name: string;
-			worker_profiles: {
-				avatar: string | null;
-			};
-		};
+		name: string;
+		worker_profiles: IProfile | null;
+		client_profiles: IProfile | null;
 	};
 }
 
@@ -19,12 +20,7 @@ export function formatRatings(ratingsData: IRating[]) {
 	const formattedRatings = ratingsData.map(rating => {
 		const {
 			stars,
-			users: {
-				workers: {
-					name,
-					worker_profiles: { avatar },
-				},
-			},
+			users: { name, worker_profiles, client_profiles },
 			...rest
 		} = rating;
 
@@ -33,7 +29,9 @@ export function formatRatings(ratingsData: IRating[]) {
 
 		const author = {
 			name,
-			avatar,
+			avatar: worker_profiles
+				? worker_profiles.avatar
+				: client_profiles!.avatar,
 		};
 
 		return {

@@ -6,52 +6,46 @@ export async function fetchUser(
 	user: SupaUser,
 	supabase: SupabaseClient<Database>
 ) {
-	const { id: user_id, email } = user;
+	const {
+		id: user_id,
+		email,
+		user_metadata: { isWorker },
+	} = user;
+
 	const { data } = await supabase
 		.from('users')
 		.select(
 			`
-			workers(id, username, isVerified, isSubscribed, worker_profiles(avatar)),
-			clients(id, username)
+				id,
+				name,
+				username,
+				worker_profiles(isVerified, isSubscribed, avatar),
+				client_profiles(avatar)
 			`
 		)
-		.eq('id', user_id)
+		.eq('auth_id', user_id)
 		.returns<IFetchUserResponse[]>();
 
 	if (!data) return null;
 
-	let id = undefined;
-	let username = undefined;
-	let isWorker = null;
+	const dataObject = data[0];
+	const { id, name, username, client_profiles, worker_profiles } = dataObject;
 
-	if (data[0].workers) {
-		const workers = data[0].workers;
-		const {
-			isSubscribed,
-			isVerified,
-			worker_profiles: { avatar },
-		} = workers;
+	let isVerified = false;
+	let isSubscribed = null;
 
-		id = workers.id;
-		username = workers.username;
-		isWorker = {
-			isSubscribed,
-			isVerified,
-			avatar,
-		};
-	} else {
-		const clients = data[0].clients;
-
-		id = clients!.id;
-		username = clients!.username;
-	}
+	const profileData = worker_profiles
+		? worker_profiles
+		: { avatar: client_profiles!.avatar, isVerified, isSubscribed };
 
 	const value: User = {
 		id,
+		name,
 		username,
 		email: email as string,
-		user_id,
+		auth_id: user_id,
 		isWorker,
+		...profileData,
 	};
 
 	return value;

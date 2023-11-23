@@ -9,7 +9,7 @@ import { WorkerCard } from '../WorkerCard';
 import { searchWorkers } from './fetch';
 
 interface IWorker {
-	id: string;
+	auth_id: string;
 	name: string;
 	bio: string | null;
 	avatar: string | null;
@@ -68,7 +68,7 @@ export function WorkerSearch({ initialData }: IJobSearchProps) {
 			) : data ? (
 				<div className="grid gap-8 mt-12 grid-cols-1 sm:grid-cols-2">
 					{data?.map(worker => (
-						<WorkerCard key={worker.id} {...worker} />
+						<WorkerCard key={worker.auth_id} {...worker} />
 					))}
 				</div>
 			) : (

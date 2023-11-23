@@ -6,14 +6,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface IJobCardProps {
-	id: string;
+	auth_id: string;
 	name: string;
 	bio: string | null;
 	avatar: string | null;
 	rating: number | null;
 }
 
-export function WorkerCard({ id, name, bio, avatar, rating }: IJobCardProps) {
+export function WorkerCard({
+	auth_id,
+	name,
+	bio,
+	avatar,
+	rating,
+}: IJobCardProps) {
 	return (
 		<div className="flex flex-col items-center justify-center p-4 rounded-lg bg-gray400 border-2 border-transparent hover:border-blue700 transition-all shadow-md shadow-gray-900">
 			<header className="flex flex-col gap-2 items-center justify-center">
@@ -23,7 +29,7 @@ export function WorkerCard({ id, name, bio, avatar, rating }: IJobCardProps) {
 						alt="User's profile picture"
 						width={150}
 						height={150}
-						className="rounded-full"
+						className="w-[150px] h-[150px] object-cover rounded-full"
 					/>
 				) : (
 					<FallbackAvatar
@@ -35,7 +41,7 @@ export function WorkerCard({ id, name, bio, avatar, rating }: IJobCardProps) {
 				)}
 
 				<Link
-					href={`/worker/${id}`}
+					href={`/worker/${auth_id}`}
 					className="mt-2 text-blue100 text-xl font-bold block hover:text-blue500 transition-all"
 				>
 					{name}

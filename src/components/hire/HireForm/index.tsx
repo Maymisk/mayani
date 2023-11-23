@@ -21,10 +21,10 @@ interface IOnSubmitData {
 }
 
 interface IHireFormProps {
-	workerId: string;
+	worker_id: string;
 }
 
-export function HireForm({ workerId }: IHireFormProps) {
+export function HireForm({ worker_id }: IHireFormProps) {
 	const supabase = createClientComponentClient<Database>();
 
 	const { user } = useAuth();
@@ -45,8 +45,7 @@ export function HireForm({ workerId }: IHireFormProps) {
 		date,
 	}: IOnSubmitData) {
 		// create a toasts for each of the submission cases (success or errors)
-
-		if (user?.id === workerId) {
+		if (user?.id === worker_id) {
 			setSubmissionError('Você não pode se contratar.');
 			return;
 		}
@@ -56,12 +55,15 @@ export function HireForm({ workerId }: IHireFormProps) {
 			description,
 			price: price * 100, // price must be in cents
 			start_date: date.toISOString(),
-			clientId: user?.user_id as string,
-			workerId,
+			client_id: user?.auth_id as string,
+			worker_id,
 		});
 
 		if (error) setSubmissionError('erro');
-		else reset();
+		else {
+			clearErrors();
+			reset();
+		}
 	}
 
 	function clearErrors() {

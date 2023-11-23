@@ -9,7 +9,6 @@ import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
 
 export function ProfileButton() {
 	const { user, isLoading } = useAuth();
-	const avatar = user?.isWorker?.avatar;
 
 	return (
 		<li>
@@ -31,7 +30,7 @@ export function ProfileButton() {
 							</span>
 						</div>
 
-						<ProfileIcon avatar={avatar || ''} />
+						<ProfileIcon />
 					</div>
 
 					<Portal>
