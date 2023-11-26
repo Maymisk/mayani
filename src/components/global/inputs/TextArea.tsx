@@ -11,13 +11,13 @@ interface ITextAreaComponentProps
 	error?: string;
 }
 
-export function TextAreaComponent(
+function TextAreaComponent(
 	{ label, error, ...rest }: ITextAreaComponentProps,
 	ref: Ref<HTMLTextAreaElement>
 ) {
 	return (
-		<div className="w-full mb-2">
-			<label className="text-white font-bold mb-1 uppercase">
+		<div className="w-full">
+			<label className="text-sm text-white font-bold mb-1 uppercase">
 				{label}
 			</label>
 
@@ -32,4 +32,4 @@ export function TextAreaComponent(
 	);
 }
 
-export const HireFormTextArea = forwardRef(TextAreaComponent);
+export const TextArea = forwardRef(TextAreaComponent);

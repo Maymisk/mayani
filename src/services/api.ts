@@ -32,4 +32,23 @@ export const api = new (class {
 			status: response.status,
 		};
 	}
+
+	async put(
+		path: string,
+		data: any,
+		options?: Omit<RequestInit, 'method' | 'body'>
+	) {
+		const response = await fetch(this.baseUrl + path, {
+			body: JSON.stringify(data),
+			method: 'PUT',
+			...options,
+		});
+
+		const body = await response.json();
+
+		return {
+			...body,
+			status: response.status,
+		};
+	}
 })();

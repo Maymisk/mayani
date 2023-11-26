@@ -1,23 +1,22 @@
 'use client';
 
+import { LoadingIcon } from '@/components/loadingIcon';
 import { useAuth } from '@/contexts/auth/AuthContext';
+import { generateHash } from '@/utils/generateHash';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Content } from '@radix-ui/react-tabs';
+import { Database } from '@root/supabase/databaseTypes';
+import {
+	SupabaseClient,
+	createClientComponentClient,
+} from '@supabase/auth-helpers-nextjs';
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BasicInfoFormButtons } from './BasicInfoFormButtons';
 import { BasicInfoUserCard } from './BasicInfoUserCard';
 import { CommonFields } from './CommonFields';
 import { WorkerFields } from './WorkerFields';
 import { validation } from './validation';
-import { LoadingIcon } from '@/components/loadingIcon';
-import {
-	SupabaseClient,
-	createClientComponentClient,
-} from '@supabase/auth-helpers-nextjs';
-import { Database } from '@root/supabase/databaseTypes';
-import { useState } from 'react';
-import { createHash } from 'crypto';
-import { generateHash } from '@/utils/generateHash';
 
 interface IFormSubmissionData {
 	name?: string;
@@ -42,7 +41,6 @@ export function BasicInfo() {
 			isWorker: user!.isWorker,
 		});
 
-		console.log(data, error);
 		if (error) setUpdateError('ERRO');
 	}
 
@@ -55,7 +53,7 @@ export function BasicInfo() {
 				>
 					<BasicInfoUserCard />
 
-					<div className="w-full max-w-3xl mt-8 bg-gray400 p-8 rounded-md shadow-black shadow-md flex flex-col">
+					<div className="w-full max-w-3xl mt-8 bg-gray400 p-8 rounded-md shadow-black shadow-md flex flex-col gap-6">
 						<CommonFields />
 
 						{!user ? (

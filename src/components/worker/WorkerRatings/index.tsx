@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { RatingCard } from '../RatingCard';
+import { RatingCard } from './RatingCard';
 import { NoRatings } from '@/components/empty/NoRatings';
 
 interface IRating {
@@ -18,7 +18,7 @@ interface IRatingProp {
 	ratings: IRating[];
 }
 
-export function Ratings({ auth_id, ratings }: IRatingProp) {
+export function WorkerRatings({ auth_id, ratings }: IRatingProp) {
 	return (
 		<section className="text-blue100 mt-20">
 			<div className="flex items-center justify-between mb-4">

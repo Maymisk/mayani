@@ -12,21 +12,21 @@ export interface Database {
 			client_profiles: {
 				Row: {
 					avatar: string | null;
-					client_id: string | null;
+					client_id: string;
 					created_at: string;
 					id: string;
 					location: string | null;
 				};
 				Insert: {
 					avatar?: string | null;
-					client_id?: string | null;
+					client_id: string;
 					created_at?: string;
 					id?: string;
 					location?: string | null;
 				};
 				Update: {
 					avatar?: string | null;
-					client_id?: string | null;
+					client_id?: string;
 					created_at?: string;
 					id?: string;
 					location?: string | null;
@@ -35,6 +35,41 @@ export interface Database {
 					{
 						foreignKeyName: 'client_profiles_client_id_fkey';
 						columns: ['client_id'];
+						isOneToOne: true;
+						referencedRelation: 'users';
+						referencedColumns: ['auth_id'];
+					}
+				];
+			};
+			notifications: {
+				Row: {
+					created_at: string;
+					description: string;
+					href: string | null;
+					id: string;
+					read_at: string | null;
+					user_id: string;
+				};
+				Insert: {
+					created_at?: string;
+					description: string;
+					href?: string | null;
+					id?: string;
+					read_at?: string | null;
+					user_id: string;
+				};
+				Update: {
+					created_at?: string;
+					description?: string;
+					href?: string | null;
+					id?: string;
+					read_at?: string | null;
+					user_id?: string;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'notifications_user_id_fkey';
+						columns: ['user_id'];
 						isOneToOne: false;
 						referencedRelation: 'users';
 						referencedColumns: ['auth_id'];
@@ -44,6 +79,7 @@ export interface Database {
 			ratings: {
 				Row: {
 					author_id: string;
+					author_rate_token: string;
 					created_at: string;
 					description: string | null;
 					id: string;
@@ -54,6 +90,7 @@ export interface Database {
 				};
 				Insert: {
 					author_id: string;
+					author_rate_token: string;
 					created_at?: string;
 					description?: string | null;
 					id?: string;
@@ -64,6 +101,7 @@ export interface Database {
 				};
 				Update: {
 					author_id?: string;
+					author_rate_token?: string;
 					created_at?: string;
 					description?: string | null;
 					id?: string;
@@ -128,6 +166,77 @@ export interface Database {
 						isOneToOne: true;
 						referencedRelation: 'users';
 						referencedColumns: ['id'];
+					}
+				];
+			};
+			work_offers: {
+				Row: {
+					author_id: string;
+					client_id: string;
+					created_at: string;
+					description: string | null;
+					id: string;
+					price: number;
+					start_date: string;
+					status: Database['public']['Enums']['workOfferStatus'];
+					title: string;
+					work_offer_id: string | null;
+					worker_id: string;
+				};
+				Insert: {
+					author_id: string;
+					client_id: string;
+					created_at?: string;
+					description?: string | null;
+					id?: string;
+					price: number;
+					start_date: string;
+					status?: Database['public']['Enums']['workOfferStatus'];
+					title: string;
+					work_offer_id?: string | null;
+					worker_id: string;
+				};
+				Update: {
+					author_id?: string;
+					client_id?: string;
+					created_at?: string;
+					description?: string | null;
+					id?: string;
+					price?: number;
+					start_date?: string;
+					status?: Database['public']['Enums']['workOfferStatus'];
+					title?: string;
+					work_offer_id?: string | null;
+					worker_id?: string;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'work_offers_author_id_fkey';
+						columns: ['author_id'];
+						isOneToOne: false;
+						referencedRelation: 'users';
+						referencedColumns: ['auth_id'];
+					},
+					{
+						foreignKeyName: 'work_offers_client_id_fkey';
+						columns: ['client_id'];
+						isOneToOne: false;
+						referencedRelation: 'users';
+						referencedColumns: ['auth_id'];
+					},
+					{
+						foreignKeyName: 'work_offers_work_offer_id_fkey';
+						columns: ['work_offer_id'];
+						isOneToOne: false;
+						referencedRelation: 'work_offers';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'work_offers_worker_id_fkey';
+						columns: ['worker_id'];
+						isOneToOne: false;
+						referencedRelation: 'users';
+						referencedColumns: ['auth_id'];
 					}
 				];
 			};
@@ -259,6 +368,7 @@ export interface Database {
 				| 'Locksmith'
 				| 'Housekeeper';
 			subscriptionType: 'VERIFIED' | 'PREMIUM';
+			workOfferStatus: 'PENDING' | 'DECLINED' | 'ACCEPTED';
 		};
 		CompositeTypes: {
 			[_ in never]: never;

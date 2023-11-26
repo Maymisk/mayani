@@ -13,14 +13,14 @@ function InputComponent(
 	ref: Ref<HTMLInputElement>
 ) {
 	return (
-		<div className="w-full flex flex-col justify-center mb-4">
-			<label className="text-white font-bold mb-1 uppercase">
+		<div className="w-full flex flex-col justify-center">
+			<label className="text-sm text-white font-bold mb-1 uppercase">
 				{label}
 			</label>
 			<input
 				ref={ref}
 				{...rest}
-				className="w-full p-2 rounded-md bg-gray500 border-2 border-transparent focus:border-blue700 hover:border-blue700 outline-none placeholder:text-gray-500 text-white font-extralight transition-all"
+				className="w-full p-3 rounded-md bg-gray500 border-2 border-transparent focus:border-blue700 hover:border-blue700 outline-none placeholder:text-gray-500 text-white font-extralight transition-all"
 			/>
 
 			{error && (
@@ -30,4 +30,4 @@ function InputComponent(
 	);
 }
 
-export const HireFormInput = forwardRef(InputComponent);
+export const Input = forwardRef(InputComponent);

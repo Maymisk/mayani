@@ -1,17 +1,17 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 
-import { HireFormInput } from './HireFormInput';
-import { validation } from './validation';
+import { Input } from '@/components/global/inputs/Input';
+import { TextArea } from '@/components/global/inputs/TextArea';
 import { LoadingIcon } from '@/components/loadingIcon';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from '@root/supabase/databaseTypes';
 import { useAuth } from '@/contexts/auth/AuthContext';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { Database } from '@root/supabase/databaseTypes';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useState } from 'react';
-import { HireFormTextArea } from './HireFormTextArea';
+import { validation } from './validation';
+import { api } from '@/services/api';
 
 interface IOnSubmitData {
 	title: string;
@@ -50,13 +50,14 @@ export function HireForm({ worker_id }: IHireFormProps) {
 			return;
 		}
 
-		const { error } = await supabase.from('works').insert({
+		const { error } = await api.post('/workOffer', {
 			title,
 			description,
 			price: price * 100, // price must be in cents
 			start_date: date.toISOString(),
-			client_id: user?.auth_id as string,
+			client_id: user!.auth_id,
 			worker_id,
+			author_id: user!.auth_id,
 		});
 
 		if (error) setSubmissionError('erro');
@@ -73,10 +74,10 @@ export function HireForm({ worker_id }: IHireFormProps) {
 
 	return (
 		<form
-			className="w-full max-w-xl p-4 bg-gray400 rounded-md flex flex-col items-center justify-center"
+			className="w-full max-w-xl p-4 bg-gray400 rounded-md flex flex-col gap-4 items-center justify-center"
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<HireFormInput
+			<Input
 				type="text"
 				placeholder="Digite o título do trabalho que deseja ser feito"
 				label="Título"
@@ -86,7 +87,7 @@ export function HireForm({ worker_id }: IHireFormProps) {
 				autoComplete="off"
 			/>
 
-			<HireFormTextArea
+			<TextArea
 				label="Descrição"
 				error={errors.description?.message}
 				placeholder="Descreva com riqueza de detalhes o trabalho a ser realizado"
@@ -96,7 +97,7 @@ export function HireForm({ worker_id }: IHireFormProps) {
 			/>
 
 			<div className="w-full flex items-start gap-2">
-				<HireFormInput
+				<Input
 					type="number"
 					label="Preço"
 					placeholder="Digite o preço que deseja pagar"
@@ -106,10 +107,10 @@ export function HireForm({ worker_id }: IHireFormProps) {
 					autoComplete="off"
 				/>
 
-				<HireFormInput
+				<Input
 					type="datetime-local"
 					placeholder="Selecione a data que deseja que o serviço seja feito"
-					label="Data"
+					label="Data de início"
 					error={errors.date?.message}
 					{...register('date')}
 					onChange={() => clearErrors()}

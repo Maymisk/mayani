@@ -30,8 +30,8 @@ export function WorkInfo({
 
 	return (
 		<div className="w-full flex items-start justify-between">
-			<div className="flex flex-col items-start">
-				<h2 className="text-2xl text-white font-bold capitalize">
+			<div className="w-full flex flex-col items-start">
+				<h2 className="w-full text-2xl text-white font-bold capitalize">
 					{title}
 				</h2>
 
@@ -45,7 +45,7 @@ export function WorkInfo({
 				</span>
 			</div>
 
-			<div className="flex flex-col items-start justify-center">
+			<div className="w-full flex flex-col items-end justify-center">
 				<span className="text-white">{formattedCreationDate}</span>
 
 				<span className="font-bold text-green400">

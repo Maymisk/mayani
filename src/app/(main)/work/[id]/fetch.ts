@@ -114,7 +114,7 @@ export async function getWork(id: string) {
 }
 
 function getAverageRating(ratings: IRating[]) {
-	if (ratings.length === 0) return null;
+	if (ratings.length === 0) return 0;
 
 	const sum = ratings.reduce((sum, rating) => (sum += rating.stars), 0);
 

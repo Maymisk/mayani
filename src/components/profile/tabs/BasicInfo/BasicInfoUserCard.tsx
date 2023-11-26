@@ -1,11 +1,11 @@
 'use client';
 
 import { FallbackAvatar } from '@/components/fallbackAvatar';
+import { FileInput } from '@/components/global/inputs/FileInput';
 import { LoadingIcon } from '@/components/loadingIcon';
 import { useAuth } from '@/contexts/auth/AuthContext';
 import Image from 'next/image';
 import { useFormContext } from 'react-hook-form';
-import { TabsFileInput } from '../TabsFileInput';
 
 export function BasicInfoUserCard() {
 	const { user } = useAuth();
@@ -36,7 +36,7 @@ export function BasicInfoUserCard() {
 				<h2 className="text-3xl text-white font-bold">{user?.name}</h2>
 			</div>
 
-			<TabsFileInput
+			<FileInput
 				id="avatarInput"
 				label="Mudar avatar"
 				accept="image/jpeg,image/png,image/jpg"

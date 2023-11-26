@@ -32,15 +32,15 @@ export function MonthlyWorksGraph({
 					<Pie
 						data={{
 							labels: [
-								`${
-									Math.round(finished / total) * 100
-								}% - CONCLUÍDOS`,
-								`${
-									Math.round(pending / total) * 100
-								}% PENDENTES`,
-								`${
-									Math.round(canceled / total) * 100
-								}% CANCELADOS`,
+								`${Math.round(
+									(finished * 100) / total
+								)}% - CONCLUÍDOS`,
+								`${Math.round(
+									(pending * 100) / total
+								)}% PENDENTES`,
+								`${Math.round(
+									(canceled * 100) / total
+								)}% CANCELADOS`,
 							],
 							datasets: [
 								{

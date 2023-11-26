@@ -28,6 +28,7 @@ export function formatWorks(works: IWork[]) {
 
 	const monthlyIncome: number[] = new Array(12).fill(0);
 	let annualIncome = 0;
+	let amountOfWorks = 0;
 
 	const formattedWorks = works.map(work => {
 		const {
@@ -49,14 +50,16 @@ export function formatWorks(works: IWork[]) {
 			const dateEndDate = new Date(end_date);
 			const month = getMonth(dateEndDate);
 
-			monthlyIncome[month - 1] += price;
-			annualIncome += price;
+			monthlyIncome[month - 1] += price / 100;
+			annualIncome += price / 100;
 
 			if (isSameMonth(now, dateEndDate)) statuses.finished++;
 		}
 
 		if (!end_date && isSameMonth(now, new Date(created_at)))
 			statuses.pending++;
+
+		if (end_date) amountOfWorks++;
 
 		const status = end_date ? WorkStatus.FINISHED : WorkStatus.PENDING;
 
@@ -71,7 +74,7 @@ export function formatWorks(works: IWork[]) {
 
 	return {
 		works: {
-			amount: works.length,
+			amount: amountOfWorks,
 			sample: formattedWorks,
 			statuses,
 		},

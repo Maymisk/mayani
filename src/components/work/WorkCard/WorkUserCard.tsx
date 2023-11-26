@@ -6,7 +6,7 @@ import Link from 'next/link';
 interface IWorkUserCardProps {
 	auth_id: string;
 	name: string;
-	rating: number | null;
+	rating: number;
 	avatar: string | null;
 }
 

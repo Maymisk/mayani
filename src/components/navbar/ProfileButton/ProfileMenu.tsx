@@ -6,6 +6,7 @@ import {
 	InformationCircleIcon,
 	StarIcon,
 	UserIcon,
+	WrenchScrewdriverIcon,
 } from '@heroicons/react/24/solid';
 import { Content, Item, Separator } from '@radix-ui/react-dropdown-menu';
 import Link from 'next/link';
@@ -17,7 +18,7 @@ function ProfileMenuComponent(_: any, ref: Ref<HTMLDivElement>) {
 	return (
 		<Content
 			ref={ref}
-			className="w-[15.625rem] relative z-50 bg-gray400 text-gray300 py-2 rounded-md px-1 flex flex-col gap-1 shadow-md shadow-black"
+			className="w-[15.625rem] relative z-50 bg-gray400 text-gray300 py-2 rounded-md px-1 flex flex-col gap-1 shadow-md shadow-black animate-fadeOut data-[state='open']:animate-fadeIn"
 			align="end"
 		>
 			<Link
@@ -26,6 +27,15 @@ function ProfileMenuComponent(_: any, ref: Ref<HTMLDivElement>) {
 			>
 				<Item className="flex items-center justify-between hover:bg-blue700 hover:text-gray300 outline-none px-4 py-1 rounded-sm">
 					Perfil <UserIcon width={20} height={20} />
+				</Item>
+			</Link>
+
+			<Link
+				href={`/work/offers`}
+				className="focus:bg-blue700 focus:text-gray300 outline-none rounded-sm"
+			>
+				<Item className="flex items-center justify-between hover:bg-blue700 hover:text-gray300 outline-none px-4 py-1 rounded-sm">
+					Ofertas <WrenchScrewdriverIcon width={20} height={20} />
 				</Item>
 			</Link>
 

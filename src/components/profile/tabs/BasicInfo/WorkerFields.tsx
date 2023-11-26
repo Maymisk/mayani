@@ -1,28 +1,28 @@
+import { FileInput } from '@/components/global/inputs/FileInput';
+import { Input } from '@/components/global/inputs/Input';
+import { TextArea } from '@/components/global/inputs/TextArea';
 import { useFormContext } from 'react-hook-form';
-import { TabsFileInput } from '../TabsFileInput';
-import { TabsInput } from '../TabsInput';
-import { TabsTextArea } from '../TabsTextArea';
 
 export function WorkerFields() {
 	const { register } = useFormContext();
 
 	return (
 		<>
-			<TabsTextArea
+			<TextArea
 				label="biografia"
 				placeholder="Digite sua biografia.."
 				{...register('bio')}
 			/>
 
-			<div className="flex gap-4">
-				<TabsInput
+			<div className="h-min flex items-end gap-4">
+				<Input
 					label="Ocupação"
 					type="text"
 					placeholder="Diga-nos seu trabalho"
 					{...register('occupation')}
 				/>
 
-				<TabsFileInput
+				<FileInput
 					id="resumeInput"
 					label="Envie seu currículo"
 					accept="application/pdf"

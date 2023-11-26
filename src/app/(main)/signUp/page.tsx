@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function SignUp() {
 	return (
 		<main className="w-full min-w-xs max-w-lg text-center">
-			<div className="bg-gray400 min-h-[24rem] p-4 rounded-md flex flex-col gap-2 shadow-md shadow-gray-600">
+			<div className="bg-gray400 min-h-[24rem] p-4 rounded-md flex flex-col gap-2 shadow-md shadow-black">
 				<h1 className="text-blue100 font-bold text-2xl">Sign Up</h1>
 
 				<SignUpForm />

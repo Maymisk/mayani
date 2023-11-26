@@ -1,6 +1,6 @@
-import { Ratings } from '@/components/worker/Ratings';
+import { WorkerRatings } from '@/components/worker/WorkerRatings';
 import { WorkerInfo } from '@/components/worker/WorkerInfo';
-import { Works } from '@/components/worker/Works';
+import { WorkerWorks } from '@/components/worker/WorkerWorks';
 import { getWorkerData } from './fetch';
 
 interface IUserProps {
@@ -32,9 +32,9 @@ export default async function Worker({ params: { id } }: IUserProps) {
 				resume={resume}
 			/>
 
-			<Ratings auth_id={auth_id} ratings={ratings} />
+			<WorkerRatings auth_id={auth_id} ratings={ratings} />
 
-			<Works works={works} />
+			<WorkerWorks works={works} />
 		</main>
 	);
 }

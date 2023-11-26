@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ProfileButton } from './ProfileButton';
+import { NotificationButton } from './NotificationButton';
 
 export function Navbar() {
 	return (
@@ -8,7 +9,7 @@ export function Navbar() {
 				JobConnect
 			</h1>
 
-			<ul className="w-[40%] text-xl flex items-center justify-around">
+			<ul className="w-[60%] text-xl flex items-center justify-around">
 				<li className="hover:text-blue700 hover:scale-105 transition-all">
 					<Link href="/home">Home</Link>
 				</li>
@@ -20,6 +21,8 @@ export function Navbar() {
 				<li className="hover:text-blue700 hover:scale-105 transition-all">
 					<Link href="">Contate-nos</Link>
 				</li>
+
+				<NotificationButton />
 
 				<ProfileButton />
 			</ul>

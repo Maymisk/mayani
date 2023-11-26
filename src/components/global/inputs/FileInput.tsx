@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, Ref, forwardRef } from 'react';
 
-interface ITabsFileInputProps
+interface IInputProps
 	extends Omit<
 		InputHTMLAttributes<HTMLInputElement>,
 		'className' | 'ref' | 'type' | 'id'
@@ -11,14 +11,14 @@ interface ITabsFileInputProps
 }
 
 function InputComponent(
-	{ id, label, error, ...rest }: ITabsFileInputProps,
+	{ id, label, error, ...rest }: IInputProps,
 	ref: Ref<HTMLInputElement>
 ) {
 	return (
 		<div className="w-full flex items-center">
 			<label
 				htmlFor={id}
-				className="w-full text-center p-3 bg-transparent text-gray300 outline-none focus:outline-none border-2 border-gray500 rounded-md transition-all hover:border-blue500 focus:border-blue500 cursor-pointer"
+				className="w-full p-3 rounded-md bg-gray500 border-2 border-transparent focus:border-blue700 hover:border-blue700 outline-none text-gray-300 text-center font-extralight transition-all cursor-pointer"
 			>
 				{label}
 			</label>
@@ -36,4 +36,4 @@ function InputComponent(
 	);
 }
 
-export const TabsFileInput = forwardRef(InputComponent);
+export const FileInput = forwardRef(InputComponent);

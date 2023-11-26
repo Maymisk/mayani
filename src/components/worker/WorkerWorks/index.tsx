@@ -1,5 +1,5 @@
 import { NoWorks } from '@/components/empty/NoWorks';
-import { WorkCard } from '../WorkCard';
+import { WorkCard } from './WorkCard';
 
 interface IWork {
 	id: string;
@@ -13,7 +13,7 @@ interface IWorksProps {
 	works: IWork[];
 }
 
-export function Works({ works }: IWorksProps) {
+export function WorkerWorks({ works }: IWorksProps) {
 	return (
 		<section className="text-blue100 mt-12">
 			<h2 className="text-2xl mb-4">Trabalhos prévios</h2>

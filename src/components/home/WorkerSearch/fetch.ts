@@ -21,13 +21,13 @@ export async function searchWorkers(
 	input: string,
 	supabase: SupabaseClient<Database>
 ) {
-	const { data } = await supabase
+	const { data, error } = await supabase
 		.from('users')
 		.select(
 			`
-		auth_id, name, 
-		worker_profiles(bio, avatar, isVerified, isSubscribed),
-		ratings!ratings_rated_id_fkey(stars)
+			auth_id, name, 
+			worker_profiles(bio, avatar, isVerified, isSubscribed),
+			ratings!ratings_rated_id_fkey(stars)
 		`
 		)
 		.eq('isWorker', true)

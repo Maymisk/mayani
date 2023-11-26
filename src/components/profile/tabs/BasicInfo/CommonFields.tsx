@@ -1,6 +1,6 @@
 'use client';
 
-import { TabsInput } from '../TabsInput';
+import { Input } from '@/components/global/inputs/Input';
 import { useFormContext } from 'react-hook-form';
 
 export function CommonFields() {
@@ -9,7 +9,7 @@ export function CommonFields() {
 	return (
 		<>
 			<div className="flex gap-4">
-				<TabsInput
+				<Input
 					label="Nome"
 					type="text"
 					autoComplete="off"
@@ -17,7 +17,7 @@ export function CommonFields() {
 					{...register('name')}
 				/>
 
-				<TabsInput
+				<Input
 					label="Nome de usuário"
 					type="text"
 					autoComplete="off"
@@ -26,7 +26,7 @@ export function CommonFields() {
 				/>
 			</div>
 
-			<TabsInput
+			<Input
 				label="Localização"
 				type="text"
 				autoComplete="off"

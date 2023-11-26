@@ -27,6 +27,9 @@ export default async function middleware(req: NextRequest) {
 	)
 		return NextResponse.redirect(new URL('/home', req.url));
 
+	if (session && splitPath[1] === 'hire' && splitPath[3] === session.user.id)
+		return NextResponse.redirect(new URL('/home', req.url));
+
 	if (session && !session.user.user_metadata.isWorker && path === '/pricing')
 		return NextResponse.redirect(new URL('/home', req.url));
 
