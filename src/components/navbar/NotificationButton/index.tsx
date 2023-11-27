@@ -6,11 +6,14 @@ import { fetchNotifications } from './fetch';
 import { NotificationCard } from './NotificationCard';
 import { useAuth } from '@/contexts/auth/AuthContext';
 import { useEffect, useState } from 'react';
+import { api } from '@/services/api';
+import { useRouter } from 'next/navigation';
 
 interface INotification {
 	id: string;
 	description: string;
 	href: string | null;
+	read_at: string | null;
 	created_at: string;
 }
 
@@ -20,16 +23,38 @@ interface INotificationsData {
 }
 
 export function NotificationButton() {
-	const { user } = useAuth();
+	const { user, reload } = useAuth();
 	const [data, setData] = useState<INotificationsData | null>(null);
 	const [open, setOpen] = useState(false);
+	const unread: string[] = [];
 
 	useEffect(() => {
-		if (!user) return;
+		async function run() {
+			if (!user) return;
 
-		// update every notification's "read_at" whenever the user clicks the notification bell
-		fetchNotifications(user!.auth_id).then(data => setData(data));
+			const data = await fetchNotifications(user!.auth_id);
+			setData(data);
+		}
+
+		run();
 	}, [user]);
+
+	useEffect(() => {
+		async function run() {
+			if (open === false) return;
+
+			if (data?.hasUnread) {
+				const response = await api.put('/notifications', {
+					notifications: unread,
+				});
+
+				if (response.status === 200) reload(true);
+				console.log(response);
+			}
+		}
+
+		run();
+	}, [open]);
 
 	function onClick() {
 		setOpen(false);
@@ -55,13 +80,18 @@ export function NotificationButton() {
 				<Portal>
 					<Content asChild align="center">
 						<div className="w-[40rem] max-h-96 overflow-y-scroll relative z-50 bg-gray400 text-gray300 py-4 rounded-md px-2 flex flex-col gap-1 shadow-md shadow-black animate-fadeOut data-[state='open']:animate-fadeIn mt-7">
-							{data?.notifications?.map(notification => (
-								<NotificationCard
-									key={notification.id}
-									{...notification}
-									onClick={onClick}
-								/>
-							))}
+							{data?.notifications?.map(notification => {
+								if (!notification.read_at)
+									unread.push(notification.id);
+
+								return (
+									<NotificationCard
+										key={notification.id}
+										{...notification}
+										onClick={onClick}
+									/>
+								);
+							})}
 						</div>
 					</Content>
 				</Portal>

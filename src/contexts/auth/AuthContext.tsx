@@ -25,6 +25,7 @@ type AuthContextData = {
 	signIn(props: ISignInProps): Promise<void | AuthError>;
 	signOut(): Promise<void>;
 	signUp(props: ISignUpProps): Promise<any>;
+	reload(reRenderOnly?: boolean): Promise<void>;
 };
 
 interface IAuthContextProviderProps {
@@ -78,6 +79,16 @@ export function AuthContextProvider({ children }: IAuthContextProviderProps) {
 		setIsLoading(false);
 	}
 
+	async function reload(reRenderOnly: boolean = false) {
+		if (reRenderOnly) return setUser(prev => prev);
+
+		const {
+			data: { user },
+		} = await supabase.auth.getUser();
+
+		await getUser(user);
+	}
+
 	useEffect(() => {
 		supabase.auth.getUser().then(response => {
 			const {
@@ -93,6 +104,7 @@ export function AuthContextProvider({ children }: IAuthContextProviderProps) {
 		signIn,
 		signOut,
 		signUp,
+		reload,
 	};
 
 	return (

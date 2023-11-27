@@ -13,7 +13,7 @@ interface IRatingCardProps {
 
 export function RatingCard({ author, description, stars }: IRatingCardProps) {
 	return (
-		<div className="w-[95%] flex items-start gap-6 rounded-xl shadow-sm shadow-gray-600 text-white p-4 hover:scale-105 transition-all">
+		<div className="w-[95%] flex items-start gap-6 rounded-xl shadow-md shadow-black text-white p-4 hover:scale-105 transition-all">
 			{author.avatar ? (
 				<Image
 					src={author.avatar}
