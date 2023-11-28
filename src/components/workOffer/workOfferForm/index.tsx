@@ -1,6 +1,5 @@
 'use client';
 
-import { api } from '@/services/api';
 import { workOfferStatusColors } from '@/utils/WorkOfferStatusColors';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formatISO9075 } from 'date-fns';
@@ -8,18 +7,21 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { WorkOfferFormInputs } from './Inputs';
 import { WorkOfferUserInfo } from './WorkOfferUserInfo';
-import { IFormData, IOffer, IWorkOfferFormProps } from './types';
+import { createWork } from './createWork';
+import { createWorkOffer } from './createWorkOffer';
+import { IFormData, IWorkOfferFormProps } from './types';
 import { validation } from './validation';
+import { useRouter } from 'next/navigation';
+import { Toast } from '@/components/global/toast';
 
 export function WorkOfferForm({ author, offer }: IWorkOfferFormProps) {
 	const formattedDate = formatISO9075(new Date(offer.start_date));
 
-	const [submissionError, setSubmissionError] = useState('');
+	const router = useRouter();
+	const [errorToastIsOpen, setErrorToastIsOpen] = useState(false);
 	const {
 		register,
 		handleSubmit,
-		clearErrors: clearFormErrors,
-		reset,
 		watch,
 		formState: { errors, isSubmitting, defaultValues },
 	} = useForm<IFormData>({
@@ -41,16 +43,8 @@ export function WorkOfferForm({ author, offer }: IWorkOfferFormProps) {
 			response = await createWorkOffer(offer, { price, start_date });
 		else response = await createWork(offer, author.auth_id);
 
-		if (response.status != 201) setSubmissionError('ERROR');
-		else {
-			clearErrors();
-			reset();
-		}
-	}
-
-	function clearErrors() {
-		clearFormErrors();
-		setSubmissionError('');
+		if (response.status != 201) setErrorToastIsOpen(true);
+		else router.refresh();
 	}
 
 	return (
@@ -83,12 +77,17 @@ export function WorkOfferForm({ author, offer }: IWorkOfferFormProps) {
 				className="w-full h-12 flex items-center justify-center hover:bg-blue500 text-white font-bold rounded-lg bg-blue700 transition-all disabled:brightness-75 disabled:hover:bg-blue700 disabled:cursor-not-allowed"
 				disabled={isSubmitting}
 			>
-				{submissionError
-					? submissionError
-					: areTheSame(defaultValues, { price, start_date })
+				{areTheSame(defaultValues, { price, start_date })
 					? 'Aceitar'
 					: 'Fazer Contraproposta'}
 			</button>
+
+			<Toast
+				title="ERRO"
+				description="Houve um erro durante o envio do formulário."
+				onOpenChange={setErrorToastIsOpen}
+				open={errorToastIsOpen}
+			/>
 		</form>
 	);
 }
@@ -100,34 +99,4 @@ function areTheSame(object1: any, object2: any) {
 		if (!object2[key] || object1[key] != object2[key]) return false;
 
 	return true;
-}
-
-async function createWorkOffer(
-	offer: IOffer,
-	{ price, start_date }: IFormData
-) {
-	const { price: _, status, start_date: __, id, ...previousOffer } = offer;
-
-	const response = await api.post('/workOffer', {
-		work_offer_id: id,
-		price: price * 100,
-		start_date: new Date(start_date).toISOString(),
-		...previousOffer,
-	});
-
-	return response;
-}
-
-async function createWork(offer: IOffer, author_id: string) {
-	const { status, id, ...workData } = offer;
-
-	const response = await api.post('/work', {
-		...workData,
-		offer: {
-			id,
-			author_id,
-		},
-	});
-
-	return response;
 }

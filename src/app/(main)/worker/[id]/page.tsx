@@ -2,6 +2,7 @@ import { WorkerRatings } from '@/components/worker/WorkerRatings';
 import { WorkerInfo } from '@/components/worker/WorkerInfo';
 import { WorkerWorks } from '@/components/worker/WorkerWorks';
 import { getWorkerData } from './fetch';
+import { Toast } from '@/components/global/toast';
 
 interface IUserProps {
 	params: {

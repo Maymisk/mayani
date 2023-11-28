@@ -17,7 +17,7 @@ export default async function Hire({ params: { id } }: IHireProps) {
 					Contratar {name}
 				</h1>
 
-				<HireForm worker_id={id} />
+				<HireForm worker={{ id, name }} />
 			</div>
 		</main>
 	);

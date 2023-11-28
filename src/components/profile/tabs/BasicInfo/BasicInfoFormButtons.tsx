@@ -3,11 +3,7 @@
 import { LoadingIcon } from '@/components/loadingIcon';
 import { useFormContext } from 'react-hook-form';
 
-interface IBasicInfoFormButtonsProps {
-	error?: string;
-}
-
-export function BasicInfoFormButtons({ error }: IBasicInfoFormButtonsProps) {
+export function BasicInfoFormButtons() {
 	const {
 		reset,
 		formState: { isSubmitting, isDirty },
@@ -29,7 +25,7 @@ export function BasicInfoFormButtons({ error }: IBasicInfoFormButtonsProps) {
 				className="flex items-center justify-center flex-1 px-8 py-4 bg-blue500 rounded-md font-bold uppercase text-gray500 hover:bg-blue700 hover:text-white transition-all disabled:cursor-not-allowed disabled:brightness-75 disabled:hover:bg-blue500 disabled:hover:text-gray500"
 				disabled={!isDirty || isSubmitting}
 			>
-				{isSubmitting ? <LoadingIcon /> : error ? error : 'Salvar'}
+				{isSubmitting ? <LoadingIcon /> : 'Salvar'}
 			</button>
 		</div>
 	);

@@ -1,5 +1,3 @@
-'use client';
-
 import { forwardRef, TextareaHTMLAttributes, Ref } from 'react';
 
 interface ITextAreaComponentProps

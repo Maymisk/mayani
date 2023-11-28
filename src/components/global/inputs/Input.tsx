@@ -1,5 +1,3 @@
-'use client';
-
 import { InputHTMLAttributes, Ref, forwardRef } from 'react';
 
 interface IInputProps
@@ -20,7 +18,7 @@ function InputComponent(
 			<input
 				ref={ref}
 				{...rest}
-				className="w-full p-3 rounded-md bg-gray500 border-2 border-transparent focus:border-blue700 hover:border-blue700 outline-none placeholder:text-gray-500 text-white font-extralight transition-all"
+				className="w-full flex-1 p-3 rounded-md bg-gray500 border-2 border-transparent focus:border-blue700 hover:border-blue700 outline-none placeholder:text-gray-500 text-white font-extralight transition-all"
 			/>
 
 			{error && (

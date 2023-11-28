@@ -6,7 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { validation } from './validation';
-import { LoginFormInput } from './LoginFormInput';
+import { Input } from '@/components/global/inputs/Input';
+import { Toast } from '@/components/global/toast';
 
 interface IOnSubmitData {
 	email: string;
@@ -15,6 +16,7 @@ interface IOnSubmitData {
 
 export function LoginForm() {
 	const { signIn } = useAuth();
+	const [errorToastIsOpen, setErrorToastIsOpen] = useState<boolean>(false);
 
 	const {
 		register,
@@ -22,12 +24,10 @@ export function LoginForm() {
 		formState: { isSubmitting, errors },
 	} = useForm({ resolver: yupResolver(validation) });
 
-	const [loginError, setLoginError] = useState<string>('');
-
 	async function onSubmit({ email, password }: IOnSubmitData) {
 		const error = await signIn({ email, password });
 
-		if (error) setLoginError('Credenciais Inválidas');
+		if (error) setErrorToastIsOpen(true);
 	}
 
 	return (
@@ -35,7 +35,8 @@ export function LoginForm() {
 			onSubmit={handleSubmit(onSubmit)}
 			className="w-full h-full flex flex-col flex-1 gap-4 mt-1"
 		>
-			<LoginFormInput
+			<Input
+				label=""
 				type="email"
 				required
 				autoComplete="off"
@@ -44,7 +45,8 @@ export function LoginForm() {
 				error={errors.email?.message}
 			/>
 
-			<LoginFormInput
+			<Input
+				label=""
 				type="password"
 				required
 				{...register('password')}
@@ -55,19 +57,17 @@ export function LoginForm() {
 			<button
 				type="submit"
 				className="w-full h-12 bg-blue500 hover:bg-blue700 hover:text-white transition-all mt-auto rounded-sm font-bold flex items-center justify-center disabled:bg-blue-400 disabled:cursor-not-allowed"
-				onClick={() => setLoginError('')}
 				disabled={isSubmitting}
 			>
-				{isSubmitting ? (
-					<LoadingIcon />
-				) : loginError ? (
-					<span className="font-bold uppercase text-sm">
-						{loginError}
-					</span>
-				) : (
-					'Logar'
-				)}
+				{isSubmitting ? <LoadingIcon /> : 'Logar'}
 			</button>
+
+			<Toast
+				title="ERRO"
+				description="Credenciais inválidas"
+				open={errorToastIsOpen}
+				onOpenChange={setErrorToastIsOpen}
+			/>
 		</form>
 	);
 }

@@ -4,6 +4,8 @@ import { Chart } from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import { useState } from 'react';
+import { Toast } from '@/components/global/toast';
 
 Chart.register(CategoryScale);
 

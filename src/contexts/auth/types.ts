@@ -1,5 +1,13 @@
 import { isSubscribedType } from '@root/supabase/isSubscribed';
 
+interface INotification {
+	id: string;
+	description: string;
+	href: string | null;
+	read_at: string | null;
+	created_at: string;
+}
+
 export type User = {
 	id: string;
 	name: string;
@@ -11,6 +19,7 @@ export type User = {
 	isVerified: boolean | undefined;
 	isSubscribed: isSubscribedType;
 	avatar: string | null;
+	notifications: INotification[];
 } | null;
 
 export interface ISignInProps {

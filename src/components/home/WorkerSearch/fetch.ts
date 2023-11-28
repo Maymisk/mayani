@@ -33,7 +33,7 @@ export async function searchWorkers(
 		.eq('isWorker', true)
 		// .eq('isVerified', true)
 		// .eq('isSubscribed', true)
-		.textSearch('name', input)
+		.textSearch('name', input, { type: 'phrase' })
 		.limit(30)
 		.returns<FetchWorkersResponse>();
 

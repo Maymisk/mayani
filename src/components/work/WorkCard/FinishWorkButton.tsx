@@ -1,17 +1,18 @@
 'use client';
 
 import { LoadingIcon } from '@/components/loadingIcon';
+import { useAuth } from '@/contexts/auth/AuthContext';
 import { api } from '@/services/api';
 import {
-	Root,
-	Trigger,
-	Overlay,
-	Content,
-	Portal,
-	Title,
-	Description,
-	Cancel,
 	Action,
+	Cancel,
+	Content,
+	Description,
+	Overlay,
+	Portal,
+	Root,
+	Title,
+	Trigger,
 } from '@radix-ui/react-alert-dialog';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -22,23 +23,32 @@ interface IFinishWorkButton {
 }
 
 export function FinishWorkButton({ work_id, client_id }: IFinishWorkButton) {
+	const { reload } = useAuth();
+	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
 
 	async function onConfirm() {
+		setIsLoading(true);
+
 		const response = await api.put('/work', {
 			id: work_id,
 			end_date: new Date().toISOString(),
 			client_id,
 		});
 
-		if (response.status === 200) router.refresh();
+		if (response.status === 200) {
+			await reload();
+			router.refresh();
+		}
+
+		setIsLoading(false);
 	}
 
 	return (
 		<Root>
 			<Trigger asChild>
-				<button className="w-1/2 mx-auto mt-8 px-8 py-4 uppercase text-sm bg-blue700 text-white rounded-lg font-bold hover:bg-blue500 outline-none transition-all">
-					Finalizar serviço
+				<button className="w-1/2 mx-auto mt-8 px-8 py-4 uppercase text-sm bg-blue700 text-white rounded-lg font-bold hover:bg-blue500 outline-none transition-all flex items-center justify-center">
+					{isLoading ? <LoadingIcon /> : 'Finalizar serviço'}
 				</button>
 			</Trigger>
 

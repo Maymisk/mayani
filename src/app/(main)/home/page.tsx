@@ -7,8 +7,6 @@ export default async function Home() {
 
 	return (
 		<main>
-			<UserCard />
-
 			<WorkerSearch initialData={workers} />
 		</main>
 	);

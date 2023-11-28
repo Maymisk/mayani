@@ -31,6 +31,9 @@ interface IWork {
 	id: string;
 	title: string;
 	description: string | null;
+	users: {
+		name: string;
+	};
 }
 
 interface IFetchWorkerResponse {
@@ -49,7 +52,7 @@ export async function getWorkerData(auth_id: string) {
 		.select(
 			`name, username, 
 			worker_profiles(bio, avatar, resume, location), 
-			works!works_worker_id_fkey(id, title, description),
+			works!works_worker_id_fkey(id, title, description, users!works_client_id_fkey(name)),
 			ratings!ratings_rated_id_fkey(
 				id, 
 				title, 

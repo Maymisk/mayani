@@ -7,11 +7,10 @@ import { Input } from '@/components/global/inputs/Input';
 import { TextArea } from '@/components/global/inputs/TextArea';
 import { LoadingIcon } from '@/components/loadingIcon';
 import { useAuth } from '@/contexts/auth/AuthContext';
-import { Database } from '@root/supabase/databaseTypes';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { api } from '@/services/api';
 import { useState } from 'react';
 import { validation } from './validation';
-import { api } from '@/services/api';
+import { Toast } from '@/components/global/toast';
 
 interface IOnSubmitData {
 	title: string;
@@ -21,19 +20,21 @@ interface IOnSubmitData {
 }
 
 interface IHireFormProps {
-	worker_id: string;
+	worker: {
+		id: string;
+		name: string;
+	};
 }
 
-export function HireForm({ worker_id }: IHireFormProps) {
-	const supabase = createClientComponentClient<Database>();
-
+export function HireForm({ worker }: IHireFormProps) {
 	const { user } = useAuth();
-	const [submissionError, setSubmissionError] = useState('');
+	const [errorToastIsOpen, setErrorToastIsOpen] = useState(false);
+	const [successToastIsOpen, setSuccessToastIsOpen] = useState(false);
 
 	const {
 		register,
 		handleSubmit,
-		clearErrors: clearFormErrors,
+		clearErrors,
 		formState: { errors, isSubmitting },
 		reset,
 	} = useForm({ resolver: yupResolver(validation) });
@@ -45,8 +46,8 @@ export function HireForm({ worker_id }: IHireFormProps) {
 		date,
 	}: IOnSubmitData) {
 		// create a toasts for each of the submission cases (success or errors)
-		if (user?.id === worker_id) {
-			setSubmissionError('Você não pode se contratar.');
+		if (user?.auth_id === worker.id) {
+			setErrorToastIsOpen(true);
 			return;
 		}
 
@@ -56,20 +57,16 @@ export function HireForm({ worker_id }: IHireFormProps) {
 			price: price * 100, // price must be in cents
 			start_date: date.toISOString(),
 			client_id: user!.auth_id,
-			worker_id,
+			worker_id: worker.id,
 			author_id: user!.auth_id,
 		});
 
-		if (error) setSubmissionError('erro');
+		if (error) setErrorToastIsOpen(true);
 		else {
 			clearErrors();
 			reset();
+			setSuccessToastIsOpen(true);
 		}
-	}
-
-	function clearErrors() {
-		clearFormErrors();
-		setSubmissionError('');
 	}
 
 	return (
@@ -83,7 +80,6 @@ export function HireForm({ worker_id }: IHireFormProps) {
 				label="Título"
 				error={errors.title?.message}
 				{...register('title')}
-				onChange={() => clearErrors()}
 				autoComplete="off"
 			/>
 
@@ -92,7 +88,6 @@ export function HireForm({ worker_id }: IHireFormProps) {
 				error={errors.description?.message}
 				placeholder="Descreva com riqueza de detalhes o trabalho a ser realizado"
 				{...register('description')}
-				onChange={() => clearErrors()}
 				autoComplete="off"
 			/>
 
@@ -103,7 +98,6 @@ export function HireForm({ worker_id }: IHireFormProps) {
 					placeholder="Digite o preço que deseja pagar"
 					error={errors.price?.message}
 					{...register('price')}
-					onChange={() => clearErrors()}
 					autoComplete="off"
 				/>
 
@@ -113,7 +107,6 @@ export function HireForm({ worker_id }: IHireFormProps) {
 					label="Data de início"
 					error={errors.date?.message}
 					{...register('date')}
-					onChange={() => clearErrors()}
 					autoComplete="off"
 				/>
 			</div>
@@ -123,16 +116,23 @@ export function HireForm({ worker_id }: IHireFormProps) {
 				className="w-full h-12 flex items-center justify-center hover:bg-blue500 text-white font-bold rounded-lg bg-blue700 transition-all disabled:bg-blue500 disabled:cursor-not-allowed"
 				disabled={isSubmitting}
 			>
-				{isSubmitting ? (
-					<LoadingIcon />
-				) : submissionError ? (
-					<span className="font-bold uppercase">
-						{submissionError}
-					</span>
-				) : (
-					'Fazer Oferta'
-				)}
+				{isSubmitting ? <LoadingIcon /> : 'Fazer Oferta'}
 			</button>
+
+			<Toast
+				open={errorToastIsOpen}
+				onOpenChange={setErrorToastIsOpen}
+				title="ERRO"
+				description="Erro durante o envio do formulário."
+			/>
+
+			<Toast
+				open={successToastIsOpen}
+				onOpenChange={setSuccessToastIsOpen}
+				title="Sucesso"
+				description={`Oferta enviada para ${worker.name}`}
+				success
+			/>
 		</form>
 	);
 }

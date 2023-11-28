@@ -17,6 +17,7 @@ import { BasicInfoUserCard } from './BasicInfoUserCard';
 import { CommonFields } from './CommonFields';
 import { WorkerFields } from './WorkerFields';
 import { validation } from './validation';
+import { Toast } from '@/components/global/toast';
 
 interface IFormSubmissionData {
 	name?: string;
@@ -29,8 +30,10 @@ interface IFormSubmissionData {
 }
 
 export function BasicInfo() {
-	const [updateError, setUpdateError] = useState('');
-	const { user } = useAuth();
+	const [errorToastIsOpen, setErrorToastIsOpen] = useState(false);
+	const [successToastIsOpen, setSuccessToastIsOpen] = useState(false);
+
+	const { user, reload } = useAuth();
 	const { handleSubmit, ...formHook } = useForm({
 		resolver: yupResolver(validation),
 	});
@@ -41,7 +44,11 @@ export function BasicInfo() {
 			isWorker: user!.isWorker,
 		});
 
-		if (error) setUpdateError('ERRO');
+		if (error) setErrorToastIsOpen(true);
+		else {
+			setSuccessToastIsOpen(true);
+			await reload();
+		}
 	}
 
 	return (
@@ -64,10 +71,25 @@ export function BasicInfo() {
 							user.isWorker && <WorkerFields />
 						)}
 
-						<BasicInfoFormButtons error={updateError} />
+						<BasicInfoFormButtons />
 					</div>
 				</form>
 			</FormProvider>
+
+			<Toast
+				title="ERRO"
+				description="Houve um erro durante o envio do formulário"
+				open={errorToastIsOpen}
+				onOpenChange={setErrorToastIsOpen}
+			/>
+
+			<Toast
+				title="Sucesso!"
+				description="Seu perfil foi atualizado com sucesso."
+				open={successToastIsOpen}
+				onOpenChange={setSuccessToastIsOpen}
+				success
+			/>
 		</Content>
 	);
 }

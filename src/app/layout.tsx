@@ -1,8 +1,9 @@
 import { AuthContextProvider } from '@/contexts/auth/AuthContext';
-import './globals.css';
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import { ReactNode } from 'react';
+import './globals.css';
+import { ToastProvider } from '@/components/global/toast/ToastProvider';
 
 const nunito = Nunito({
 	subsets: ['latin'],
@@ -26,11 +27,11 @@ interface IRootLayoutProps {
 export default function RootLayout({ children }: IRootLayoutProps) {
 	return (
 		<html lang="en">
-			<AuthContextProvider>
-				<body className={`bg-gray500 ${nunito.className}`}>
-					{children}
-				</body>
-			</AuthContextProvider>
+			<body className={`bg-gray500 ${nunito.className}`}>
+				<AuthContextProvider>
+					<ToastProvider>{children}</ToastProvider>
+				</AuthContextProvider>
+			</body>
 		</html>
 	);
 }

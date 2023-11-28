@@ -10,6 +10,8 @@ import { LoadingIcon } from '@/components/loadingIcon';
 import { useAuth } from '@/contexts/auth/AuthContext';
 import { api } from '@/services/api';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Toast } from '@/components/global/toast';
 
 interface IFormData {
 	title: string;
@@ -26,6 +28,8 @@ interface IRateFormProps {
 export function RateForm({ rated_id, work_id, token }: IRateFormProps) {
 	const router = useRouter();
 	const { user } = useAuth();
+	const [errorToastIsOpen, setErrorToastIsOpen] = useState(false);
+	const [successToastIsOpen, setSuccessToastIsOpen] = useState(false);
 	const {
 		register,
 		handleSubmit,
@@ -44,7 +48,10 @@ export function RateForm({ rated_id, work_id, token }: IRateFormProps) {
 			token,
 		});
 
-		if (response.status === 201) router.refresh();
+		if (response.status === 201) {
+			setSuccessToastIsOpen(true);
+			router.refresh();
+		} else setErrorToastIsOpen(true);
 	}
 
 	return (
@@ -80,6 +87,21 @@ export function RateForm({ rated_id, work_id, token }: IRateFormProps) {
 			>
 				{isSubmitting ? <LoadingIcon /> : 'Enviar'}
 			</button>
+
+			<Toast
+				title="ERRO"
+				description="Houve um erro durante o envio do formulário"
+				open={errorToastIsOpen}
+				onOpenChange={setErrorToastIsOpen}
+			/>
+
+			<Toast
+				title="Sucesso!"
+				description="Sua avaliação foi enviada."
+				open={successToastIsOpen}
+				onOpenChange={setSuccessToastIsOpen}
+				success
+			/>
 		</form>
 	);
 }

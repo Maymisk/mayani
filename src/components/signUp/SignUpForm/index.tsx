@@ -8,6 +8,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { SignUpFormInput } from './SignUpFormInput';
 import { validation } from './validation';
 import { SignUpFormRadioInput } from './SignUpFormRadioInput';
+import { Toast } from '@/components/global/toast';
 
 interface IOnSubmitData {
 	name: string;
@@ -29,7 +30,7 @@ export function SignUpForm() {
 		reset,
 	} = useForm({ resolver: yupResolver(validation) });
 
-	const [signUpError, setSignUpError] = useState('');
+	const [errorToastIsOpen, setErrorToastIsOpen] = useState(false);
 
 	async function onSubmit({
 		name,
@@ -51,7 +52,7 @@ export function SignUpForm() {
 			password,
 		});
 
-		if (response.status != 201) setSignUpError('Erro');
+		if (response.status != 201) setErrorToastIsOpen(true);
 		else reset();
 	}
 
@@ -124,16 +125,16 @@ export function SignUpForm() {
 				type="submit"
 				className="w-full h-12 bg-blue500 hover:bg-blue700 hover:text-white transition-all mt-auto rounded-sm font-bold flex items-center justify-center disabled:bg-blue-400 disabled:cursor-not-allowed"
 				disabled={isSubmitting}
-				onClick={() => setSignUpError('')}
 			>
-				{isSubmitting ? (
-					<LoadingIcon />
-				) : signUpError ? (
-					<span className="uppercase">{signUpError}</span>
-				) : (
-					'Criar Conta'
-				)}
+				{isSubmitting ? <LoadingIcon /> : 'Criar Conta'}
 			</button>
+
+			<Toast
+				title="ERRO"
+				description="Houve um erro durante o envio do formulário"
+				open={errorToastIsOpen}
+				onOpenChange={setErrorToastIsOpen}
+			/>
 		</form>
 	);
 }

@@ -1,5 +1,6 @@
 import { WorkOfferForm } from '@/components/workOffer/workOfferForm';
 import { getWorkOffer } from './fetch';
+import { FakeWorkOfferForm } from '@/components/workOffer/fakeWorkOfferForm';
 
 interface IWorkOfferProps {
 	params: {
@@ -17,7 +18,11 @@ export default async function WorkOffer({ params: { id } }: IWorkOfferProps) {
 				{authorIsWorker ? 'Contraproposta' : 'Oferta de trabalho'}
 			</h2>
 
-			<WorkOfferForm author={author} offer={offer} />
+			{offer.status === 'PENDING' ? (
+				<WorkOfferForm author={author} offer={offer} />
+			) : (
+				<FakeWorkOfferForm author={author} offer={offer} />
+			)}
 		</main>
 	);
 }

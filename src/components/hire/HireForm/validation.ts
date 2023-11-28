@@ -7,7 +7,7 @@ export const validation = yup.object({
 	price: yup
 		.number()
 		.required('Defina um preço.')
-		.typeError('Selecione uma data')
+		.typeError('Defina um preço.')
 		.min(50, 'O preço mínimo é 50 reais.'),
 	date: yup
 		.date()

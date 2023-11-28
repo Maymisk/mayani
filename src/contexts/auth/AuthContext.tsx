@@ -25,7 +25,7 @@ type AuthContextData = {
 	signIn(props: ISignInProps): Promise<void | AuthError>;
 	signOut(): Promise<void>;
 	signUp(props: ISignUpProps): Promise<any>;
-	reload(reRenderOnly?: boolean): Promise<void>;
+	reload(): Promise<void>;
 };
 
 interface IAuthContextProviderProps {
@@ -68,20 +68,18 @@ export function AuthContextProvider({ children }: IAuthContextProviderProps) {
 		return response;
 	}
 
-	async function getUser(user: SupaUser | null) {
-		if (!user) return null;
+	async function getUser(supaUser: SupaUser | null) {
+		if (!supaUser) return null;
 
-		setIsLoading(true);
+		if (!user) setIsLoading(true);
 
-		const fetchedUser = await fetchUser(user, supabase);
+		const fetchedUser = await fetchUser(supaUser, supabase);
 
 		setUser(fetchedUser);
 		setIsLoading(false);
 	}
 
 	async function reload(reRenderOnly: boolean = false) {
-		if (reRenderOnly) return setUser(prev => prev);
-
 		const {
 			data: { user },
 		} = await supabase.auth.getUser();

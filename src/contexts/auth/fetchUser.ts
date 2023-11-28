@@ -38,6 +38,13 @@ export async function fetchUser(
 		? worker_profiles
 		: { avatar: client_profiles!.avatar, isVerified, isSubscribed };
 
+	const { data: notifications } = await supabase
+		.from('notifications')
+		.select('id, description, href, created_at, read_at')
+		.eq('user_id', user_id)
+		.order('read_at', { nullsFirst: true })
+		.order('created_at', { ascending: false });
+
 	const value: User = {
 		id,
 		name,
@@ -46,6 +53,7 @@ export async function fetchUser(
 		auth_id: user_id,
 		isWorker,
 		...profileData,
+		notifications: notifications || [],
 	};
 
 	return value;
