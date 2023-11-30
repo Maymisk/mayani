@@ -1,3 +1,3 @@
 export default function NotFound() {
-	return <h1>Sorry! What you're looking for was not found.</h1>;
+	return <h1>Desculpe! O que você estava procurando não foi encontrado.</h1>;
 }
