@@ -53,13 +53,13 @@ export function AuthContextProvider({ children }: IAuthContextProviderProps) {
 		if (error) return error;
 
 		await getUser(user);
-		router.push('/home');
+		router.refresh();
 	}
 
 	async function signOut() {
 		await supabase.auth.signOut();
 		setUser(null);
-		router.push('/login');
+		router.refresh();
 	}
 
 	async function signUp(data: ISignUpProps) {

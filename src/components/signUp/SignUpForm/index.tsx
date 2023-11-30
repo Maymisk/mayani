@@ -145,6 +145,7 @@ export function SignUpForm() {
 				description="Verifique seu email por meio do link enviado"
 				open={successToastIsOpen}
 				onOpenChange={setSuccessToastIsOpen}
+				success
 			/>
 		</form>
 	);

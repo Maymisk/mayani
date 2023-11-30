@@ -45,7 +45,6 @@ export function HireForm({ worker }: IHireFormProps) {
 		price,
 		date,
 	}: IOnSubmitData) {
-		// create a toasts for each of the submission cases (success or errors)
 		if (user?.auth_id === worker.id) {
 			setErrorToastIsOpen(true);
 			return;
