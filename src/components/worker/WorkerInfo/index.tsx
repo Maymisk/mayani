@@ -8,6 +8,8 @@ interface IUserInfoProps {
 	bio: string | null;
 	avatar: string | null;
 	resume: string | null;
+	occupation: string | null;
+	location: string | null;
 }
 
 export function WorkerInfo({
@@ -16,18 +18,25 @@ export function WorkerInfo({
 	bio,
 	avatar,
 	resume,
+	location,
+	occupation,
 }: IUserInfoProps) {
 	return (
 		<section className="flex items-start justify-between gap-16 p-6 mt-8 rounded-lg text-blue100">
 			<div className="flex flex-col items-center gap-10">
 				<h1 className="text-6xl text-center leading-[5rem]">
 					Olá, eu sou {name},
-					<span className="block">Trabalhador</span>
+					<span className="block">{occupation}</span>
 				</h1>
 
-				<p className="w-full max-w-3xl text-justify">{bio}</p>
+				<div className="flex flex-col items-center gap-2">
+					<p className="w-full max-w-3xl text-justify">{bio}</p>
+					<span className="font-extralight uppercase text-blue700">
+						{location}
+					</span>
+				</div>
 
-				<div className="flex items-center justify-evenly w-full">
+				<div className="flex items-center justify-center gap-4 w-full">
 					<Link
 						href={resume || '#'}
 						className="w-full max-w-[200px] text-center font-bold p-3 rounded-md bg-blue700 hover:bg-blue500 transition-all"

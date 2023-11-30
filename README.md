@@ -15,5 +15,3 @@
 #####
 
 ## make the layout responsive
-
-## improve the profile file inputs

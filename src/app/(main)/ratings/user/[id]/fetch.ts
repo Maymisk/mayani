@@ -76,9 +76,9 @@ export async function getRatingsAndRatedUser(
 		const author = users
 			? {
 					name: users.name,
-					avatar:
-						users.client_profiles?.avatar ||
-						users.worker_profiles!.avatar,
+					avatar: users.client_profiles
+						? users.client_profiles.avatar
+						: users.worker_profiles!.avatar,
 			  }
 			: null;
 

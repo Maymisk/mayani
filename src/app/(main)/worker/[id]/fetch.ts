@@ -8,6 +8,7 @@ interface IWorkerProfile {
 	avatar: string | null;
 	resume: string | null;
 	location: string | null;
+	occupation: string | null;
 }
 
 interface IRating {
@@ -51,7 +52,7 @@ export async function getWorkerData(auth_id: string) {
 		.from('users')
 		.select(
 			`name, username, 
-			worker_profiles(bio, avatar, resume, location), 
+			worker_profiles(bio, avatar, resume, location, occupation), 
 			works!works_worker_id_fkey(id, title, description, users!works_client_id_fkey(name)),
 			ratings!ratings_rated_id_fkey(
 				id, 
@@ -71,7 +72,7 @@ export async function getWorkerData(auth_id: string) {
 	if (!data) notFound();
 
 	const { name, username, worker_profiles, ratings, works } = data[0];
-	const { avatar, bio, location, resume } = worker_profiles;
+	const { avatar, bio, location, resume, occupation } = worker_profiles;
 
 	const formattedRatings = ratings.map(rating => {
 		const { id, title, description, stars, users } = rating;
@@ -98,6 +99,7 @@ export async function getWorkerData(auth_id: string) {
 		username,
 		bio,
 		location,
+		occupation,
 		resume,
 		avatar,
 		auth_id,

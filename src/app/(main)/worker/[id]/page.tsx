@@ -17,6 +17,7 @@ export default async function Worker({ params: { id } }: IUserProps) {
 		bio,
 		avatar,
 		location,
+		occupation,
 		auth_id,
 		ratings,
 		works,
@@ -31,6 +32,8 @@ export default async function Worker({ params: { id } }: IUserProps) {
 				bio={bio}
 				avatar={avatar}
 				resume={resume}
+				location={location}
+				occupation={occupation}
 			/>
 
 			<WorkerRatings auth_id={auth_id} ratings={ratings} />

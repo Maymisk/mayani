@@ -31,6 +31,7 @@ export function SignUpForm() {
 	} = useForm({ resolver: yupResolver(validation) });
 
 	const [errorToastIsOpen, setErrorToastIsOpen] = useState(false);
+	const [successToastIsOpen, setSuccessToastIsOpen] = useState(false);
 
 	async function onSubmit({
 		name,
@@ -53,7 +54,10 @@ export function SignUpForm() {
 		});
 
 		if (response.status != 201) setErrorToastIsOpen(true);
-		else reset();
+		else {
+			setSuccessToastIsOpen(true);
+			reset();
+		}
 	}
 
 	return (
@@ -134,6 +138,13 @@ export function SignUpForm() {
 				description="Houve um erro durante o envio do formulário"
 				open={errorToastIsOpen}
 				onOpenChange={setErrorToastIsOpen}
+			/>
+
+			<Toast
+				title="Sucesso!"
+				description="Verifique seu email por meio do link enviado"
+				open={successToastIsOpen}
+				onOpenChange={setSuccessToastIsOpen}
 			/>
 		</form>
 	);

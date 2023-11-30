@@ -39,7 +39,7 @@ export function ProfileButton() {
 				</Root>
 			) : (
 				<Link
-					href="/auth/login"
+					href="/login"
 					className="border-2 border-gray400 p-3 rounded-sm hover:border-blue700 transition-all"
 				>
 					Fazer Login

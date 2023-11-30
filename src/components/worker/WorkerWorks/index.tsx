@@ -16,8 +16,8 @@ interface IWorksProps {
 
 export function WorkerWorks({ works }: IWorksProps) {
 	return (
-		<section className="text-blue100 mt-12">
-			<h2 className="text-2xl mb-4">Trabalhos prévios</h2>
+		<section className="text-blue100 mt-24">
+			<h2 className="text-4xl mb-4">Trabalhos prévios</h2>
 
 			<ul
 				className={`gap-8 items-start ${
