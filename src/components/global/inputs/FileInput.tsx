@@ -13,7 +13,7 @@ interface IInputProps
 }
 
 function InputComponent(
-	{ id, label, error, ...rest }: IInputProps,
+	{ id, label, error, onChange, ...rest }: IInputProps,
 	ref: Ref<HTMLInputElement>
 ) {
 	const [value, setValue] = useState<string | null>(null);
@@ -33,7 +33,10 @@ function InputComponent(
 				{...rest}
 				type="file"
 				className="hidden"
-				onChange={event => setValue(event.target.value)}
+				onChange={event => {
+					setValue(event.target.value);
+					if (onChange) onChange(event);
+				}}
 			/>
 
 			<p
