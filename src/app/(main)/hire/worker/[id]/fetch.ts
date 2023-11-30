@@ -4,7 +4,10 @@ import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 export async function getWorker(auth_id: string) {
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createServerComponentClient<Database>({
+		cookies: () => cookieStore,
+	});
 
 	const { data } = await supabase
 		.from('users')

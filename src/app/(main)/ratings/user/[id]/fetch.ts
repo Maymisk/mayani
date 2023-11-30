@@ -42,7 +42,10 @@ type QueryResponse = {
 export async function getRatingsAndRatedUser(
 	user_id: string
 ): Promise<QueryResponse> {
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createServerComponentClient<Database>({
+		cookies: () => cookieStore,
+	});
 
 	const { data: ratedUserData } = await supabase
 		.from('users')

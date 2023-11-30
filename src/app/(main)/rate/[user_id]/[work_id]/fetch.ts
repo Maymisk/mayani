@@ -1,4 +1,3 @@
-import { api } from '@/services/api';
 import { Database } from '@root/supabase/databaseTypes';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
@@ -11,7 +10,10 @@ interface IIsAuthorizedProps {
 }
 
 export async function isAuthorized({ user_id, work_id }: IIsAuthorizedProps) {
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createServerComponentClient<Database>({
+		cookies: () => cookieStore,
+	});
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();

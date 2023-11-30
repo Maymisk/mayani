@@ -34,7 +34,10 @@ type FetchWorkOfferResponse = {
 }[];
 
 export async function getWorkOffer(id: string) {
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createServerComponentClient<Database>({
+		cookies: () => cookieStore,
+	});
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();

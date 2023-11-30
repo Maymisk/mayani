@@ -46,7 +46,10 @@ export async function POST(request: Request) {
 			{ status: 400 }
 		);
 
-	const supabase = createRouteHandlerClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createRouteHandlerClient<Database>({
+		cookies: () => cookieStore,
+	});
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();

@@ -30,7 +30,10 @@ type FetchWorkOffersResponse = {
 }[];
 
 export async function getWorkOffers() {
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createServerComponentClient<Database>({
+		cookies: () => cookieStore,
+	});
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
@@ -39,7 +42,7 @@ export async function getWorkOffers() {
 
 	const relation = user.user_metadata.isWorker ? 'worker_id' : 'client_id';
 
-	const { data, error } = await supabase
+	const { data } = await supabase
 		.from('work_offers')
 		.select(
 			`

@@ -13,7 +13,10 @@ export async function POSTLogic(request: Request) {
 			}
 		);
 
-	const supabase = createRouteHandlerClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createRouteHandlerClient<Database>({
+		cookies: () => cookieStore,
+	});
 
 	// check if the username is available
 	const { data } = await supabase

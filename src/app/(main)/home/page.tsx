@@ -1,4 +1,3 @@
-import { UserCard } from '@/components/home/UserCard';
 import { WorkerSearch } from '@/components/home/WorkerSearch';
 import { getWorkers } from './fetch';
 

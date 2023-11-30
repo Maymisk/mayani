@@ -39,7 +39,10 @@ interface IFetchWorkResponse {
 }
 
 export async function getWork(id: string) {
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createServerComponentClient<Database>({
+		cookies: () => cookieStore,
+	});
 
 	const { data } = await supabase
 		.from('works')

@@ -25,7 +25,10 @@ export async function POSTLogic(request: NextRequest) {
 	if (!user_id || user_id != author_id)
 		return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
 
-	const supabase = createRouteHandlerClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createRouteHandlerClient<Database>({
+		cookies: () => cookieStore,
+	});
 
 	const { data: tokenExists } = await supabase
 		.from('ratings')

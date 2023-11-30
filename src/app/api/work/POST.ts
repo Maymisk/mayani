@@ -43,7 +43,10 @@ export async function POSTLogic(request: Request) {
 			{ status: 400 }
 		);
 
-	const supabase = createRouteHandlerClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createRouteHandlerClient<Database>({
+		cookies: () => cookieStore,
+	});
 
 	const { data: work, error: creationError } = await supabase
 		.from('works')

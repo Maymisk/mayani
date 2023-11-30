@@ -43,7 +43,10 @@ interface IFetchWorkerResponse {
 }
 
 export async function getDashboardData(auth_id: string) {
-	const supabase = createServerComponentClient<Database>({ cookies });
+	const cookieStore = cookies();
+	const supabase = createServerComponentClient<Database>({
+		cookies: () => cookieStore,
+	});
 
 	const { data } = await supabase
 		.from('users')
