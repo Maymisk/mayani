@@ -32,15 +32,17 @@ export async function POST(request: Request) {
 		!client_id ||
 		!worker_id
 	)
-		return Response.json(
-			{ message: 'Insufficient data for work offer creation' },
+		return new Response(
+			JSON.stringify({
+				message: 'Insufficient data for work offer creation',
+			}),
 			{ status: 400 }
 		);
 
 	// you cant hire yourself
 	if (client_id === worker_id)
-		return Response.json(
-			{ message: "You can't hire yourself" },
+		return new Response(
+			JSON.stringify({ message: "You can't hire yourself" }),
 			{ status: 400 }
 		);
 
@@ -67,8 +69,8 @@ export async function POST(request: Request) {
 		.single();
 
 	if (creationError)
-		return Response.json(
-			{ message: creationError.message },
+		return new Response(
+			JSON.stringify({ message: creationError.message }),
 			{ status: 400 }
 		);
 
@@ -79,8 +81,8 @@ export async function POST(request: Request) {
 			.eq('id', work_offer_id);
 
 		if (updateError)
-			return Response.json(
-				{ message: updateError.message },
+			return new Response(
+				JSON.stringify({ message: updateError.message }),
 				{ status: 400 }
 			);
 	}
@@ -95,10 +97,12 @@ export async function POST(request: Request) {
 		});
 
 	if (notificationError)
-		return Response.json(
-			{ message: notificationError.message },
+		return new Response(
+			JSON.stringify({ message: notificationError.message }),
 			{ status: 400 }
 		);
 
-	return Response.json({ message: 'Work offer created!' }, { status: 201 });
+	return new Response(JSON.stringify({ message: 'Work offer created!' }), {
+		status: 201,
+	});
 }

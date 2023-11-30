@@ -38,8 +38,8 @@ export async function POSTLogic(request: Request) {
 		!offer.author_id ||
 		!offer.id
 	)
-		return Response.json(
-			{ message: 'Insufficient data for work creation' },
+		return new Response(
+			JSON.stringify({ message: 'Insufficient data for work creation' }),
 			{ status: 400 }
 		);
 
@@ -59,8 +59,8 @@ export async function POSTLogic(request: Request) {
 		.single();
 
 	if (!work)
-		return Response.json(
-			{ message: creationError.message },
+		return new Response(
+			JSON.stringify({ message: creationError.message }),
 			{ status: 400 }
 		);
 
@@ -70,7 +70,9 @@ export async function POSTLogic(request: Request) {
 		.eq('id', offer.id);
 
 	if (updateError)
-		return Response.json({ message: updateError.message }, { status: 400 });
+		return new Response(JSON.stringify({ message: updateError.message }), {
+			status: 400,
+		});
 
 	const notificationUserId =
 		offer.author_id === worker_id ? worker_id : client_id;
@@ -83,10 +85,12 @@ export async function POSTLogic(request: Request) {
 		});
 
 	if (notificationError)
-		return Response.json(
-			{ message: notificationError.message },
+		return new Response(
+			JSON.stringify({ message: notificationError.message }),
 			{ status: 400 }
 		);
 
-	return Response.json({ message: 'Work created!' }, { status: 201 });
+	return new Response(JSON.stringify({ message: 'Work created!' }), {
+		status: 201,
+	});
 }

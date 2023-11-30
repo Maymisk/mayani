@@ -6,8 +6,8 @@ export async function POSTLogic(request: Request) {
 	const { name, username, isWorker, email, password } = await request.json();
 
 	if (!name || !username || isWorker === undefined || !email || !password)
-		return Response.json(
-			{ message: 'Insufficient data for user creation' },
+		return new Response(
+			JSON.stringify({ message: 'Insufficient data for user creation' }),
 			{
 				status: 400,
 			}
@@ -22,8 +22,8 @@ export async function POSTLogic(request: Request) {
 		.eq('username', username)
 		.single();
 	if (data)
-		return Response.json(
-			{ message: 'Username already exists' },
+		return new Response(
+			JSON.stringify({ message: 'Username already exists' }),
 			{ status: 400 }
 		);
 
@@ -41,12 +41,9 @@ export async function POSTLogic(request: Request) {
 	});
 
 	if (signUpError)
-		return Response.json(
-			{ message: signUpError.message },
-			{
-				status: 400,
-			}
-		);
+		return new Response(JSON.stringify({ message: signUpError.message }), {
+			status: 400,
+		});
 
 	// create the user entity
 	const { error: userCreationError } = await supabase
@@ -54,12 +51,14 @@ export async function POSTLogic(request: Request) {
 		.insert({ name, username, isWorker, auth_id: user!.id });
 
 	if (userCreationError)
-		return Response.json(
-			{ message: userCreationError.message },
+		return new Response(
+			JSON.stringify({ message: userCreationError.message }),
 			{
 				status: 400,
 			}
 		);
 
-	return Response.json({ message: 'User created' }, { status: 201 });
+	return new Response(JSON.stringify({ message: 'User created' }), {
+		status: 201,
+	});
 }

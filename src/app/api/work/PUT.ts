@@ -14,8 +14,8 @@ export async function PUTLogic(request: Request) {
 	const { id, client_id, end_date } = (await request.json()) as IPutPayload;
 
 	if (!id || !end_date || !client_id)
-		return Response.json(
-			{ message: 'Insufficient data for work update' },
+		return new Response(
+			JSON.stringify({ message: 'Insufficient data for work update' }),
 			{ status: 400 }
 		);
 
@@ -33,7 +33,9 @@ export async function PUTLogic(request: Request) {
 		.eq('worker_id', user.id);
 
 	if (error)
-		return Response.json({ message: error.message }, { status: 400 });
+		return new Response(JSON.stringify({ message: error.message }), {
+			status: 400,
+		});
 
 	const clientRateToken = sign({}, process.env.RATE_TOKEN_SECRET as string, {
 		subject: client_id,
@@ -53,8 +55,8 @@ export async function PUTLogic(request: Request) {
 		});
 
 	if (clientNotificationError)
-		return Response.json(
-			{ message: clientNotificationError.message },
+		return new Response(
+			JSON.stringify({ message: clientNotificationError.message }),
 			{ status: 400 }
 		);
 
@@ -76,13 +78,13 @@ export async function PUTLogic(request: Request) {
 		});
 
 	if (workerNotificationError)
-		return Response.json(
-			{ message: workerNotificationError.message },
+		return new Response(
+			JSON.stringify({ message: workerNotificationError.message }),
 			{ status: 400 }
 		);
 
-	return Response.json(
-		{ message: 'Work successfully updated' },
+	return new Response(
+		JSON.stringify({ message: 'Work successfully updated' }),
 		{ status: 200 }
 	);
 }
