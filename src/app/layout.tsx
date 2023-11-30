@@ -11,7 +11,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-	title: 'Job Connect',
+	title: 'Mayani',
 	icons: [
 		{
 			url: '/favicon.png',

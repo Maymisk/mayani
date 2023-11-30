@@ -8,7 +8,7 @@ export function MainBanner() {
 				width={400}
 				height={400}
 				src={'/logo.png'}
-				alt="Maynani Logo"
+				alt="Mayani Logo"
 			/>
 		</header>
 	);

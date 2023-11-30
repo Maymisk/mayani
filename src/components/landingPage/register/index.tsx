@@ -10,7 +10,7 @@ export function Register() {
 				</h1>
 
 				<span className="block font-light">
-					Registre-se no Maynani hoje
+					Registre-se no Mayani hoje
 				</span>
 
 				<Link

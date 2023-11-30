@@ -4,7 +4,7 @@ export function Advantages() {
 	return (
 		<section className="mt-36 border-2 border-gray400 p-8 flex flex-col items-center justify-center rounded-xl gap-4">
 			<h1 className="text-4xl font-bold hover:scale-105 transition-all">
-				Por que escolher o Maynani?
+				Por que escolher o Mayani?
 			</h1>
 
 			<span className="block font-light">

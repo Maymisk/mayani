@@ -62,7 +62,7 @@ export function WorkerCard({
 
 				<div className="flex gap-1 items-center hover:text-blue-500">
 					<BriefcaseIcon width={16} height={16} />
-					Trabalhador Maynani
+					Trabalhador Mayani
 				</div>
 			</footer>
 		</div>

@@ -5,7 +5,7 @@ export function LandingPageBanner() {
 	return (
 		<section className="flex items-center justify-between">
 			<div>
-				<h1 className="text-7xl font-bold">Bem-vindo ao Maynani</h1>
+				<h1 className="text-7xl font-bold">Bem-vindo ao Mayani</h1>
 
 				<span className="block mt-6 w-3/4">
 					Conectando você aos profissionais qualificados mais próximos

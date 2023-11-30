@@ -8,14 +8,14 @@ export default function Pricing() {
 			</h1>
 
 			<span className="font-extralight hover:scale-105 transition-all">
-				O Maynani oferece diferentes planos de acordo com suas
+				O Mayani oferece diferentes planos de acordo com suas
 				necessidades
 			</span>
 
 			<section className="grid grid-cols-2 items-center gap-8 mt-8">
 				<PricingCard
 					title="Verificado"
-					description="O plano base para quem deseja publicar seus serviços na plataforma. Ganhe acesso à publicação de anúncios e à comunidade Maynani."
+					description="O plano base para quem deseja publicar seus serviços na plataforma. Ganhe acesso à publicação de anúncios e à comunidade Mayani."
 					price={50}
 					image="/verified.svg"
 				/>
