@@ -2,13 +2,13 @@ import Image from 'next/image';
 
 export function MainBanner() {
 	return (
-		<header className="w-full h-[24rem] bg-white flex flex-col justify-center items-center">
+		<header className="w-full h-[24rem] bg-[#fff] flex flex-col justify-center items-center">
 			<Image
-				className="w-auto h-auto"
+				className="w-[200px] h-[200px] object-cover"
 				width={400}
 				height={400}
 				src={'/logo.png'}
-				alt="Job Connect Logo"
+				alt="Maynani Logo"
 			/>
 		</header>
 	);

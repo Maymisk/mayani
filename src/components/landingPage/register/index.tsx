@@ -10,7 +10,7 @@ export function Register() {
 				</h1>
 
 				<span className="block font-light">
-					Registre-se no JobConnect hoje
+					Registre-se no Maynani hoje
 				</span>
 
 				<Link

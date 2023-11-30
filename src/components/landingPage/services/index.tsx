@@ -14,7 +14,7 @@ export function Services() {
 
 			<div className="mt-20 flex items-center justify-evenly">
 				<Image
-					src={'https://github.com/maymisk.png'}
+					src={'/screenshot.png'}
 					alt="App screenshot"
 					width={400}
 					height={200}
