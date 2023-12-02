@@ -2,7 +2,10 @@ export const api = new (class {
 	private baseUrl: string;
 
 	constructor() {
-		this.baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL + '/api';
+		this.baseUrl =
+			process.env.NODE_ENV === 'development'
+				? 'http://localhost:3000/api'
+				: '/api';
 	}
 
 	async get(path: string, options?: Omit<RequestInit, 'method'>) {
