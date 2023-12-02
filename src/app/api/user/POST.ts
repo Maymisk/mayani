@@ -38,7 +38,7 @@ export async function POSTLogic(request: Request) {
 		email,
 		password,
 		options: {
-			emailRedirectTo: 'http://localhost:3000/home',
+			emailRedirectTo: process.env.NEXT_PUBLIC_VERCEL_URL + '/home',
 			data: { isWorker },
 		},
 	});

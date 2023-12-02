@@ -2,7 +2,7 @@ export const api = new (class {
 	private baseUrl: string;
 
 	constructor() {
-		this.baseUrl = 'http://localhost:3000/api';
+		this.baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL + '/api';
 	}
 
 	async get(path: string, options?: Omit<RequestInit, 'method'>) {
