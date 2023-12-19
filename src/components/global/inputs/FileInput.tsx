@@ -19,7 +19,7 @@ function InputComponent(
 	const [value, setValue] = useState<string | null>(null);
 
 	return (
-		<div className="w-full flex items-center overflow-hidden whitespace-nowrap">
+		<div className="w-full flex flex-col gap-4 items-center overflow-hidden whitespace-nowrap">
 			<label
 				htmlFor={id}
 				className="w-full p-3 rounded-md bg-gray500 border-2 border-transparent focus:border-blue700 hover:border-blue700 outline-none text-gray-300 text-center font-extralight transition-all cursor-pointer text-ellipsis overflow-hidden"
@@ -34,7 +34,8 @@ function InputComponent(
 				type="file"
 				className="hidden"
 				onChange={event => {
-					setValue(event.target.value);
+					const fileName = event.target.value.split('\\')[2];
+					setValue(fileName);
 					if (onChange) onChange(event);
 				}}
 			/>

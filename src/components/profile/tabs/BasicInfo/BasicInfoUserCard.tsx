@@ -9,7 +9,10 @@ import { useFormContext } from 'react-hook-form';
 
 export function BasicInfoUserCard() {
 	const { user } = useAuth();
-	const { register } = useFormContext();
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext();
 
 	return (
 		<div className="h-full flex-1 mt-8 bg-gray400 p-8 rounded-md shadow-black shadow-md">
@@ -41,6 +44,7 @@ export function BasicInfoUserCard() {
 				label="Mudar avatar"
 				accept="image/jpeg,image/png,image/jpg"
 				{...register('avatar')}
+				error={errors.avatar?.message as string}
 			/>
 		</div>
 	);

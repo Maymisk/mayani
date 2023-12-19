@@ -48,6 +48,7 @@ export function BasicInfo() {
 		else {
 			setSuccessToastIsOpen(true);
 			await reload();
+			formHook.reset();
 		}
 	}
 
@@ -60,7 +61,7 @@ export function BasicInfo() {
 				>
 					<BasicInfoUserCard />
 
-					<div className="w-full max-w-3xl mt-8 bg-gray400 p-8 rounded-md shadow-black shadow-md flex flex-col gap-6">
+					<div className="w-full max-w-3xl mt-8 bg-gray400 p-8 rounded-md shadow-black shadow-md flex flex-col gap-6 max-xl:max-w-none">
 						<CommonFields />
 
 						{!user ? (

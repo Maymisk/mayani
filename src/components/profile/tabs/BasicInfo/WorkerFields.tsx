@@ -4,7 +4,10 @@ import { TextArea } from '@/components/global/inputs/TextArea';
 import { useFormContext } from 'react-hook-form';
 
 export function WorkerFields() {
-	const { register } = useFormContext();
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext();
 
 	return (
 		<>
@@ -27,6 +30,7 @@ export function WorkerFields() {
 					label="Envie seu currículo"
 					accept="application/pdf"
 					{...register('resume')}
+					error={errors.resume?.message as string}
 				/>
 			</div>
 		</>

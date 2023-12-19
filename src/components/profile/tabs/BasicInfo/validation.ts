@@ -6,13 +6,13 @@ export const validation = yup.object({
 	username: yup.string(),
 	location: yup.string(),
 	bio: yup.string(),
-	occupation: yup.string().oneOf(['', ...Object.values(OccupationTypeEnum)]),
+	occupation: yup.string(),
 	avatar: yup
 		.mixed<FileList>()
 		.test(
 			'fileSize',
 			'Arquivo muito grande.',
-			value => testSize(value, 2097152) // 2mb
+			value => testSize(value, 5242880) // 5mb
 		)
 		.test('fileType', 'Formato de arquivo errado', avatarFormatCheck),
 	resume: yup
