@@ -12,7 +12,7 @@ export default async function UserRatings({ params: { id } }: IUserRatings) {
 	const { name, ratings } = await getRatingsAndRatedUser(id);
 
 	return (
-		<main className="flex flex-col items-center justify-center mt-20 text-white max-md:px-4">
+		<main className="flex flex-col items-center justify-center mt-20 text-white max-xl:px-4">
 			<h1 className="text-3xl font-bold">Avaliações de {name}</h1>
 
 			{ratings.length > 0 ? <Ratings ratings={ratings} /> : <NoRatings />}

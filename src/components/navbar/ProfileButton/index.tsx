@@ -24,7 +24,7 @@ export function ProfileButton() {
 			) : user ? (
 				<Root>
 					<div className="flex items-center gap-4 border-l-2 border-gray400 pl-6">
-						<div className="flex flex-col gap-2 items-start justify-center max-md:hidden">
+						<div className="flex flex-col gap-2 items-start justify-center max-xl:hidden">
 							<span className="text-white font-bold text-sm">
 								{user.username}
 							</span>

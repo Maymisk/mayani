@@ -24,7 +24,7 @@ export default async function Worker({ params: { id } }: IUserProps) {
 	} = await getWorkerData(id);
 
 	return (
-		<main className="max-md:px-4">
+		<main className="max-xl:px-4">
 			<WorkerInfo
 				auth_id={auth_id}
 				name={name}

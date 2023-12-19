@@ -8,7 +8,7 @@ export function CommonFields() {
 
 	return (
 		<>
-			<div className="flex gap-4 max-md:gap-2">
+			<div className="flex gap-4 max-xl:gap-2">
 				<Input
 					label="Nome"
 					type="text"
@@ -18,7 +18,7 @@ export function CommonFields() {
 				/>
 
 				<Input
-					label="Nome de usuário"
+					label="username"
 					type="text"
 					autoComplete="off"
 					placeholder="Digite seu nome de usuário.."

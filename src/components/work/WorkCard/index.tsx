@@ -41,7 +41,7 @@ export function WorkCard({
 
 			<p className="mt-4 text-justify text-white">{description}</p>
 
-			<section className="mt-auto flex justify-between items-center gap-4 max-md:flex-col max-md:mt-8">
+			<section className="mt-auto flex justify-between items-center gap-4 max-xl:flex-col max-xl:mt-8">
 				<div className="w-full">
 					<h3 className="text-blue700 font-bold uppercase">
 						Contratante

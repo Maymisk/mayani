@@ -14,7 +14,7 @@ export function WorkerFields() {
 				{...register('bio')}
 			/>
 
-			<div className="h-min flex items-end gap-4 max-md:text-xs">
+			<div className="h-min flex items-end gap-4 max-xl:text-xs">
 				<Input
 					label="Ocupação"
 					type="text"

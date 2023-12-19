@@ -3,8 +3,8 @@ import Link from 'next/link';
 export function Register() {
 	return (
 		<section className="mt-36 bg-gray400 p-12 rounded-sm">
-			<div className="flex flex-col items-center justify-center gap-8 border-2 border-blue700 rounded-lg py-16 max-md:px-4">
-				<h1 className="text-4xl font-bold hover:scale-105 transition-all w-1/2 text-center max-md:w-full max-md:text-xl">
+			<div className="flex flex-col items-center justify-center gap-8 border-2 border-blue700 rounded-lg py-16 max-xl:px-4">
+				<h1 className="text-4xl font-bold hover:scale-105 transition-all w-1/2 text-center max-xl:w-full max-xl:text-xl">
 					Preparado para encontrar o profissional certo para seu
 					trabalho?
 				</h1>

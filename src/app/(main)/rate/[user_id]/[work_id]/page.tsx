@@ -18,7 +18,7 @@ export default async function RateUser({
 	const { name } = await isAuthorized({ user_id, work_id, ...searchParams });
 
 	return (
-		<main className="flex flex-col items-center max-md:px-4">
+		<main className="flex flex-col items-center max-xl:px-4">
 			<h1 className="font-bold text-white text-3xl mb-8">
 				Avalie {name}{' '}
 			</h1>

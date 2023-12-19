@@ -20,7 +20,7 @@ export function WorkOfferInfo({
 	return (
 		<div className="w-full flex flex-col justify-between overflow-hidden">
 			<div className="flex flex-col items-start">
-				<h2 className="w-full whitespace-nowrap overflow-hidden text-ellipsis text-3xl text-white font-bold capitalize max-md:text-xl">
+				<h2 className="w-full whitespace-nowrap overflow-hidden text-ellipsis text-3xl text-white font-bold capitalize max-xl:text-xl">
 					{title}
 				</h2>
 
@@ -31,7 +31,7 @@ export function WorkOfferInfo({
 				</span>
 			</div>
 
-			<div className="flex flex-col items-start justify-center max-md:text-lg">
+			<div className="flex flex-col items-start justify-center max-xl:text-lg">
 				<span className="text-white">
 					{format(new Date(created_at), "dd 'de' MMMM 'de' yyyy", {
 						locale: ptBR,

@@ -52,7 +52,7 @@ export function WorkerCard({
 				{bio}
 			</p>
 
-			<footer className="w-full text-blue700 font-bold flex justify-center gap-6 mt-4 transition-all max-md:text-sm">
+			<footer className="w-full text-blue700 font-bold flex justify-center gap-6 mt-4 transition-all max-xl:text-sm">
 				<div className="w-full flex gap-1 items-center justify-end hover:text-blue-500">
 					<StarIcon width={16} height={16} />
 					{!rating

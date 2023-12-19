@@ -70,7 +70,7 @@ export function HireForm({ worker }: IHireFormProps) {
 
 	return (
 		<form
-			className="w-full max-w-xl p-4 bg-gray400 rounded-md flex flex-col gap-4 items-center justify-center max-md:text-sm"
+			className="w-full max-w-xl p-4 bg-gray400 rounded-md flex flex-col gap-4 items-center justify-center max-xl:text-sm"
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<Input

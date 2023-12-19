@@ -12,7 +12,7 @@ export function Services() {
 				Explore os diversos serviços que oferecemos
 			</span>
 
-			<div className="mt-20 flex max-md:flex-col max-md:gap-4 max-md:text-center items-center justify-evenly">
+			<div className="mt-20 flex max-xl:flex-col max-xl:gap-4 max-xl:text-center items-center justify-evenly">
 				<Image
 					src={'/screenshot.png'}
 					alt="App screenshot"
@@ -21,7 +21,7 @@ export function Services() {
 					className="rounded-md"
 				/>
 
-				<div className="h-[200px] flex flex-col gap-6 max-md:items-center">
+				<div className="h-[200px] flex flex-col gap-6 max-xl:items-center">
 					<h2 className="text-3xl font-bold hover:scale-105 transition-all">
 						Conecte-se com profissionais especializados
 					</h2>

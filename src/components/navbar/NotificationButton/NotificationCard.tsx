@@ -32,12 +32,12 @@ export function NotificationCard({
 				/>
 			</span>
 
-			<div className="w-full flex justify-between items-center gap-12 border-b-2 border-gray600 pb-4 px-1 group-hover:border-transparent max-md:gap-8">
-				<p className="w-full text-sm md:max-w-[70%] md:max-h-10 text-justify md:overflow-hidden md:text-ellipsis max-md:text-xs">
+			<div className="w-full flex justify-between items-center gap-12 border-b-2 border-gray600 pb-4 px-1 group-hover:border-transparent max-xl:gap-8">
+				<p className="w-full text-sm md:max-w-[70%] md:max-h-10 text-justify md:overflow-hidden md:text-ellipsis max-xl:text-xs">
 					{description}
 				</p>
 
-				<span className="text-sm font-extralight block mt-2 max-md:text-xs max-md:text-center">
+				<span className="text-sm font-extralight block mt-2 max-xl:text-xs max-xl:text-center">
 					{formatDistanceToNow(new Date(created_at), {
 						addSuffix: true,
 						locale: ptBR,

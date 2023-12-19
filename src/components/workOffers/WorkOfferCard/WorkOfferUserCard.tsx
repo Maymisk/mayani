@@ -38,7 +38,7 @@ export function WorkOfferUserCard({
 
 			<div className="flex flex-col justify-around gap-1">
 				<div>
-					<h4 className="text-white text-3xl max-md:text-xl">
+					<h4 className="text-white text-3xl max-xl:text-xl">
 						{name}
 					</h4>
 					<span className="text-white text-sm font-bold">

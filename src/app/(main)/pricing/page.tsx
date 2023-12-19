@@ -2,7 +2,7 @@ import { PricingCard } from '@/components/pricing/PricingCard';
 
 export default function Pricing() {
 	return (
-		<main className="flex flex-col justify-center items-center gap-4 text-white max-md:px-4">
+		<main className="flex flex-col justify-center items-center gap-4 text-white max-xl:px-4">
 			<h1 className="text-4xl hover:scale-105 transition-all">
 				Preço acessível para todos
 			</h1>
@@ -12,7 +12,7 @@ export default function Pricing() {
 				necessidades
 			</span>
 
-			<section className="grid grid-cols-2 items-center gap-8 mt-8 max-md:grid-cols-1">
+			<section className="grid grid-cols-2 items-center gap-8 mt-8 max-xl:grid-cols-1">
 				<PricingCard
 					title="Verificado"
 					description="O plano base para quem deseja publicar seus serviços na plataforma. Ganhe acesso à publicação de anúncios e à comunidade Mayani."

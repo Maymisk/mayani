@@ -6,7 +6,7 @@ export default async function WorkOffers() {
 
 	return (
 		<main
-			className={`grid gap-8 max-md:grid-cols-1 max-md:px-4 ${
+			className={`grid gap-8 max-xl:grid-cols-1 max-xl:px-4 ${
 				workOffers.length > 0 ? 'grid-cols-2' : 'grid-cols-1'
 			} md:grid-cols-1`}
 		>

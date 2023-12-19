@@ -13,7 +13,7 @@ export function BasicInfoFormButtons() {
 		<div className="flex items-center justify-center gap-4 mt-auto">
 			<button
 				type="button"
-				className="bg-transparent px-8 py-4 border-2 border-blue500 rounded-md font-bold uppercase text-white flex-1 disabled:cursor-not-allowed disabled:brightness-[60%] max-md:px-6"
+				className="bg-transparent px-8 py-4 border-2 border-blue500 rounded-md font-bold uppercase text-white flex-1 disabled:cursor-not-allowed disabled:brightness-[60%] max-xl:px-6"
 				disabled={!isDirty || isSubmitting}
 				onClick={() => reset()}
 			>
@@ -22,7 +22,7 @@ export function BasicInfoFormButtons() {
 
 			<button
 				type="submit"
-				className="flex items-center justify-center flex-1 px-8 py-4 bg-blue500 rounded-md font-bold uppercase text-gray500 hover:bg-blue700 hover:text-white transition-all disabled:cursor-not-allowed disabled:brightness-75 disabled:hover:bg-blue500 disabled:hover:text-gray500 max-md:px-6"
+				className="flex items-center justify-center flex-1 px-8 py-4 bg-blue500 rounded-md font-bold uppercase text-gray500 hover:bg-blue700 hover:text-white transition-all disabled:cursor-not-allowed disabled:brightness-75 disabled:hover:bg-blue500 disabled:hover:text-gray500 max-xl:px-6"
 				disabled={!isDirty || isSubmitting}
 			>
 				{isSubmitting ? <LoadingIcon /> : 'Salvar'}

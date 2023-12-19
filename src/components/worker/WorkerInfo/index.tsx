@@ -22,7 +22,7 @@ export function WorkerInfo({
 	occupation,
 }: IUserInfoProps) {
 	return (
-		<section className="flex items-start justify-between gap-16 p-6 mt-8 rounded-lg text-blue100 max-md:flex-col max-md:items-center max-md:p-0">
+		<section className="flex items-start justify-between gap-16 p-6 mt-8 rounded-lg text-blue100 max-xl:flex-col max-xl:items-center max-xl:p-0">
 			<div className="flex flex-col items-center gap-10">
 				<h1 className="text-6xl text-center leading-[5rem]">
 					Olá, eu sou {name},
@@ -39,7 +39,7 @@ export function WorkerInfo({
 				<div className="flex items-center justify-center gap-4 w-full">
 					<Link
 						href={resume || '#'}
-						className="w-full max-w-[200px] text-center font-bold p-3 rounded-md bg-blue700 hover:bg-blue500 transition-all max-md:text-sm"
+						className="w-full max-w-[200px] text-center font-bold p-3 rounded-md bg-blue700 hover:bg-blue500 transition-all max-xl:text-sm"
 						target="_blank"
 					>
 						Baixe meu currículo
@@ -47,7 +47,7 @@ export function WorkerInfo({
 
 					<Link
 						href={`/hire/worker/${auth_id}`}
-						className="w-full max-w-[200px] text-center font-bold p-3 rounded-md bg-blue700 hover:bg-blue500 transition-all max-md:text-sm"
+						className="w-full max-w-[200px] text-center font-bold p-3 rounded-md bg-blue700 hover:bg-blue500 transition-all max-xl:text-sm"
 					>
 						Contrate-me
 					</Link>

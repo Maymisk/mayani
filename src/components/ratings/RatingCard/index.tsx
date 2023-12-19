@@ -27,8 +27,8 @@ export function RatingCard({
 
 	return (
 		<div className="w-full max-w-[800px] bg-gray400 rounded-lg p-8 hover:scale-[1.02] shadow-sm shadow-gray400 transition-all">
-			<header className="flex items-center justify-between max-md:flex-col">
-				<div className="flex items-center justify-center gap-4 max-md:flex-col max-md:gap-2">
+			<header className="flex items-center justify-between max-xl:flex-col">
+				<div className="flex items-center justify-center gap-4 max-xl:flex-col max-xl:gap-2">
 					{author.avatar ? (
 						<Image
 							src={author.avatar}
@@ -45,13 +45,13 @@ export function RatingCard({
 						/>
 					)}
 
-					<div className="flex flex-col justify-center gap-1 max-md:items-center">
+					<div className="flex flex-col justify-center gap-1 max-xl:items-center">
 						<h2 className="text-2xl">{author.name}</h2>
 						<span className="font-extralight">Brazil</span>
 					</div>
 				</div>
 
-				<div className="flex flex-col justify-center gap-2 max-md:items-center max-md:mt-2">
+				<div className="flex flex-col justify-center gap-2 max-xl:items-center max-xl:mt-2">
 					<Stars stars={stars} />
 
 					<span className="font-extralight">
@@ -64,11 +64,11 @@ export function RatingCard({
 			</header>
 
 			<div className="mt-8">
-				<h2 className="text-2xl max-w-full font-bold whitespace-nowrap text-ellipsis overflow-hidden max-md:text-lg">
+				<h2 className="text-2xl max-w-full font-bold whitespace-nowrap text-ellipsis overflow-hidden max-xl:text-lg">
 					{title}
 				</h2>
 
-				<p className="font-light mt-4 text-justify max-md:text-sm">
+				<p className="font-light mt-4 text-justify max-xl:text-sm">
 					{description}
 				</p>
 			</div>

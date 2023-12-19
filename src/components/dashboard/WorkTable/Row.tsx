@@ -24,7 +24,7 @@ export function WorkTableRow({
 	url,
 }: IWorkTableRowProps) {
 	return (
-		<tr className="w-[300px] text-white max-md:text-sm overflow-x-auto">
+		<tr className="w-[300px] text-white max-xl:text-sm overflow-x-auto">
 			<td className="p-2 flex items-center justify-center rounded-l-xl border-l-2 border-y-2 border-gray400">
 				{client.avatar ? (
 					<Image

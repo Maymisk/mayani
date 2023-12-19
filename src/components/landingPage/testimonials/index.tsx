@@ -3,8 +3,8 @@ import { TestimonialCard } from './TestimonialCard';
 
 export function Testimonials() {
 	return (
-		<section className="flex flex-col items-center gap-4 mt-36 max-md:mx-2">
-			<h1 className="text-4xl font-bold hover:scale-105 transition-all max-md:text-center">
+		<section className="flex flex-col items-center gap-4 mt-36 max-xl:mx-2">
+			<h1 className="text-4xl font-bold hover:scale-105 transition-all max-xl:text-center">
 				O que nossos usuários dizem
 			</h1>
 

@@ -31,12 +31,12 @@ export function WorkInfo({
 	return (
 		<div className="w-full flex items-start justify-between">
 			<div className="w-full flex flex-col items-start">
-				<h2 className="w-full text-2xl text-white font-bold capitalize max-md:text-xl">
+				<h2 className="w-full text-2xl text-white font-bold capitalize max-xl:text-xl">
 					{title}
 				</h2>
 
 				<span
-					className={`uppercase text-sm max-md:text-xs ${StatusColors[status]}`}
+					className={`uppercase text-sm max-xl:text-xs ${StatusColors[status]}`}
 				>
 					{status} &#128900;{' '}
 					<span>
@@ -48,7 +48,7 @@ export function WorkInfo({
 			</div>
 
 			<div className="w-full flex flex-col items-end justify-center">
-				<span className="text-white max-md:text-xs max-md:text-center">
+				<span className="text-white max-xl:text-xs max-xl:text-center">
 					{formattedCreationDate}
 				</span>
 

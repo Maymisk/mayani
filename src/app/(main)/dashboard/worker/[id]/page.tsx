@@ -24,16 +24,16 @@ export default async function Dashboard({ params: { id } }: IDashboardProps) {
 	} = await getDashboardData(id);
 
 	return (
-		<main className="max-md:px-4">
-			<h1 className="text-white text-4xl font-bold mb-1 max-md:text-center">
+		<main className="max-xl:px-4">
+			<h1 className="text-white text-4xl font-bold mb-1 max-xl:text-center">
 				Olá {name}, esse é seu painel
 			</h1>
 
-			<span className="text-white font-thin text-lg mb-6 block max-md:text-center">
+			<span className="text-white font-thin text-lg mb-6 block max-xl:text-center">
 				Informações sobre sua atividade na plataforma
 			</span>
 
-			<section className="w-full flex gap-12 max-md:flex-col">
+			<section className="w-full flex gap-12 max-xl:flex-col">
 				<div className="w-full">
 					<SummarizedData
 						amountOfRatings={ratings.amount}
@@ -46,7 +46,7 @@ export default async function Dashboard({ params: { id } }: IDashboardProps) {
 						totalIncome={annualIncome}
 					/>
 
-					<div className="flex justify-center gap-6 mt-12 max-md:flex-col">
+					<div className="flex justify-center gap-6 mt-12 max-xl:flex-col">
 						<MonthlyWorksGraph {...works.statuses} />
 
 						<OverallRatingCard

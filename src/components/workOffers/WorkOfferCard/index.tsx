@@ -23,7 +23,7 @@ export function WorkOfferCard({ id, author, ...offer }: IWorkOfferCardProps) {
 	return (
 		<Link
 			href={'/work/offer/' + id}
-			className="w-full max-w-5xl mx-auto flex justify-between gap-8 border-2 border-gray400 p-8 rounded-xl hover:scale-[1.02] transition-all max-md:flex-col"
+			className="w-full max-w-5xl mx-auto flex justify-between gap-8 border-2 border-gray400 p-8 rounded-xl hover:scale-[1.02] transition-all max-xl:flex-col"
 		>
 			<div className="w-full flex flex-col gap-2">
 				<span className="text-white font-extralight">Oferta por:</span>

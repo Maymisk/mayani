@@ -19,7 +19,7 @@ function ProfileMenuComponent(_: any, ref: Ref<HTMLDivElement>) {
 	return (
 		<Content
 			ref={ref}
-			className="w-[15.625rem] relative z-50 bg-gray400 text-gray300 py-2 rounded-md px-1 flex flex-col gap-1 shadow-md shadow-black animate-fadeOut data-[state='open']:animate-fadeIn self-end max-md:self-start"
+			className="w-[15.625rem] relative z-50 bg-gray400 text-gray300 py-2 rounded-md px-1 flex flex-col gap-1 shadow-md shadow-black animate-fadeOut data-[state='open']:animate-fadeIn self-end max-xl:self-start"
 		>
 			<Link
 				href={`/profile/user/${user?.auth_id}`}
