@@ -72,6 +72,9 @@ export async function getWorkOffer(id: string) {
 	const { client_profiles, worker_profiles, ratings, ...authorData } = users;
 
 	const rating = ratings.reduce((sum, cur) => sum + cur.stars, 0) || 0;
+	const averageRating =
+		ratings.length > 0 ? Math.floor(rating / ratings.length) : rating;
+
 	const avatar = client_profiles
 		? client_profiles.avatar
 		: worker_profiles!.avatar;
@@ -81,7 +84,7 @@ export async function getWorkOffer(id: string) {
 
 	const author = {
 		...authorData,
-		rating,
+		rating: averageRating,
 		avatar,
 		location,
 	};

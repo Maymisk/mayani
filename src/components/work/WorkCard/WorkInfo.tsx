@@ -48,7 +48,9 @@ export function WorkInfo({
 			</div>
 
 			<div className="w-full flex flex-col items-end justify-center">
-				<span className="text-white">{formattedCreationDate}</span>
+				<span className="text-white max-md:text-xs max-md:text-center">
+					{formattedCreationDate}
+				</span>
 
 				<span className="font-bold text-green400">
 					{formattedPrice}
