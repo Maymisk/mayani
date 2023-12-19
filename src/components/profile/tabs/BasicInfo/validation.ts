@@ -12,7 +12,7 @@ export const validation = yup.object({
 		.test(
 			'fileSize',
 			'Arquivo muito grande.',
-			value => testSize(value, 5242880) // 5mb
+			value => testSize(value, 2 * 1048576) // 2mb
 		)
 		.test('fileType', 'Formato de arquivo errado', avatarFormatCheck),
 	resume: yup
