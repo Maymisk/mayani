@@ -55,7 +55,7 @@ export function BasicInfo() {
 		<Content value="info">
 			<FormProvider {...formHook} handleSubmit={handleSubmit}>
 				<form
-					className="w-full flex gap-8"
+					className="w-full flex gap-8 max-md:flex-col"
 					onSubmit={handleSubmit(onSubmit)}
 				>
 					<BasicInfoUserCard />

@@ -19,16 +19,14 @@ interface IWorkTableProps {
 export function WorkTable({ works }: IWorkTableProps) {
 	return (
 		<table className="w-full rounded-md border-separate border-spacing-y-4">
-			<thead>
-				<tr>
+			<thead className="text-lg max-md:text-sm">
+				<tr className="w-[300px]">
 					<th></th>
-					<th className="p-4 uppercase text-lg text-white">
-						Cliente
-					</th>
-					<th className="p-4 uppercase text-lg text-white">Preço</th>
-					<th className="p-4 uppercase text-lg text-white">Status</th>
-					<th className="p-4 uppercase text-lg text-white">Data</th>
-					<th className="p-4 uppercase text-lg"></th>
+					<th className="p-4 uppercase text-white">Cliente</th>
+					<th className="p-4 uppercase text-white">Preço</th>
+					<th className="p-4 uppercase text-white">Status</th>
+					<th className="p-4 uppercase text-white">Data</th>
+					<th className="p-4 uppercase"></th>
 				</tr>
 			</thead>
 

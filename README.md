@@ -8,10 +8,4 @@
 
 ## improve no data screens 6
 
-## improve work cards in the worker page 7
-
 ## implement work cancel functionality
-
-#####
-
-## make the layout responsive

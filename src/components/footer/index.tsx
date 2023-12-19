@@ -4,7 +4,7 @@ export function Footer() {
 	return (
 		<footer
 			id="mainFooter"
-			className="w-full flex items-start justify-evenly text-white bg-gray500 border-y-2 border-y-gray400 px-8 py-8 mt-20 mb-8"
+			className="w-full flex max-md:flex-col max-md:gap-12 items-start justify-evenly text-white bg-gray500 border-y-2 border-y-gray400 px-8 py-8 mt-20 mb-8"
 		>
 			<Link
 				href="https://storyset.com/"

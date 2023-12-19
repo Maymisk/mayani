@@ -70,7 +70,7 @@ export function HireForm({ worker }: IHireFormProps) {
 
 	return (
 		<form
-			className="w-full max-w-xl p-4 bg-gray400 rounded-md flex flex-col gap-4 items-center justify-center"
+			className="w-full max-w-xl p-4 bg-gray400 rounded-md flex flex-col gap-4 items-center justify-center max-md:text-sm"
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<Input
@@ -90,7 +90,7 @@ export function HireForm({ worker }: IHireFormProps) {
 				autoComplete="off"
 			/>
 
-			<div className="w-full flex items-start gap-2">
+			<div className="w-full grid grid-cols-2 items-start gap-2">
 				<Input
 					type="number"
 					label="Preço"

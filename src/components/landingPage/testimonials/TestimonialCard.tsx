@@ -9,7 +9,7 @@ interface ITestimonialCardProps {
 
 export function TestimonialCard({ author, detailing }: ITestimonialCardProps) {
 	return (
-		<div className="w-1/2 flex justify-between gap-6 shadow-md shadow-gray400">
+		<div className="w-1/2 flex justify-between gap-6 shadow-md shadow-gray400 max-md:w-full">
 			<Image
 				src={'https://github.com/maymisk.png'}
 				alt="User profile picture"

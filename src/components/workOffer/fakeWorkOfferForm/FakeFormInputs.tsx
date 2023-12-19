@@ -1,5 +1,6 @@
 import { Input } from '@/components/global/inputs/Input';
 import { TextArea } from '@/components/global/inputs/TextArea';
+import { formatISO9075 } from 'date-fns';
 
 interface IFakeWorkOfferFormInputsProps {
 	title: string;
@@ -32,7 +33,7 @@ export function FakeWorkOfferFormInputs({
 				<Input
 					type="datetime-local"
 					label="Data de início"
-					value={start_date}
+					value={formatISO9075(new Date(start_date))}
 				/>
 			</div>
 		</>

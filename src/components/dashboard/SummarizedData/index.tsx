@@ -20,7 +20,7 @@ export function SummarizedData({
 }: ISummarizedDataProps) {
 	return (
 		<div className="border-2 border-gray400 p-4 rounded-md">
-			<ul className="flex items-center justify-around">
+			<ul className="flex items-center justify-around max-md:flex-col max-md:items-start max-md:gap-4">
 				<ListItem
 					title="Visitas no perfil"
 					data={1000}
@@ -28,7 +28,7 @@ export function SummarizedData({
 					iconColor="gray200"
 				/>
 
-				<li className="w-[1px] h-10 bg-slate-500"></li>
+				<li className="w-[1px] h-10 bg-slate-500 max-md:hidden"></li>
 
 				<ListItem
 					title="Serviços feitos"
@@ -37,7 +37,7 @@ export function SummarizedData({
 					iconColor="danger"
 				/>
 
-				<li className="w-[1px] h-10 bg-slate-500"></li>
+				<li className="w-[1px] h-10 bg-slate-500 max-md:hidden"></li>
 
 				<ListItem
 					title="Avaliações recebidas"
@@ -46,7 +46,7 @@ export function SummarizedData({
 					iconColor="yellow-400"
 				/>
 
-				<li className="w-[1px] h-10 bg-slate-500"></li>
+				<li className="w-[1px] h-10 bg-slate-500 max-md:hidden"></li>
 
 				<ListItem
 					title="Inscrição"

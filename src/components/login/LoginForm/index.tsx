@@ -1,13 +1,13 @@
 'use client';
 
+import { Toast } from '@/components/global/toast';
 import { LoadingIcon } from '@/components/loadingIcon';
 import { useAuth } from '@/contexts/auth/AuthContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { LoginFormInput } from './LoginFormInput';
 import { validation } from './validation';
-import { Input } from '@/components/global/inputs/Input';
-import { Toast } from '@/components/global/toast';
 
 interface IOnSubmitData {
 	email: string;
@@ -35,8 +35,7 @@ export function LoginForm() {
 			onSubmit={handleSubmit(onSubmit)}
 			className="w-full h-full flex flex-col flex-1 gap-4 mt-1"
 		>
-			<Input
-				label=""
+			<LoginFormInput
 				type="email"
 				required
 				autoComplete="off"
@@ -45,8 +44,7 @@ export function LoginForm() {
 				error={errors.email?.message}
 			/>
 
-			<Input
-				label=""
+			<LoginFormInput
 				type="password"
 				required
 				{...register('password')}

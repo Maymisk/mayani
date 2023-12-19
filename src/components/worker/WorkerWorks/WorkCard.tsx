@@ -10,7 +10,7 @@ interface IWorkCardProps {
 
 export function WorkCard({ title, description, users }: IWorkCardProps) {
 	return (
-		<li className="flex gap-4 border-b-2 pb-4 mb-12 border-gray400">
+		<li className="flex gap-4 border-b-2 pb-4 mb-12 mt-4 border-gray400">
 			<div>
 				<h1 className="text-2xl font-bold text-blue500 hover:text-blue700 transition-all">
 					{title}

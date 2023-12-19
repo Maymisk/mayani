@@ -8,7 +8,7 @@ export function CommonFields() {
 
 	return (
 		<>
-			<div className="flex gap-4">
+			<div className="flex gap-4 max-md:gap-2">
 				<Input
 					label="Nome"
 					type="text"

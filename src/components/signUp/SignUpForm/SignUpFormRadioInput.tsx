@@ -15,16 +15,16 @@ export function SignUpFormRadioInput({
 	error,
 }: ISignUpFormRadioInput) {
 	return (
-		<div>
+		<div className="w-full">
 			<Root
 				value={value}
 				onValueChange={onChange}
 				defaultChecked={false}
-				className="flex gap-4"
+				className="w-full flex gap-4"
 			>
 				<Item
 					value={'workers'}
-					className={`w-full border-2 border-gray500 rounded-md flex items-center justify-center gap-2 text-blue700 px-8 py-4 uppercase font-bold hover:bg-blue500 hover:text-gray400 transition-all ${
+					className={`w-full border-2 border-gray500 rounded-md flex items-center justify-center gap-2 text-blue700 px-8 py-4 uppercase font-bold hover:bg-blue500 hover:text-gray400 transition-all max-md:text-sm max-md:px-4 ${
 						value === 'workers' && 'bg-blue500 text-gray400'
 					}`}
 				>
@@ -34,7 +34,7 @@ export function SignUpFormRadioInput({
 
 				<Item
 					value="clients"
-					className={`w-full border-2 border-gray500 rounded-md flex items-center justify-center gap-2 text-blue700 px-8 py-4 uppercase font-bold hover:bg-blue500 hover:text-gray400 transition-all ${
+					className={`w-full border-2 border-gray500 rounded-md flex items-center justify-center gap-2 text-blue700 px-8 py-4 uppercase font-bold hover:bg-blue500 hover:text-gray400 transition-all max-md:text-sm max-md:px-4 ${
 						value === 'clients' && 'bg-blue500 text-gray400'
 					}`}
 				>

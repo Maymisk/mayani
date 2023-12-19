@@ -79,7 +79,7 @@ export function AuthContextProvider({ children }: IAuthContextProviderProps) {
 		setIsLoading(false);
 	}
 
-	async function reload(reRenderOnly: boolean = false) {
+	async function reload() {
 		const {
 			data: { user },
 		} = await supabase.auth.getUser();

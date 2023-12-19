@@ -64,7 +64,7 @@ export function NotificationButton() {
 
 				<Portal>
 					<Content asChild align="center">
-						<div className="w-[40rem] max-h-96 overflow-y-scroll relative z-50 bg-gray400 text-gray300 py-4 rounded-md px-2 flex flex-col gap-1 shadow-md shadow-black animate-fadeOut data-[state='open']:animate-fadeIn mt-7">
+						<div className="w-full max-w-[40rem] max-h-96 overflow-y-auto relative z-50 bg-gray400 text-gray300 py-4 rounded-md px-2 flex flex-col gap-1 shadow-md shadow-black animate-fadeOut data-[state='open']:animate-fadeIn mt-7 max-md:max-w-[20rem]">
 							{user && user.notifications.length > 0 ? (
 								user.notifications.map(notification => (
 									<NotificationCard

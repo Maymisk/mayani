@@ -35,7 +35,7 @@ export function WorkerRatings({ auth_id, ratings }: IRatingProp) {
 			<div
 				className={`${
 					ratings.length > 0 ? 'grid grid-cols-2' : 'flex flex-col'
-				} gap-4`}
+				} gap-4 max-md:grid-cols-1`}
 			>
 				{ratings.length > 0 ? (
 					ratings.map(rating => (

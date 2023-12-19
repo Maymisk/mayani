@@ -31,11 +31,13 @@ export function WorkInfo({
 	return (
 		<div className="w-full flex items-start justify-between">
 			<div className="w-full flex flex-col items-start">
-				<h2 className="w-full text-2xl text-white font-bold capitalize">
+				<h2 className="w-full text-2xl text-white font-bold capitalize max-md:text-xl">
 					{title}
 				</h2>
 
-				<span className={`uppercase text-sm ${StatusColors[status]}`}>
+				<span
+					className={`uppercase text-sm max-md:text-xs ${StatusColors[status]}`}
+				>
 					{status} &#128900;{' '}
 					<span>
 						{status === WorkStatus.PENDING

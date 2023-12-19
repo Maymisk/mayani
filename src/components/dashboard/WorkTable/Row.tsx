@@ -24,7 +24,7 @@ export function WorkTableRow({
 	url,
 }: IWorkTableRowProps) {
 	return (
-		<tr className="text-white">
+		<tr className="w-[300px] text-white max-md:text-sm overflow-x-auto">
 			<td className="p-2 flex items-center justify-center rounded-l-xl border-l-2 border-y-2 border-gray400">
 				{client.avatar ? (
 					<Image
@@ -42,20 +42,25 @@ export function WorkTableRow({
 					/>
 				)}
 			</td>
+
 			<td className="p-2 text-center border-y-2 border-gray400">
 				{client.name}
 			</td>
+
 			<td className="p-2 text-center border-y-2 border-gray400 font-bold">
 				{currencyFormatter.format(price)}
 			</td>
+
 			<td
 				className={`p-2 text-center ${StatusColors[status]} border-y-2 border-gray400 font-bold`}
 			>
 				{status}
 			</td>
+
 			<td className="p-2 text-center border-y-2 border-gray400">
 				{format(new Date(created_at), 'dd/MM/yyyy')}
 			</td>
+
 			<td className="p-2 text-center rounded-r-xl border-y-2 border-r-2 border-gray400">
 				<Link
 					href={url}

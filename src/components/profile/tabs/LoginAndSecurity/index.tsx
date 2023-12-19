@@ -15,7 +15,7 @@ export function LoginAndSecurity() {
 			asChild
 		>
 			<div>
-				<div className="flex items-center justify-between gap-12">
+				<div className="flex items-center justify-between gap-12 max-md:gap-4">
 					<Input
 						label="Email"
 						type="text"
@@ -26,13 +26,13 @@ export function LoginAndSecurity() {
 
 					<Link
 						href={''}
-						className="w-full max-w-[20%] font-bold text-xs text-white bg-gray500 p-4 rounded-sm uppercase text-center hover:bg-gray600 transition-all shadow-sm shadow-black mt-6"
+						className="w-full max-w-[20%] font-bold text-xs text-white bg-gray500 p-4 rounded-sm uppercase text-center hover:bg-gray600 transition-all shadow-sm shadow-black mt-6 max-md:max-w-[30%]"
 					>
 						Mudar email
 					</Link>
 				</div>
 
-				<div className="flex items-center justify-between gap-12">
+				<div className="flex items-center justify-between gap-12 max-md:gap-4">
 					<Input
 						label="senha"
 						type="password"
@@ -43,13 +43,13 @@ export function LoginAndSecurity() {
 
 					<Link
 						href={''}
-						className="w-full max-w-[20%] font-bold text-xs text-white bg-gray500 p-4 rounded-sm uppercase text-center hover:bg-gray600 transition-all shadow-sm shadow-black mt-6"
+						className="w-full max-w-[20%] font-bold text-xs text-white bg-gray500 p-4 rounded-sm uppercase text-center hover:bg-gray600 transition-all shadow-sm shadow-black mt-6 max-md:max-w-[30%]"
 					>
 						Mudar senha
 					</Link>
 				</div>
 
-				<div className="flex items-center justify-between gap-12">
+				<div className="flex items-center justify-between gap-12 max-md:gap-4">
 					<Input
 						label="telefone"
 						type="text"
@@ -60,7 +60,7 @@ export function LoginAndSecurity() {
 
 					<Link
 						href={''}
-						className="w-full max-w-[20%] font-bold text-xs text-white bg-gray500 p-4 rounded-sm uppercase text-center hover:bg-gray600 transition-all shadow-sm shadow-black mt-6"
+						className="w-full max-w-[20%] font-bold text-xs text-white bg-gray500 p-4 rounded-sm uppercase text-center hover:bg-gray600 transition-all shadow-sm shadow-black mt-6 max-md:max-w-[30%]"
 					>
 						Mudar número
 					</Link>

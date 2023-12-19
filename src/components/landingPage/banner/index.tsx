@@ -3,11 +3,13 @@ import Link from 'next/link';
 
 export function LandingPageBanner() {
 	return (
-		<section className="flex items-center justify-between">
-			<div>
-				<h1 className="text-7xl font-bold">Bem-vindo ao Mayani</h1>
+		<section className="flex max-md:flex-col items-center justify-between">
+			<div className="max-md:flex flex-col items-center">
+				<h1 className="text-7xl font-bold max-md:text-5xl max-md:text-center">
+					Bem-vindo ao Mayani
+				</h1>
 
-				<span className="block mt-6 w-3/4">
+				<span className="block mt-6 w-3/4 max-md:text-center">
 					Conectando você aos profissionais qualificados mais próximos
 					de você.
 				</span>
@@ -19,7 +21,7 @@ export function LandingPageBanner() {
 					Começar
 				</Link>
 
-				<span className="text-sm block mt-4 w-1/2 text-blue100 font-extralight">
+				<span className="text-sm block mt-4 w-1/2 text-blue100 font-extralight max-md:text-center">
 					Junte-se a nós hoje e encontre o profissional certo para o
 					seu trabalho.
 				</span>

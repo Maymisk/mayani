@@ -52,17 +52,22 @@ export function WorkerCard({
 				{bio}
 			</p>
 
-			<footer className="text-blue700 font-bold flex gap-6 mt-4 transition-all">
-				<div className="flex gap-1 items-center hover:text-blue-500">
+			<footer className="w-full text-blue700 font-bold flex justify-center gap-6 mt-4 transition-all max-md:text-sm">
+				<div className="w-full flex gap-1 items-center justify-end hover:text-blue-500">
 					<StarIcon width={16} height={16} />
 					{!rating
 						? 'Sem avaliações'
 						: `${rating.toFixed(1)} em avaliações`}
 				</div>
 
-				<div className="flex gap-1 items-center hover:text-blue-500">
-					<BriefcaseIcon width={16} height={16} />
-					Trabalhador Mayani
+				<div className="w-full flex gap-1 items-center justify-start hover:text-blue-500 overflow-hidden">
+					<span>
+						<BriefcaseIcon width={16} height={16} />
+					</span>
+
+					<span className="overflow-hidden text-ellipsis whitespace-nowrap">
+						Trabalhador
+					</span>
 				</div>
 			</footer>
 		</div>

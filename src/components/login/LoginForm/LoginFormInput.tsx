@@ -16,7 +16,7 @@ function InputComponent(
 			<input
 				ref={ref}
 				{...rest}
-				className="w-full p-3 bg-transparent text-gray-400 outline-none focus:outline-none border-2 border-gray500 rounded-md transition-all placeholder:text-gray-400 placeholder:font-extralight hover:border-blue500 focus:border-blue500"
+				className="w-full p-3 bg-transparent text-gray-400 outline-none focus:outline-none border-2 border-gray500 rounded-md transition-all placeholder:text-gray-500 placeholder:font-extralight hover:border-blue500 focus:border-blue500"
 			/>
 
 			<p

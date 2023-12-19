@@ -24,16 +24,16 @@ export default async function Dashboard({ params: { id } }: IDashboardProps) {
 	} = await getDashboardData(id);
 
 	return (
-		<main>
-			<h1 className="text-white text-4xl font-bold mb-1">
+		<main className="max-md:px-4">
+			<h1 className="text-white text-4xl font-bold mb-1 max-md:text-center">
 				Olá {name}, esse é seu painel
 			</h1>
 
-			<span className="text-white font-thin text-lg mb-6 block">
+			<span className="text-white font-thin text-lg mb-6 block max-md:text-center">
 				Informações sobre sua atividade na plataforma
 			</span>
 
-			<section className="w-full flex gap-12">
+			<section className="w-full flex gap-12 max-md:flex-col">
 				<div className="w-full">
 					<SummarizedData
 						amountOfRatings={ratings.amount}
@@ -46,8 +46,9 @@ export default async function Dashboard({ params: { id } }: IDashboardProps) {
 						totalIncome={annualIncome}
 					/>
 
-					<div className="flex justify-center gap-6 mt-12">
+					<div className="flex justify-center gap-6 mt-12 max-md:flex-col">
 						<MonthlyWorksGraph {...works.statuses} />
+
 						<OverallRatingCard
 							rating={ratings.stars}
 							ratingsByStars={ratingsByStars}
@@ -65,7 +66,9 @@ export default async function Dashboard({ params: { id } }: IDashboardProps) {
 				</h2>
 
 				{works.sample.length > 0 ? (
-					<WorkTable works={works.sample} />
+					<div className="w-full overflow-x-auto">
+						<WorkTable works={works.sample} />
+					</div>
 				) : (
 					<div className="text-xl text-gray-600 uppercase font-bold flex items-center justify-center">
 						Sem trabalhos

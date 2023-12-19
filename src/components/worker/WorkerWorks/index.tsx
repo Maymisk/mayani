@@ -22,7 +22,7 @@ export function WorkerWorks({ works }: IWorksProps) {
 			<ul
 				className={`gap-8 items-start ${
 					works.length > 0 ? 'grid grid-cols-2' : 'flex flex-col'
-				} `}
+				} max-md:grid-cols-1`}
 			>
 				{works.length > 0 ? (
 					works.map(work => <WorkCard key={work.id} {...work} />)

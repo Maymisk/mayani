@@ -13,7 +13,7 @@ export default async function WorkOffer({ params: { id } }: IWorkOfferProps) {
 	const authorIsWorker = author.auth_id === offer.worker_id;
 
 	return (
-		<main>
+		<main className="max-md:px-4">
 			<h2 className="font-bold text-white text-3xl mx-auto mb-4 w-fit">
 				{authorIsWorker ? 'Contraproposta' : 'Oferta de trabalho'}
 			</h2>

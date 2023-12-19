@@ -5,7 +5,10 @@ import { ProfileIcon } from './ProfileIcon';
 import { ProfileMenu } from './ProfileMenu';
 import { useAuth } from '@/contexts/auth/AuthContext';
 import Link from 'next/link';
-import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
+import {
+	UserCircleIcon,
+	WrenchScrewdriverIcon,
+} from '@heroicons/react/24/solid';
 
 export function ProfileButton() {
 	const { user, isLoading } = useAuth();
@@ -21,7 +24,7 @@ export function ProfileButton() {
 			) : user ? (
 				<Root>
 					<div className="flex items-center gap-4 border-l-2 border-gray400 pl-6">
-						<div className="flex flex-col gap-2 items-start justify-center">
+						<div className="flex flex-col gap-2 items-start justify-center max-md:hidden">
 							<span className="text-white font-bold text-sm">
 								{user.username}
 							</span>
@@ -40,9 +43,9 @@ export function ProfileButton() {
 			) : (
 				<Link
 					href="/login"
-					className="border-2 border-gray400 p-3 rounded-sm hover:border-blue700 transition-all"
+					className="bg-white rounded-full hover:border-blue700 transition-all brightness-50"
 				>
-					Fazer Login
+					<UserCircleIcon width={60} height={60} />
 				</Link>
 			)}
 		</li>

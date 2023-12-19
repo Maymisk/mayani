@@ -14,10 +14,10 @@ export function Tabs() {
 
 	return (
 		<Root defaultValue="info" value={active} onValueChange={handleChange}>
-			<List className="w-full border-b-2 border-gray400 flex items-center justify-start gap-10">
+			<List className="w-full border-b-2 border-gray400 flex items-center justify-start gap-10 max-md:items-end">
 				<Trigger
 					value="info"
-					className={`text-xl border-b-2 text-white capitalize font-light px-1 py-4 ${
+					className={`text-xl border-b-2 text-white capitalize font-light px-1 py-4 max-md:w-full max-md:text-lg ${
 						active === 'info'
 							? 'border-blue500'
 							: 'border-transparent'
@@ -28,7 +28,7 @@ export function Tabs() {
 
 				<Trigger
 					value="security"
-					className={`text-xl border-b-2 text-white capitalize font-light px-1 py-4 ${
+					className={`text-xl border-b-2 text-white capitalize font-light px-1 py-4 max-md:w-full max-md:text-lg ${
 						active === 'security'
 							? 'border-blue500'
 							: 'border-transparent'
