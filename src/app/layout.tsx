@@ -1,10 +1,10 @@
+import { FacebookPixel } from '@/components/Pixel';
 import { ToastProvider } from '@/components/global/toast/ToastProvider';
 import { AuthContextProvider } from '@/contexts/auth/AuthContext';
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import { ReactNode } from 'react';
 import './globals.css';
-import { FacebookPixel } from '@/components/Pixel';
 const nunito = Nunito({
 	subsets: ['latin'],
 	weight: ['200', '300', '400', '700', '900'],
