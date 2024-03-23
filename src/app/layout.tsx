@@ -28,11 +28,7 @@ interface IRootLayoutProps {
 export default function RootLayout({ children }: IRootLayoutProps) {
 	return (
 		<html lang="en">
-			<body className={`bg-gray500 ${nunito.className}`}>
-				<AuthContextProvider>
-					<ToastProvider>{children}</ToastProvider>
-				</AuthContextProvider>
-
+			<head>
 				<Script id="fb-pixel" strategy="afterInteractive">
 					{`
 					!function(f,b,e,v,n,t,s)
@@ -55,6 +51,11 @@ export default function RootLayout({ children }: IRootLayoutProps) {
 					</noscript>
 					`}
 				</Script>
+			</head>
+			<body className={`bg-gray500 ${nunito.className}`}>
+				<AuthContextProvider>
+					<ToastProvider>{children}</ToastProvider>
+				</AuthContextProvider>
 			</body>
 		</html>
 	);
