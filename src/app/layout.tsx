@@ -1,11 +1,10 @@
+import { ToastProvider } from '@/components/global/toast/ToastProvider';
 import { AuthContextProvider } from '@/contexts/auth/AuthContext';
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
+import Script from 'next/script';
 import { ReactNode } from 'react';
 import './globals.css';
-import { ToastProvider } from '@/components/global/toast/ToastProvider';
-import Script from 'next/script';
-
 const nunito = Nunito({
 	subsets: ['latin'],
 	weight: ['200', '300', '400', '700', '900'],
@@ -28,7 +27,11 @@ interface IRootLayoutProps {
 export default function RootLayout({ children }: IRootLayoutProps) {
 	return (
 		<html lang="en">
-			<head>
+			<body className={`bg-gray500 ${nunito.className}`}>
+				<AuthContextProvider>
+					<ToastProvider>{children}</ToastProvider>
+				</AuthContextProvider>
+
 				<Script id="fb-pixel" strategy="afterInteractive">
 					{`
 					!function(f,b,e,v,n,t,s)
@@ -51,11 +54,6 @@ export default function RootLayout({ children }: IRootLayoutProps) {
 					</noscript>
 					`}
 				</Script>
-			</head>
-			<body className={`bg-gray500 ${nunito.className}`}>
-				<AuthContextProvider>
-					<ToastProvider>{children}</ToastProvider>
-				</AuthContextProvider>
 			</body>
 		</html>
 	);
